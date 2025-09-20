@@ -1,32 +1,42 @@
 {
-  "name": "liniatela-next",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
-  },
-  "dependencies": {
-    "@sanity/image-url": "^1.1.0",
-    "@sanity/vision": "^4.5.0",
-    "next": "15.5.0",
-    "next-sanity": "^10.0.13",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "sanity": "^4.5.0",
-    "styled-components": "^6.1.19"
-  },
-  "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.5.0",
-    "tailwindcss": "^4",
-    "typescript": "^5"
-  }
+	"name": "liniatela-next",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "eslint"
+	},
+	"dependencies": {
+		"@mux/mux-player-react": "^3.5.3",
+		"@radix-ui/react-slot": "^1.2.3",
+		"@sanity/image-url": "^1.1.0",
+		"@sanity/vision": "^4.5.0",
+		"@tanstack/react-query": "^5.85.5",
+		"class-variance-authority": "^0.7.1",
+		"clsx": "^2.1.1",
+		"graphql": "^16.11.0",
+		"graphql-request": "^7.2.0",
+		"lucide-react": "^0.544.0",
+		"motion": "^12.23.16",
+		"next": "15.5.0",
+		"next-sanity": "^10.0.13",
+		"react": "19.1.0",
+		"react-dom": "19.1.0",
+		"sanity": "^4.5.0",
+		"styled-components": "^6.1.19",
+		"tailwind-merge": "^3.3.1"
+	},
+	"devDependencies": {
+		"@eslint/eslintrc": "^3",
+		"@tailwindcss/postcss": "^4",
+		"@types/node": "^20",
+		"@types/react": "^19",
+		"@types/react-dom": "^19",
+		"eslint": "^9",
+		"eslint-config-next": "15.5.0",
+		"tailwindcss": "^4",
+		"typescript": "^5"
+	}
 }

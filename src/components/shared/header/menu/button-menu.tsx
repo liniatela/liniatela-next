@@ -1,0 +1,153 @@
+'use client'
+
+import { useState } from 'react'
+import { Button } from '../../button'
+import { MenuIcon, XIcon } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { MENU_ITEMS } from './menu'
+import { cn } from '@/lib/utils'
+import Link from 'next/link'
+
+const ButtonMenu = () => {
+	const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+	const handleToggleMenu = () => {
+		setIsMenuOpen(!isMenuOpen)
+	}
+
+	const handleCloseMenu = () => {
+		setIsMenuOpen(false)
+	}
+
+	const handleKeyDown = (event: React.KeyboardEvent) => {
+		if (event.key === 'Escape') {
+			handleCloseMenu()
+		}
+	}
+
+	return (
+		<div className='relative'>
+			<Button
+				className={cn(
+					'transition-all duration-300 ease-in-out z-50 relative',
+					isMenuOpen && 'bg-white text-primary hover:bg-white/90'
+				)}
+				variant={isMenuOpen ? 'white' : 'ghost'}
+				onClick={handleToggleMenu}
+				onKeyDown={handleKeyDown}
+				aria-expanded={isMenuOpen}
+				aria-controls='mobile-menu'
+				aria-label={isMenuOpen ? 'Закрыть меню' : 'Открыть меню'}
+			>
+				<motion.div
+					initial={false}
+					animate={{ rotate: isMenuOpen ? 90 : 0 }}
+					transition={{ duration: 0.3, ease: 'easeInOut' }}
+				>
+					{isMenuOpen ? <XIcon strokeWidth={1.5} /> : <MenuIcon strokeWidth={1.5} />}
+				</motion.div>
+				Меню
+			</Button>
+
+			{/* Меню всегда в DOM для SEO */}
+			<nav
+				className={cn(
+					'h-[460px] w-[320px]',
+					'absolute inset-0 z-40 pointer-events-none',
+					isMenuOpen && 'pointer-events-auto'
+				)}
+				id='mobile-menu'
+				aria-hidden={!isMenuOpen}
+			>
+				<AnimatePresence>
+					{isMenuOpen && (
+						<>
+							{/* Оверлей */}
+							<motion.div
+								className='absolute inset-0 bg-primary rounded-2xl origin-top-left'
+								initial={{ opacity: 0, scaleX: 0, scaleY: 0, x: 0, y: 0 }}
+								animate={{ opacity: 1, scaleX: 1, scaleY: 1, x: -8, y: -8 }}
+								exit={{ opacity: 0, scaleX: 0, scaleY: 0, x: 0, y: 0 }}
+								transition={{ duration: 0.4, ease: 'easeInOut' }}
+								onClick={handleCloseMenu}
+							/>
+
+							{/* Контент меню */}
+							<motion.div
+								className='absolute -inset-2 right-2 bottom-2 z-10 flex flex-col'
+								initial={{ opacity: 0, y: -20 }}
+								animate={{ opacity: 1, y: 0 }}
+								exit={{ opacity: 0, y: -20 }}
+								transition={{ duration: 0.4, ease: 'easeOut' }}
+							>
+								<ul className='mt-20  p-6 flex flex-col gap-3'>
+									{MENU_ITEMS.map((item, index) => (
+										<motion.li
+											key={item.id}
+											initial={{ opacity: 0, y: 20 }}
+											animate={{ opacity: 1, y: 0 }}
+											exit={{ opacity: 0, y: 20 }}
+											transition={{
+												duration: 0.6,
+												delay: 0.1 + index * 0.1,
+												ease: 'easeOut'
+											}}
+										>
+											<Link
+												className='block text-3xl text-white'
+												href={item.href}
+												onClick={handleCloseMenu}
+												onKeyDown={e => {
+													if (e.key === 'Enter' || e.key === ' ') {
+														handleCloseMenu()
+													}
+												}}
+												tabIndex={isMenuOpen ? 0 : -1}
+											>
+												{item.title}
+											</Link>
+										</motion.li>
+									))}
+								</ul>
+
+								{/* Социальные ссылки */}
+								<motion.div
+									initial={{ opacity: 0, y: 20 }}
+									animate={{ opacity: 1, y: 0 }}
+									exit={{ opacity: 0, y: 20 }}
+									transition={{
+										duration: 0.6,
+										delay: 0.1 + MENU_ITEMS.length * 0.1,
+										ease: 'easeOut'
+									}}
+									className='mt-auto p-6 flex justify-start gap-6'
+								>
+									<a
+										href='#'
+										onClick={handleCloseMenu}
+										className='text-white hover:text-white/80 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-primary rounded-lg px-2 py-1'
+										tabIndex={isMenuOpen ? 0 : -1}
+										aria-label='Instagram'
+									>
+										Instagram
+									</a>
+									<a
+										href='#'
+										onClick={handleCloseMenu}
+										className='text-white hover:text-white/80 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-primary rounded-lg px-2 py-1'
+										tabIndex={isMenuOpen ? 0 : -1}
+										aria-label='Telegram'
+									>
+										Telegram
+									</a>
+								</motion.div>
+							</motion.div>
+						</>
+					)}
+				</AnimatePresence>
+			</nav>
+		</div>
+	)
+}
+
+export default ButtonMenu
