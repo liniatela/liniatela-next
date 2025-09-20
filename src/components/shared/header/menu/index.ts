@@ -1,3 +1,3 @@
-import ButtonMenu from "./button-menu";
+import Menu from "./menu"
 
-export default ButtonMenu
+export default Menu

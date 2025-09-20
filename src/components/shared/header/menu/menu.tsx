@@ -4,11 +4,11 @@ import { useState } from 'react'
 import { Button } from '../../button'
 import { MenuIcon, XIcon } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { MENU_ITEMS } from './menu'
+import { MENU_ITEMS } from './constants'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 
-const ButtonMenu = () => {
+const Menu = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 
 	const handleToggleMenu = () => {
@@ -52,8 +52,8 @@ const ButtonMenu = () => {
 			{/* Меню всегда в DOM для SEO */}
 			<nav
 				className={cn(
-					'h-[460px] w-[320px]',
-					'absolute inset-0 z-40 pointer-events-none',
+					'h-[560px] lg:h-[460px] w-[320px]',
+					'absolute right-0 top-0 lg:inset-0 z-40 pointer-events-none',
 					isMenuOpen && 'pointer-events-auto'
 				)}
 				id='mobile-menu'
@@ -64,7 +64,7 @@ const ButtonMenu = () => {
 						<>
 							{/* Оверлей */}
 							<motion.div
-								className='absolute inset-0 bg-primary rounded-2xl origin-top-left'
+								className='absolute -right-4 inset-0 lg:right-0 bg-primary rounded-2xl  origin-top-right lg:origin-top-left'
 								initial={{ opacity: 0, scaleX: 0, scaleY: 0, x: 0, y: 0 }}
 								animate={{ opacity: 1, scaleX: 1, scaleY: 1, x: -8, y: -8 }}
 								exit={{ opacity: 0, scaleX: 0, scaleY: 0, x: 0, y: 0 }}
@@ -74,13 +74,13 @@ const ButtonMenu = () => {
 
 							{/* Контент меню */}
 							<motion.div
-								className='absolute -inset-2 right-2 bottom-2 z-10 flex flex-col'
+								className='absolute -inset-2 -right-2 lg:right-2 bottom-2 z-10 flex flex-col'
 								initial={{ opacity: 0, y: -20 }}
 								animate={{ opacity: 1, y: 0 }}
 								exit={{ opacity: 0, y: -20 }}
 								transition={{ duration: 0.4, ease: 'easeOut' }}
 							>
-								<ul className='mt-20  p-6 flex flex-col gap-3'>
+								<ul className='mt-15  p-6 flex flex-col gap-4'>
 									{MENU_ITEMS.map((item, index) => (
 										<motion.li
 											key={item.id}
@@ -94,7 +94,7 @@ const ButtonMenu = () => {
 											}}
 										>
 											<Link
-												className='block text-3xl text-white'
+												className='block text-4xl lg:text-3xl text-white max-lg:text-end'
 												href={item.href}
 												onClick={handleCloseMenu}
 												onKeyDown={e => {
@@ -108,6 +108,31 @@ const ButtonMenu = () => {
 											</Link>
 										</motion.li>
 									))}
+									<motion.li
+										className='lg:hidden'
+										initial={{ opacity: 0, y: 20 }}
+										animate={{ opacity: 1, y: 0 }}
+										exit={{ opacity: 0, y: 20 }}
+										transition={{
+											duration: 0.6,
+											delay: 0.1 + 6 * 0.1,
+											ease: 'easeOut'
+										}}
+									>
+										<Link
+											className='block text-4xl lg:text-3xl text-white max-lg:text-end'
+											href={'#'}
+											onClick={handleCloseMenu}
+											onKeyDown={e => {
+												if (e.key === 'Enter' || e.key === ' ') {
+													handleCloseMenu()
+												}
+											}}
+											tabIndex={isMenuOpen ? 0 : -1}
+										>
+											Записаться
+										</Link>
+									</motion.li>
 								</ul>
 
 								{/* Социальные ссылки */}
@@ -120,9 +145,9 @@ const ButtonMenu = () => {
 										delay: 0.1 + MENU_ITEMS.length * 0.1,
 										ease: 'easeOut'
 									}}
-									className='mt-auto p-6 flex justify-start gap-6'
+									className='mt-auto p-6 flex justify-end lg:justify-start gap-6'
 								>
-									<a
+									<Link
 										href='#'
 										onClick={handleCloseMenu}
 										className='text-white hover:text-white/80 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-primary rounded-lg px-2 py-1'
@@ -130,8 +155,8 @@ const ButtonMenu = () => {
 										aria-label='Instagram'
 									>
 										Instagram
-									</a>
-									<a
+									</Link>
+									<Link
 										href='#'
 										onClick={handleCloseMenu}
 										className='text-white hover:text-white/80 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-primary rounded-lg px-2 py-1'
@@ -139,7 +164,7 @@ const ButtonMenu = () => {
 										aria-label='Telegram'
 									>
 										Telegram
-									</a>
+									</Link>
 								</motion.div>
 							</motion.div>
 						</>
@@ -150,4 +175,4 @@ const ButtonMenu = () => {
 	)
 }
 
-export default ButtonMenu
+export default Menu
