@@ -17,7 +17,7 @@ function Trainers() {
 	const trainers = getAllTrainers()
 
 	return (
-		<section className='trainers -mt-7 pt-32 lg:pt-52 overflow-hidden select-none'>
+		<section className='trainers -mt-7 pt-32 lg:pt-52 overflow-hidden select-none' id='trainers'>
 			<div className='container grid gap-5 sm:gap-10'>
 				<header className='flex flex-col flex-wrap items-start sm:flex-row sm:items-center sm:gap-8 gap-4'>
 					<Tag>Тренеры</Tag>

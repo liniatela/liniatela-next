@@ -29,7 +29,7 @@ function Memberships() {
 	const memberships = getAllMemberships()
 
 	return (
-		<section className='memberships -mt-7 pt-32 lg:pt-52 overflow-hidden select-none'>
+		<section className='memberships -mt-7 pt-32 lg:pt-52 overflow-hidden select-none' id='memberships'>
 			<div className='container flex flex-col gap-5 sm:gap-10'>
 				<header className='flex flex-col items-start sm:flex-row sm:items-center sm:gap-8 gap-4'>
 					<Tag>Абонементы</Tag>

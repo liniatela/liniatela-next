@@ -28,7 +28,7 @@ import { cn } from '@/lib/utils'
 
 function Directions() {
 	return (
-		<section className='directions -mt-7 overflow-hidden select-none'>
+		<section className='directions -mt-7 overflow-hidden select-none' id='directions'>
 			<div className='bg-white rounded-4xl py-10 sm:py-20'>
 				<div className='container flex flex-col gap-5 sm:gap-10'>
 					<header className='flex flex-col items-start sm:flex-row sm:items-center sm:gap-8 gap-4'>
