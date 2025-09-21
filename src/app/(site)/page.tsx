@@ -1,6 +1,7 @@
 import Hero from '@/components/pages/home/hero'
 import Directions from '@/components/pages/home/directions'
 import Memberships from '@/components/pages/home/memberships'
+import Space from '@/components/pages/home/space'
 
 export default async function Home() {
 	return (
@@ -8,6 +9,7 @@ export default async function Home() {
 			<Hero />
 			<Directions />
 			<Memberships />
+			<Space />
 		</>
 	)
 }
