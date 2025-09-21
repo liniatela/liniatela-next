@@ -73,9 +73,8 @@
 	}
 } */
 
-
 body {
-	background: var(--background);
+	background: var(--border);
 	color: var(--foreground);
 	font-family: var(--font-mono);
 	-webkit-font-smoothing: antialiased;

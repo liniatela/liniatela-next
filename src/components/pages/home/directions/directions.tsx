@@ -49,16 +49,16 @@ function Directions() {
 								{MOCK_DIRECTIONS.map(direction => (
 									<CarouselItem
 										key={direction.id}
-										className='pl-4 basis-[80%]  2xs:basis-1/2 lg:basis-1/3 xl:basis-1/4'
+										className='pl-4 basis-[90%] 2xs:basis-1/2 lg:basis-1/3 xl:basis-1/4'
 									>
 										<DirectionCard direction={direction} />
 									</CarouselItem>
 								))}
 							</CarouselContent>
 
-							<footer className='mt-5 sm:mt-10 flex justify-between gap-5 sm:gap-10'>
+							<footer className='mt-5 sm:mt-10 flex flex-wrap-reverse justify-between gap-5 sm:gap-10 empty:hidden'>
 								<CarouselNavigation />
-								<p className='text-end text-muted-foreground leading-none tracking-tighter'>
+								<p className='text-end text-muted-foreground leading-none tracking-tighter sm:block ml-auto'>
 									Запишись на практику, где тело отпускает, разум отдыхает, <br /> а ты
 									возвращаешься к себе.
 								</p>
@@ -92,7 +92,7 @@ const DirectionCard = ({ direction }: { direction: Direction }) => {
 					<Tag size={'sm'} variant={'white'}>
 						{direction.name}
 					</Tag>
-					<p className='mt-auto text-2xl text-white leading-none tracking-tighter'>
+					<p className='mt-auto text-2xl text-white leading-none tracking-tighter '>
 						{direction.shortDescription}
 					</p>
 				</div>

@@ -7,7 +7,7 @@ const tagVariants = cva(
 	{
 		variants: {
 			variant: {
-				outline: 'border border-muted-foreground text-muted-foreground bg-background',
+				outline: 'border border-muted-foreground text-muted-foreground bg-transparent',
 				white: 'border border-white bg-transparent text-white'
 			},
 			size: {

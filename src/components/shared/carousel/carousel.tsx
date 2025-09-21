@@ -331,7 +331,7 @@ function CarouselNavigation() {
 	const { scrollPrev, scrollNext, canScrollPrev, canScrollNext } = useCarousel()
 
 	return (
-		<div className='flex items-center gap-4'>
+		<div className={cn('flex items-center gap-4', !canScrollNext && !canScrollPrev && 'hidden')}>
 			<Button
 				variant='outline'
 				size='icon'
