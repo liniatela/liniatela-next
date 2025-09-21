@@ -8,7 +8,9 @@ const tagVariants = cva(
 		variants: {
 			variant: {
 				outline: 'border border-muted-foreground text-muted-foreground bg-transparent',
-				white: 'border border-white bg-transparent text-white'
+				white: 'border border-white bg-transparent text-white',
+				blue: 'border border-primary bg-primary text-white',
+				brown: 'border border-secondary bg-secondary text-secondary-foreground'
 			},
 			size: {
 				sm: 'px-2 py-1 text-sm',

@@ -327,11 +327,17 @@ function CarouselNavigationWithDots({ className }: { className?: string }) {
 	)
 }
 
-function CarouselNavigation() {
+function CarouselNavigation({ className }: { className?: string }) {
 	const { scrollPrev, scrollNext, canScrollPrev, canScrollNext } = useCarousel()
 
 	return (
-		<div className={cn('flex items-center gap-4', !canScrollNext && !canScrollPrev && 'hidden')}>
+		<div
+			className={cn(
+				'flex items-center gap-4 max-xl:hidden',
+				!canScrollNext && !canScrollPrev && 'hidden',
+				className
+			)}
+		>
 			<Button
 				variant='outline'
 				size='icon'

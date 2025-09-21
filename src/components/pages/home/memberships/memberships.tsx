@@ -29,44 +29,42 @@ function Memberships() {
 	const memberships = getAllMemberships()
 
 	return (
-		<section className='memberships -mt-7 pt-20 overflow-hidden select-none'>
-			<div className='rounded-4xl py-10 sm:py-20'>
-				<div className='container flex flex-col gap-5 sm:gap-10'>
-					<header className='flex flex-col items-start sm:flex-row sm:items-center sm:gap-8 gap-4'>
-						<Tag>Абонементы</Tag>
-						<h2 className='text-3xl [&_span]:text-muted-foreground leading-none tracking-tighter'>
-							<span>Твоя свобода</span> — в выборе формата
-						</h2>
-					</header>
+		<section className='memberships -mt-7 pt-32 lg:pt-52 overflow-hidden select-none'>
+			<div className='container flex flex-col gap-5 sm:gap-10'>
+				<header className='flex flex-col items-start sm:flex-row sm:items-center sm:gap-8 gap-4'>
+					<Tag>Абонементы</Tag>
+					<h2 className='text-3xl [&_span]:text-muted-foreground leading-none tracking-tighter'>
+						<span>Твоя свобода</span> — в выборе формата
+					</h2>
+				</header>
 
-					<div className='relative'>
-						<Carousel
-							className='w-full'
-							opts={{
-								align: 'start'
-							}}
-						>
-							{/* Навигация сверху */}
+				<div className='relative'>
+					<Carousel
+						className='w-full'
+						opts={{
+							align: 'start'
+						}}
+					>
+						{/* Навигация сверху */}
 
-							<CarouselContent>
-								{memberships.map(membership => (
-									<CarouselItem
-										key={membership.id}
-										className='pl-4 basis-[90%] xs:basis-[80%] sm:basis-1/2 lg:basis-1/3'
-									>
-										<MembershipCard membership={membership} />
-									</CarouselItem>
-								))}
-							</CarouselContent>
+						<CarouselContent>
+							{memberships.map(membership => (
+								<CarouselItem
+									key={membership.id}
+									className='pl-4 basis-[90%] xs:basis-[80%] sm:basis-1/2 lg:basis-1/3'
+								>
+									<MembershipCard membership={membership} />
+								</CarouselItem>
+							))}
+						</CarouselContent>
 
-							<footer className='mt-5 sm:mt-10 flex flex-wrap-reverse justify-between items-center gap-5 empty:hidden'>
-								<CarouselNavigation />
-								<p className='text-end text-muted-foreground leading-none tracking-tighter hidden sm:block ml-auto'>
-									Выбери свой путь к гармонии <br /> тела и души
-								</p>
-							</footer>
-						</Carousel>
-					</div>
+						<footer className='mt-5 sm:mt-10 flex flex-wrap-reverse justify-between items-center gap-5 empty:hidden'>
+							<CarouselNavigation />
+							<p className='text-end text-muted-foreground leading-none tracking-tighter hidden sm:block ml-auto'>
+								Выбери свой путь к гармонии <br /> тела и души
+							</p>
+						</footer>
+					</Carousel>
 				</div>
 			</div>
 		</section>
