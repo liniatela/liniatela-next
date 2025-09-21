@@ -35,7 +35,7 @@ function Trainers() {
 					>
 						<CarouselContent className='max-sm:max-w-[90vw]'>
 							{trainers.map(trainer => (
-								<CarouselItem key={trainer.id} className='pl-4 basis-[95%] lg:basis-[70%]'>
+								<CarouselItem key={trainer.id} className='pl-4 basis-[95%] lg:basis-[60%]'>
 									<TrainerCard trainer={trainer} />
 								</CarouselItem>
 							))}
@@ -58,7 +58,7 @@ export default Trainers
 const TrainerCard = ({ trainer }: { trainer: Trainer }) => {
 	return (
 		<article className='h-full group/trainer'>
-			<div className='p-3 rounded-4xl bg-white max-sm:flex max-sm:flex-col sm:grid sm:grid-cols-2 sm:gap-2 h-full lg:min-h-[380px]  xl:min-h-[550px] '>
+			<div className='p-3 rounded-4xl bg-white max-sm:flex max-sm:flex-col sm:grid sm:grid-cols-2 sm:gap-2 h-full md:min-h-[350px] '>
 				{/* Изображение */}
 				<div className='relative overflow-hidden rounded-3xl p-4 flex flex-col max-sm:h-[300px]'>
 					<div className='flex flex-col text-white gap-2 z-10 relative'>

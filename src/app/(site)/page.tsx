@@ -8,9 +8,9 @@ export default async function Home() {
 	return (
 		<>
 			<Hero />
-			{/* <Directions />
+			<Directions />
 			<Memberships />
-			<Space /> */}
+			<Space />
 			<Trainers />
 		</>
 	)
