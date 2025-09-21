@@ -2,8 +2,9 @@ import { CopyrightIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import logo from '@/icons/short-logo.svg'
 import { COMPANY_INFO, FOOTER_SECTIONS, SOCIAL_LINKS } from './constants'
+
+import logo from '@/icons/short-logo.svg'
 
 function Footer() {
 	return (

@@ -4,6 +4,7 @@ import Memberships from '@/components/pages/home/memberships'
 import Space from '@/components/pages/home/space'
 import Trainers from '@/components/pages/home/trainers'
 import Footer from '@/components/shared/footer'
+import Contacts from '@/components/shared/contacts'
 
 export default async function Home() {
 	return (
@@ -15,6 +16,7 @@ export default async function Home() {
 			<Trainers />
 			<div className='pt-32 lg:pt-52 overflow-hidden'>
 				<div className='bg-white rounded-t-[70px] py-10 sm:py-20'>
+					<Contacts />
 					<Footer />
 				</div>
 			</div>

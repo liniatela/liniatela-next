@@ -7,10 +7,10 @@ function Hero() {
 		<section className='hero relative h-[105vh] overflow-hidden '>
 			<div className='container h-full flex flex-col justify-center'>
 				<div className='text-white space-y-3'>
-					<p className='text-3xl tracking-tighter text-[#D8D8D8]'>
+					<p className='text-2xl lg:text-3xl tracking-tighter text-[#D8D8D8]'>
 						Твоя гибкость — <br /> Это свобода быть собой{' '}
 					</p>
-					<h1 className='text-[80px] leading-none tracking-tighter'>Студия мягкого фитнеса</h1>
+					<h1 className='text-[40px] lg:text-[80px] leading-none tracking-tighter'>Студия мягкого фитнеса</h1>
 				</div>
 			</div>
 			<Image
