@@ -4,7 +4,7 @@ import backgroundImage from './images/background.jpg'
 
 function Hero() {
 	return (
-		<section className='hero pt-[80px] relative h-screen overflow-hidden '>
+		<section className='hero relative h-[105vh] overflow-hidden '>
 			<div className='container h-full flex flex-col justify-center'>
 				<div className='text-white space-y-3'>
 					<p className='text-3xl tracking-tighter text-[#D8D8D8]'>

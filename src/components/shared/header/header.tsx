@@ -7,7 +7,7 @@ import { Button } from '../button'
 
 function Header() {
 	return (
-		<header className='fixed inset-0 z-50 h-[80px]'>
+		<header className='sticky top-0 inset-0 z-50 h-[80px] mt-[-80px]'>
 			<div className='container h-full'>
 				<div className='flex gap-10 flex-row-reverse lg:flex-row items-center justify-between relative h-full'>
 					<ButtonMenu />
