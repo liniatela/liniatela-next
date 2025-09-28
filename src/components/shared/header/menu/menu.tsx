@@ -1,29 +1,16 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '../../button'
 import { MenuIcon, XIcon } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MENU_ITEMS } from './constants'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
+import { useMenu } from '@/lib/hooks'
 
 const Menu = () => {
-	const [isMenuOpen, setIsMenuOpen] = useState(false)
-
-	const handleToggleMenu = () => {
-		setIsMenuOpen(!isMenuOpen)
-	}
-
-	const handleCloseMenu = () => {
-		setIsMenuOpen(false)
-	}
-
-	const handleKeyDown = (event: React.KeyboardEvent) => {
-		if (event.key === 'Escape') {
-			handleCloseMenu()
-		}
-	}
+	const { isMenuOpen, handleToggleMenu, handleCloseMenu, handleKeyDown } = useMenu()
 
 	return (
 		<div className='relative'>
@@ -49,6 +36,7 @@ const Menu = () => {
 				Меню
 			</Button>
 
+
 			{/* Меню всегда в DOM для SEO */}
 			<nav
 				className={cn(
@@ -62,14 +50,13 @@ const Menu = () => {
 				<AnimatePresence>
 					{isMenuOpen && (
 						<>
-							{/* Оверлей */}
+							{/* Фон меню */}
 							<motion.div
-								className='absolute -right-4 inset-0 lg:right-0 bg-primary rounded-2xl  origin-top-right lg:origin-top-left'
+								className='absolute -right-4 inset-0 lg:right-0 bg-primary rounded-2xl origin-top-right lg:origin-top-left'
 								initial={{ opacity: 0, scaleX: 0, scaleY: 0, x: 0, y: 0 }}
 								animate={{ opacity: 1, scaleX: 1, scaleY: 1, x: -8, y: -8 }}
 								exit={{ opacity: 0, scaleX: 0, scaleY: 0, x: 0, y: 0 }}
 								transition={{ duration: 0.4, ease: 'easeInOut' }}
-								onClick={handleCloseMenu}
 							/>
 
 							{/* Контент меню */}
@@ -80,7 +67,7 @@ const Menu = () => {
 								exit={{ opacity: 0, y: -20 }}
 								transition={{ duration: 0.4, ease: 'easeOut' }}
 							>
-								<ul className='mt-15  p-6 flex flex-col gap-4'>
+								<ul className='mt-15 p-6 flex flex-col gap-4'>
 									{MENU_ITEMS.map((item, index) => (
 										<motion.li
 											key={item.id}

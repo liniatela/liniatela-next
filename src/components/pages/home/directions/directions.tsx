@@ -49,7 +49,7 @@ function Directions() {
 								{MOCK_DIRECTIONS.map(direction => (
 									<CarouselItem
 										key={direction.id}
-										className='pl-4 basis-[90%] 2xs:basis-1/2 lg:basis-1/3 xl:basis-1/4'
+										className='pl-4 basis-[90%] 2xs:basis-1/2 lg:basis-1/3'
 									>
 										<DirectionCard direction={direction} />
 									</CarouselItem>
@@ -89,10 +89,10 @@ const DirectionCard = ({ direction }: { direction: Direction }) => {
 				onClick={handleOpenDialog}
 			>
 				<div className='p-4 h-full flex flex-col items-end'>
-					<Tag size={'sm'} variant={'white'}>
+					<Tag size={'md'} variant={'white'}>
 						{direction.name}
 					</Tag>
-					<p className='mt-auto text-2xl text-white leading-none tracking-tighter '>
+					<p className='mt-auto text-xl text-white leading-none tracking-tighter '>
 						{direction.shortDescription}
 					</p>
 				</div>
