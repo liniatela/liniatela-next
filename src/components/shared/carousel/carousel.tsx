@@ -244,6 +244,8 @@ function CarouselNext({
 function CarouselDots({ className }: { className?: string }) {
 	const { scrollSnaps, selectedIndex, scrollTo } = useCarousel()
 
+	if (scrollSnaps.length <= 1) return null
+	
 	return (
 		<div
 			className={cn('flex items-center justify-center gap-2', className)}
@@ -276,6 +278,8 @@ function CarouselNavigationWithDots({ className }: { className?: string }) {
 		selectedIndex,
 		scrollTo
 	} = useCarousel()
+
+	if (scrollSnaps.length <= 1) return null
 
 	return (
 		<div
@@ -328,7 +332,9 @@ function CarouselNavigationWithDots({ className }: { className?: string }) {
 }
 
 function CarouselNavigation({ className }: { className?: string }) {
-	const { scrollPrev, scrollNext, canScrollPrev, canScrollNext } = useCarousel()
+	const { scrollPrev, scrollNext, canScrollPrev, scrollSnaps, canScrollNext } = useCarousel()
+
+	if (scrollSnaps.length <= 1) return null
 
 	return (
 		<div
