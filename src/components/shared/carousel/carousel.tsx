@@ -347,7 +347,7 @@ function CarouselNavigation({ className }: { className?: string }) {
 			<Button
 				variant='outline'
 				size='icon'
-				className='size-10 rounded-full'
+				className='size-10 rounded-full text-muted border-muted-foreground'
 				disabled={!canScrollPrev}
 				onClick={scrollPrev}
 				aria-label='Предыдущее направление'
@@ -357,7 +357,7 @@ function CarouselNavigation({ className }: { className?: string }) {
 			<Button
 				variant='outline'
 				size='icon'
-				className='size-10 rounded-full'
+				className='size-10 rounded-full text-muted border-muted-foreground'
 				disabled={!canScrollNext}
 				onClick={scrollNext}
 				aria-label='Следующее направление'
