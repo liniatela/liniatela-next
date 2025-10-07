@@ -9,8 +9,6 @@ import {
 import Tag from '@/components/shared/tag'
 import Image from 'next/image'
 import { Button } from '@/components/shared/button'
-import { QuoteIcon } from 'lucide-react'
-import { cn } from '@/lib/utils'
 import { getAllTrainers, Trainer } from './constance'
 
 function Trainers() {
@@ -91,13 +89,13 @@ const TrainerCard = ({ trainer }: { trainer: Trainer }) => {
 						</ul>
 					</div>
 
-					<p>{trainer.description}</p>
+					<p className='max-sm:hidden'>{trainer.description}</p>
 
 					<div className='mt-auto flex flex-col gap-2'>
 						<Button className=' xl:group-hover/trainer:opacity-100 xl:opacity-0 max-xl:opacity-100'>
 							Записаться
 						</Button>
-						<Button variant={'outline'}>Подробнее о тренере</Button>
+
 					</div>
 				</div>
 			</div>

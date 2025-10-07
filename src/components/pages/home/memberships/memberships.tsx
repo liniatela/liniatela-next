@@ -24,22 +24,13 @@ import {
 	AccordionItem,
 	AccordionTrigger
 } from '@/components/shared/accordion'
-import {
-	CheckIcon,
-	ClockIcon,
-	GiftIcon,
-	MapPinIcon,
-	PhoneIcon,
-	CreditCardIcon,
-	CalendarIcon,
-	UserCheckIcon,
-	ShieldCheckIcon,
-	TrendingUpIcon
-} from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { CreditCardIcon } from 'lucide-react'
 import { getAllMemberships, Membership } from './constance'
+import { ComparisonDialog } from './comparison/comparison-dialog'
 
 function Memberships() {
+	const [isComparisonOpen, setIsComparisonOpen] = useState(false)
+
 	const memberships = getAllMemberships()
 
 	return (
@@ -50,6 +41,10 @@ function Memberships() {
 					<h2 className='text-3xl [&_span]:text-muted-foreground leading-none tracking-tighter'>
 						<span>Твоя свобода</span> — в выборе формата
 					</h2>
+
+					<Button size={'lg'} variant={'white'} className='sm:ml-auto'>
+						Сравнить абонементы
+					</Button>
 				</header>
 
 				<div className='relative'>
@@ -79,7 +74,12 @@ function Memberships() {
 					</Carousel>
 				</div>
 			</div>
+			<ComparisonDialog
+				open={isComparisonOpen}
+				onOpenChange={setIsComparisonOpen}
+			/>
 		</section>
+
 	)
 }
 
@@ -109,7 +109,7 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
 						</div>
 					</div>
 
-					<p className='mt-4 text-white text-lg leading-tight mb-4 line-clamp-3'>
+					<p className='mt-4 text-white text-lg leading-none tracking-tighter mb-4 line-clamp-3'>
 						{membership.shortDescription}
 					</p>
 				</div>
@@ -122,231 +122,149 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
 					</SheetTrigger>
 				</div>
 
-				<Image
-					className='object-cover -z-10 brightness-[70%] group-hover/card:brightness-[65%] transition-[filter]'
-					src={membership.coverImage}
-					fill
-					sizes='(max-width: 768px) 90vw, (max-width: 1024px) 50vw, 33vw'
-					alt={membership.title}
-				/>
+				<div className="absolute inset-0 -z-10">
+					<Image
+						className="object-cover w-full h-full transition-[filter]"
+						src={membership.coverImage}
+						fill
+						sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+						alt={membership.title}
+					/>
+					<div className="absolute inset-0 bg-black/40 group-hover/card:bg-black/40 transition-colors" aria-hidden="true" />
+				</div>
 			</article>
 
 			<SheetContent
 				side="right"
-				className='py-4 px-6 lg:px-6 lg:py-6 overflow-y-auto overflow-x-hidden'
+				className='py-4 px-6 lg:px-8 lg:py-6 overflow-visible'
 			>
 				<div className='h-full flex flex-col'>
-					<SheetHeader className='p-0 mb-6'>
-						<div className='flex flex-wrap items-center gap-3 mb-2'>
-							<SheetTitle className='text-2xl text-left'>{membership.title}</SheetTitle>
-							<div className='bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium'>
-								{membership.price.toLocaleString()} ₽ / {membership.duration}
+					<div className="mb-6 relative max-h-[266px] rounded-3xl overflow-hidden">
+						<Image
+							className="object-cover w-full h-full max-sm:max-h-[180px]"
+							src={membership.coverImage}
+							sizes="(max-width: 768px) 90vw, (max-width: 1024px) 50vw, 33vw"
+							alt={membership.title}
+						/>
+						<div
+							className="absolute inset-0 bg-black/40 pointer-events-none rounded-3xl"
+							aria-hidden="true"
+						/>
+						<SheetHeader className='absolute left-4 top-4 right-4 p-0 mb-6'>
+							<div className='flex flex-wrap items-center gap-3 mb-2 w-full'>
+								<SheetTitle className='text-2xl text-left text-white'>{membership.title}</SheetTitle>
+								<Tag variant={'white'} size={'md'} className='ml-auto'>
+									{membership.price.toLocaleString()} ₽ / {membership.duration}
+								</Tag>
+
+							</div>
+							<SheetDescription className='text-base text-left leading-relaxed text-white'>
+								{membership.shortDescription}
+							</SheetDescription>
+						</SheetHeader>
+					</div>
+
+					<div className='flex-1 overflow-y-auto overflow-x-hidden pr-2 space-y-10'>
+						<div className='space-y-10'>
+							<div>
+								<p>{membership.longDescription}</p>
+							</div>
+
+							<div className='p-4 bg-muted rounded-xl space-y-6'>
+								<div className='flex items-start gap-3'>
+
+									<div>
+										<p className='text-sm font-medium'>Срок действия</p>
+										<p className='text-muted-foreground'>{membership.validityPeriod}</p>
+									</div>
+								</div>
+
+								<div className='flex items-start gap-3'>
+
+									<div>
+										<p className='text-sm font-medium'>Количество занятий</p>
+										<p className='text-muted-foreground'>
+											{membership.sessionsCount === 'unlimited' ? 'Безлимит' : `${membership.sessionsCount} занятий`}
+											{membership.sessionsPerWeek && ` (${membership.sessionsPerWeek})`}
+										</p>
+									</div>
+								</div>
+
+								{membership.freeze.available && (
+									<div className='flex items-start gap-3'>
+
+										<div>
+											<p className='text-sm font-medium'>Заморозка</p>
+											<p className='text-muted-foreground'>
+												{membership.freeze.duration}
+												{membership.freeze.conditions && ` — ${membership.freeze.conditions}`}
+											</p>
+										</div>
+									</div>
+								)}
+
+								{membership.pricePerSession && (
+									<div className='flex items-start gap-3'>
+
+										<div>
+											<p className='font-medium text-sm'>Стоимость одного занятия</p>
+											<p className='text-sm text-muted-foreground'>{membership.pricePerSession} ₽</p>
+										</div>
+									</div>
+								)}
 							</div>
 						</div>
-						<SheetDescription className='text-base text-left leading-relaxed'>
-							{membership.shortDescription}
-						</SheetDescription>
-					</SheetHeader>
 
-					<div className='flex-1 overflow-y-auto overflow-x-hidden pr-2 space-y-6'>
-
-    
-
-						{/* Аккордион с дополнительной информацией */}
-						<div className='border rounded-xl overflow-hidden hidden'>
-							<Accordion type="multiple" className='w-full'>
-								{/* Правила посещения студии */}
-								<AccordionItem value="rules">
-									<AccordionTrigger className='px-4 hover:no-underline'>
-										<span className='font-semibold'>Правила посещения студии</span>
-									</AccordionTrigger>
-									<AccordionContent className='px-4'>
-										<ul className='space-y-3 text-sm text-muted-foreground'>
-											<li className='flex items-start gap-2'>
-												<UserCheckIcon className='size-4 mt-0.5 flex-shrink-0 text-primary' />
-												<span>При себе иметь подтверждение оплаты, скриншот, чеки, паспорт</span>
-											</li>
-											<li className='flex items-start gap-2'>
-												<ClockIcon className='size-4 mt-0.5 flex-shrink-0 text-primary' />
-												<span>Бесплатная отмена возможна не позднее 8 часов до занятия</span>
-											</li>
-											<li className='flex items-start gap-2'>
-												<CheckIcon className='size-4 mt-0.5 flex-shrink-0 text-primary' />
-												<span>Взять на занятие удобную спортивную форму, обувь</span>
-											</li>
-											<li className='flex items-start gap-2'>
-												<ShieldCheckIcon className='size-4 mt-0.5 flex-shrink-0 text-primary' />
-												<span>Студия оставляет за собой право на замену инструктора при необходимости</span>
-											</li>
-										</ul>
-									</AccordionContent>
-								</AccordionItem>
-
-								{/* Как приобрести */}
-								<AccordionItem value="purchase">
-									<AccordionTrigger className='px-4 hover:no-underline'>
-										<span className='font-semibold'>Как приобрести</span>
-									</AccordionTrigger>
-									<AccordionContent className='px-4'>
-										<div className='space-y-4 text-sm'>
-											<div className='flex items-start gap-3'>
-												<div className='flex items-center justify-center size-6 rounded-full bg-primary text-primary-foreground text-xs font-semibold flex-shrink-0'>
-													1
-												</div>
-												<div>
-													<p className='font-medium mb-1'>Выберите абонемент</p>
-													<p className='text-muted-foreground'>Определитесь с форматом, который вам подходит</p>
-												</div>
-											</div>
-											<div className='flex items-start gap-3'>
-												<div className='flex items-center justify-center size-6 rounded-full bg-primary text-primary-foreground text-xs font-semibold flex-shrink-0'>
-													2
-												</div>
-												<div>
-													<p className='font-medium mb-1'>Свяжитесь с нами</p>
-													<p className='text-muted-foreground'>Позвоните или напишите администратору для оформления</p>
-												</div>
-											</div>
-											<div className='flex items-start gap-3'>
-												<div className='flex items-center justify-center size-6 rounded-full bg-primary text-primary-foreground text-xs font-semibold flex-shrink-0'>
-													3
-												</div>
-												<div>
-													<p className='font-medium mb-1'>Оплатите удобным способом</p>
-													<p className='text-muted-foreground'>Наличные, карта, перевод — выбирайте, как удобно</p>
-												</div>
-											</div>
-											<div className='flex items-start gap-3'>
-												<div className='flex items-center justify-center size-6 rounded-full bg-primary text-primary-foreground text-xs font-semibold flex-shrink-0'>
-													4
-												</div>
-												<div>
-													<p className='font-medium mb-1'>Начните заниматься</p>
-													<p className='text-muted-foreground'>Записывайтесь на занятия и приходите в студию</p>
-												</div>
-											</div>
-										</div>
-									</AccordionContent>
-								</AccordionItem>
-
-								{/* Преимущества разового посещения */}
-								<AccordionItem value="benefits">
-									<AccordionTrigger className='px-4 hover:no-underline'>
-										<span className='font-semibold'>Преимущества разового посещения</span>
-									</AccordionTrigger>
-									<AccordionContent className='px-4'>
-										<div className='space-y-3 text-sm'>
-											<div className='flex items-start gap-3 p-3 bg-green-50 dark:bg-green-950/20 rounded-lg'>
-												<TrendingUpIcon className='size-5 text-green-600 flex-shrink-0 mt-0.5' />
-												<div>
-													<p className='font-medium text-green-900 dark:text-green-100 mb-1'>
-														Экономия до 40%
-													</p>
-													<p className='text-green-700 dark:text-green-300'>
-														Стоимость одного занятия по абонементу значительно ниже разовой цены
-													</p>
-												</div>
-											</div>
-											<div className='flex items-start gap-3 p-3 bg-blue-50 dark:bg-blue-950/20 rounded-lg'>
-												<CalendarIcon className='size-5 text-blue-600 flex-shrink-0 mt-0.5' />
-												<div>
-													<p className='font-medium text-blue-900 dark:text-blue-100 mb-1'>
-														Гибкость расписания
-													</p>
-													<p className='text-blue-700 dark:text-blue-300'>
-														Занимайтесь когда удобно в течение всего срока действия
-													</p>
-												</div>
-											</div>
-											<div className='flex items-start gap-3 p-3 bg-purple-50 dark:bg-purple-950/20 rounded-lg'>
-												<GiftIcon className='size-5 text-purple-600 flex-shrink-0 mt-0.5' />
-												<div>
-													<p className='font-medium text-purple-900 dark:text-purple-100 mb-1'>
-														Бонусы и подарки
-													</p>
-													<p className='text-purple-700 dark:text-purple-300'>
-														При покупке длительных абонементов получайте дополнительные преимущества
-													</p>
-												</div>
-											</div>
-										</div>
-									</AccordionContent>
-								</AccordionItem>
-
-								{/* Контактная информация */}
-								<AccordionItem value="contacts">
-									<AccordionTrigger className='px-4 hover:no-underline'>
-										<span className='font-semibold'>Контактная информация</span>
-									</AccordionTrigger>
-									<AccordionContent className='px-4'>
-										<div className='space-y-4'>
-											<a
-												href='tel:+79001234567'
-												className='flex items-center gap-3 p-3 bg-muted rounded-xl hover:bg-muted/80 transition-colors'
-											>
-												<PhoneIcon className='size-5 text-primary flex-shrink-0' />
-												<div>
-													<p className='font-medium'>Телефон</p>
-													<p className='text-sm text-muted-foreground'>+7 (900) 123-45-67</p>
-												</div>
-											</a>
-											<div className='flex items-start gap-3 p-3 bg-muted rounded-xl'>
-												<MapPinIcon className='size-5 text-primary flex-shrink-0 mt-0.5' />
-												<div>
-													<p className='font-medium mb-1'>Адрес студии</p>
-													<p className='text-sm text-muted-foreground'>
-														г. Москва, ул. Примерная, д. 1
-													</p>
-												</div>
-											</div>
-											<div className='flex items-start gap-3 p-3 bg-muted rounded-xl'>
-												<ClockIcon className='size-5 text-primary flex-shrink-0 mt-0.5' />
-												<div>
-													<p className='font-medium mb-1'>Режим работы</p>
-													<p className='text-sm text-muted-foreground'>
-														Пн-Пт: 08:00 - 22:00<br />
-														Сб-Вс: 09:00 - 20:00
-													</p>
-												</div>
-											</div>
-										</div>
-									</AccordionContent>
-								</AccordionItem>
-
-								{/* Как добраться */}
-								<AccordionItem value="location">
-									<AccordionTrigger className='px-4 hover:no-underline'>
-										<span className='font-semibold'>Как добраться</span>
-									</AccordionTrigger>
-									<AccordionContent className='px-4'>
-										<div className='space-y-3 text-sm'>
-											<div className='flex items-start gap-3'>
-												<MapPinIcon className='size-4 text-primary flex-shrink-0 mt-0.5' />
-												<div>
-													<p className='font-medium mb-1'>На метро</p>
-													<p className='text-muted-foreground'>
-														Станция "Примерная" (5 минут пешком)
-													</p>
-												</div>
-											</div>
-											<div className='flex items-start gap-3'>
-												<MapPinIcon className='size-4 text-primary flex-shrink-0 mt-0.5' />
-												<div>
-													<p className='font-medium mb-1'>На автомобиле</p>
-													<p className='text-muted-foreground'>
-														Бесплатная парковка для клиентов студии
-													</p>
-												</div>
-											</div>
-											<Button variant='outline' className='w-full mt-4'>
-												Открыть на карте
-											</Button>
-										</div>
-									</AccordionContent>
-								</AccordionItem>
-							</Accordion>
+						{/* Направления */}
+						<div className='space-y-3'>
+							<h3 className='text-sm'>Включенные направления</h3>
+							<div className='flex flex-wrap gap-2'>
+								{membership.includedDirections.map((direction, index) => (
+									<span
+										key={index}
+										className='px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium'
+									>
+										{direction}
+									</span>
+								))}
+							</div>
+							{membership.excludedDirections && membership.excludedDirections.length > 0 && (
+								<p className='text-sm text-muted-foreground'>
+									Не включено: {membership.excludedDirections.join(', ')}
+								</p>
+							)}
 						</div>
 
+
+						{/* Для кого подходит */}
+						<div className='space-y-3'>
+							<h3 className='text-sm'>Подходит для</h3>
+							<div className='flex flex-wrap gap-2'>
+								{membership.suitableFor.map((level, index) => (
+									<span key={index} className='px-3 py-1 bg-white  text-primary  rounded-full text-sm border border-primary'>
+										{level}
+									</span>
+								))}
+							</div>
+						</div>
+
+						{/* FAQ Аккордион */}
+						<div className='overflow-hidden'>
+							<Accordion type="single" className='w-full' defaultValue='0'>
+								{membership.faq.map((item, index) => (
+									<AccordionItem key={index} value={`faq-${index}`}>
+										<AccordionTrigger className='px-4 hover:no-underline'>
+											{item.question}
+										</AccordionTrigger>
+										<AccordionContent className='px-4'>
+											<div className='leading-relaxed [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-2 [&_p]:mb-2 last:[&_p]:mb-0 [&_strong]:font-medium [&_a]:text-primary [&_a]:underline'>
+												{typeof item.answer === 'string' ? item.answer : item.answer}
+											</div>
+										</AccordionContent>
+									</AccordionItem>
+								))}
+							</Accordion>
+						</div>
 
 					</div>
 
@@ -356,14 +274,8 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
 							<CreditCardIcon className='size-4 mr-2' />
 							Приобрести абонемент
 						</Button>
-						<div className='grid grid-cols-2 gap-3'>
-							<Button variant='outline'>
-								Задать вопрос
-							</Button>
-							<Button variant='outline'>
-								Сравнить
-							</Button>
-						</div>
+
+
 					</div>
 				</div>
 			</SheetContent>

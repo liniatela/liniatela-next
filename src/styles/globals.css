@@ -109,3 +109,7 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
 	display: none; /* Chrome, Safari, Opera */
 }
+
+.scrollbar-gutter {
+	scrollbar-gutter: stable;
+}

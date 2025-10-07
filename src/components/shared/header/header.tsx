@@ -7,8 +7,7 @@ import Image from 'next/image'
 import logo from '@/icons/logo.svg'
 import { Button } from '../button'
 import { cn } from '@/lib/utils'
-import { useMenu, useScrollPosition } from '@/lib/hooks'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useScrollPosition } from '@/lib/hooks'
 
 const Header = () => {
 	const { scrollPercentage, isHeaderVisible } = useScrollPosition()
@@ -26,7 +25,7 @@ const Header = () => {
 				<div className='container h-full'>
 					<div className={cn(
 						'flex gap-10 transition-all duration-300 flex-row-reverse lg:flex-row items-center justify-between relative h-full',
-						isSticky ? 'lg:mt-4 lg:bg-black/20 lg:p-6 lg:rounded-3xl lg:backdrop-blur-2xl lg:shadow-2xl' : ''
+						isSticky ? 'lg:mt-4 lg:bg-black/50 lg:p-6 lg:rounded-3xl lg:backdrop-blur-2xl lg:shadow-2xl' : ''
 					)}>
 						<ButtonMenu />
 

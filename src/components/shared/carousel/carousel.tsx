@@ -183,7 +183,7 @@ function CarouselItem({ className, ...props }: React.ComponentProps<'div'>) {
 
 function CarouselPrevious({
 	className,
-	variant = 'outline',
+	variant = 'outline-grey',
 	size = 'icon',
 	...props
 }: React.ComponentProps<typeof Button>) {
@@ -213,7 +213,7 @@ function CarouselPrevious({
 
 function CarouselNext({
 	className,
-	variant = 'outline',
+	variant = 'outline-grey',
 	size = 'icon',
 	...props
 }: React.ComponentProps<typeof Button>) {
@@ -222,7 +222,7 @@ function CarouselNext({
 	return (
 		<Button
 			data-slot='carousel-next'
-			variant={'outline'}
+			variant={variant}
 			size={size}
 			className={cn(
 				'absolute size-10 rounded-full',
@@ -288,7 +288,7 @@ function CarouselNavigationWithDots({ className }: { className?: string }) {
 		>
 			{/* Кнопка назад */}
 			<Button
-				variant='outline'
+				variant='outline-grey'
 				size='icon'
 				className='size-10 rounded-full shrink-0'
 				disabled={!canScrollPrev}
@@ -318,7 +318,7 @@ function CarouselNavigationWithDots({ className }: { className?: string }) {
 
 			{/* Кнопка вперед */}
 			<Button
-				variant='outline'
+				variant='outline-grey'
 				size='icon'
 				className='size-10 rounded-full shrink-0'
 				disabled={!canScrollNext}
@@ -345,9 +345,9 @@ function CarouselNavigation({ className }: { className?: string }) {
 			)}
 		>
 			<Button
-				variant='outline'
+				variant='outline-grey'
 				size='icon'
-				className='size-10 rounded-full text-muted border-muted-foreground'
+				className='size-10 rounded-full'
 				disabled={!canScrollPrev}
 				onClick={scrollPrev}
 				aria-label='Предыдущее направление'
@@ -355,9 +355,9 @@ function CarouselNavigation({ className }: { className?: string }) {
 				<ArrowLeft strokeWidth={1.5} className='size-5' />
 			</Button>
 			<Button
-				variant='outline'
+				variant='outline-grey'
 				size='icon'
-				className='size-10 rounded-full text-muted border-muted-foreground'
+				className='size-10 rounded-full'
 				disabled={!canScrollNext}
 				onClick={scrollNext}
 				aria-label='Следующее направление'

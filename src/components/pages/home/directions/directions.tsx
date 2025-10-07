@@ -6,8 +6,6 @@ import {
 	CarouselItem,
 	CarouselNavigation,
 	CarouselNavigationWithDots,
-	CarouselNext,
-	CarouselPrevious
 } from '@/components/shared/carousel'
 import Tag from '@/components/shared/tag'
 import Image from 'next/image'
@@ -16,7 +14,6 @@ import { Button } from '@/components/shared/button'
 import { useState } from 'react'
 import {
 	Sheet,
-	SheetClose,
 	SheetContent,
 	SheetDescription,
 	SheetHeader,
@@ -89,10 +86,10 @@ const DirectionCard = ({ direction }: { direction: Direction }) => {
 				onClick={handleOpenSheet}
 			>
 				<div className='p-4 h-full flex flex-col items-end'>
-					<Tag size={'md'} variant={'white'}>
+					<Tag size={'lg'} variant={'white'}>
 						{direction.name}
 					</Tag>
-					<p className='mt-auto text-xl text-white leading-none tracking-tighter '>
+					<p className='mt-auto text-lg text-white leading-none tracking-tighter '>
 						{direction.shortDescription}
 					</p>
 				</div>
@@ -103,13 +100,16 @@ const DirectionCard = ({ direction }: { direction: Direction }) => {
 						</Button>
 					</SheetTrigger>
 				</div>
-				<Image
-					className='object-cover -z-10 brightness-95 group-hover/card:brightness-75 transition-[filter]'
-					src={direction.coverImage}
-					fill
-					sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
-					alt={direction.name}
-				/>
+				<div className="absolute inset-0 -z-10">
+					<Image
+						className="object-cover w-full h-full transition-[filter]"
+						src={direction.coverImage}
+						fill
+						sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+						alt={direction.name}
+					/>
+					<div className="absolute inset-0 bg-black/20 group-hover/card:bg-black/40 transition-colors" aria-hidden="true" />
+				</div>
 			</article>
 
 			<SheetContent

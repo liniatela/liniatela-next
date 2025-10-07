@@ -3,16 +3,12 @@
 import Tag from '@/components/shared/tag'
 import Image from 'next/image'
 import { Button } from '@/components/shared/button'
-import { MapPinIcon, StarIcon, UsersIcon, HomeIcon } from 'lucide-react'
-import { cn } from '@/lib/utils'
 import { STUDIO_INFO, HALLS, Hall } from './constanse'
 import {
 	Carousel,
 	CarouselContent,
 	CarouselDots,
 	CarouselItem,
-	CarouselNavigation,
-	CarouselNavigationWithDots,
 	CarouselNext,
 	CarouselPrevious
 } from '@/components/shared/carousel'
@@ -40,35 +36,32 @@ function Space() {
 							<p className='mt-6 leading-none tracking-tighter text-border max-w-[252px]'>
 								Где место напоминает не о тренировке, а о встрече с собой.
 							</p>
-							<Image
-								className='object-cover -z-10 brightness-50'
-								src={STUDIO_INFO.generalImages[0]}
-								fill
-								alt=''
-								sizes='(max-width: 1024px) 100vw, 50vw'
-							/>
+							<div className="absolute inset-0 w-full h-full -z-10">
+								<Image
+									className="object-cover -z-10"
+									src={STUDIO_INFO.generalImages[0]}
+									fill
+									alt=""
+									sizes="(max-width: 1024px) 100vw, 50vw"
+								/>
+								<div className="absolute inset-0 bg-black/30 pointer-events-none" aria-hidden="true" />
+							</div>
 						</div>
 						<div className='relative overflow-hidden rounded-3xl max-sm:hidden min-h-[180px]'>
-							<Image
-								className='object-cover -z-10 brightness-75'
-								src={STUDIO_INFO.generalImages[1]}
-								fill
-								alt=''
-								sizes='(max-width: 1024px) 100vw, 50vw'
-							/>
+							<div className="absolute inset-0 w-full h-full -z-10">
+								<Image
+									className="object-cover -z-10"
+									src={STUDIO_INFO.generalImages[1]}
+									fill
+									alt=""
+									sizes="(max-width: 1024px) 100vw, 50vw"
+								/>
+								<div className="absolute inset-0 bg-black/30 pointer-events-none" aria-hidden="true" />
+							</div>
 						</div>
 					</div>
 					<div className='relative overflow-hidden rounded-3xl'>
 						<div className='p-10 flex flex-col  sm:items-end h-full justify-between gap-10'>
-							<div className='flex flex-col gap-2'>
-								<Button asChild>
-									<Link href={''}>Открыть на карте</Link>
-								</Button>
-
-								<p className='text-sm text-muted leading-none tracking-tighter sm:max-w-[150px] text-center sm:text-end'>
-									{STUDIO_INFO.address}
-								</p>
-							</div>
 
 							<ul className='grid  sm:items-end gap-5 sm:gap-10'>
 								{STUDIO_INFO.features.map(item => (
@@ -84,14 +77,26 @@ function Space() {
 									</li>
 								))}
 							</ul>
+							<div className='flex flex-col gap-2'>
+								<Button asChild variant={'white'}>
+									<Link href={''}>Открыть на карте</Link>
+								</Button>
+
+								<p className='text-sm text-muted leading-none tracking-tighter sm:max-w-[150px] text-center sm:text-end'>
+									{STUDIO_INFO.address}
+								</p>
+							</div>
 						</div>
-						<Image
-							className='object-cover -z-10 brightness-75'
-							src={STUDIO_INFO.generalImages[2]}
-							fill
-							alt=''
-							sizes='(max-width: 1024px) 100vw, 50vw'
-						/>
+						<div className="absolute inset-0 w-full h-full -z-10">
+							<Image
+								className="object-cover -z-10"
+								src={STUDIO_INFO.generalImages[2]}
+								fill
+								alt=""
+								sizes="(max-width: 1024px) 100vw, 50vw"
+							/>
+							<div className="absolute inset-0 bg-black/30 pointer-events-none" aria-hidden="true" />
+						</div>
 					</div>
 				</div>
 
@@ -110,8 +115,8 @@ function Space() {
 								</CarouselItem>
 							))}
 						</CarouselContent>
-						<CarouselPrevious className='absolute left-0' />
-						<CarouselNext className='absolute right-0' />
+						<CarouselPrevious className='absolute left-0'  variant={'white'}/>
+						<CarouselNext className='absolute right-0' variant={'white'} />
 						<CarouselDots className='mt-6 mb-1' />
 					</Carousel>
 				</div>

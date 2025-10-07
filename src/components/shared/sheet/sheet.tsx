@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import * as SheetPrimitive from "@radix-ui/react-dialog"
-import { XIcon } from "lucide-react"
+import { ArrowLeft, XIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
@@ -54,13 +54,13 @@ function SheetContent({
 }) {
     return (
         <SheetPortal>
-            <SheetOverlay />
+            <SheetOverlay className="backdrop-blur-md" />
             <SheetPrimitive.Content
                 data-slot="sheet-content"
                 className={cn(
                     "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 flex flex-col gap-4 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500 border-none sm:rounded-l-4xl outline-none",
                     side === "right" &&
-                    "data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-full border-l sm:max-w-[70%] 2xl:max-w-1/3",
+                    "data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-full border-l sm:max-w-[70%] 2xl:max-w-[40%] max-sm:pt-16",
                     side === "left" &&
                     "data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left inset-y-0 left-0 h-full w-full border-r sm:max-w-[70%] 2xl:max-w-1/3",
                     side === "top" &&
@@ -72,9 +72,13 @@ function SheetContent({
                 {...props}
             >
                 {children}
-                <SheetPrimitive.Close className="ring-offset-background focus:ring-ring data-[state=open]:bg-input absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none cursor-pointer ">
-                    <XIcon strokeWidth={1.5} size={32} />
+                <SheetPrimitive.Close className="hidden sm:block absolute top-4 -left-14 rounded-xs opacity-100 transition-opacity hover:opacity-70 focus:outline-hidden disabled:pointer-events-none cursor-pointer text-white">
+                    <XIcon strokeWidth={1.5} size={40} />
                     <span className="sr-only">Закрыть</span>
+                </SheetPrimitive.Close>
+                <SheetPrimitive.Close className="sm:hidden absolute top-2 left-0 inline-flex gap-2 items-center  rounded-full h-10 px-4 text-primary">
+                    <ArrowLeft strokeWidth={1.5} size={24} />
+                    <span>Назад</span>
                 </SheetPrimitive.Close>
             </SheetPrimitive.Content>
         </SheetPortal>
