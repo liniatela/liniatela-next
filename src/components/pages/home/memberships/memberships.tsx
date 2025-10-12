@@ -42,7 +42,7 @@ function Memberships() {
 						<span>Твоя свобода</span> — в выборе формата
 					</h2>
 
-					<Button size={'lg'} variant={'white'} className='sm:ml-auto'>
+					<Button size={'lg'} variant={'white'} className='sm:ml-auto' onClick={() => setIsComparisonOpen(true)}>
 						Сравнить абонементы
 					</Button>
 				</header>
@@ -99,7 +99,7 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
 				onClick={handleOpenSheet}
 			>
 				<div className='p-6 h-full flex flex-col'>
-					<div className='flex items-center justify-between mb-4'>
+					<div className='flex flex-wrap gap-3 items-center justify-between mb-4'>
 						<Tag size={'md'} variant={'white'}>
 							{membership.title}
 						</Tag>
