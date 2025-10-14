@@ -221,7 +221,7 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
             </div>
 
             {/* Направления */}
-            <div className='space-y-3'>
+            {/* <div className='space-y-3'>
               <h3 className='text-sm'>Включенные направления</h3>
               <div className='flex flex-wrap gap-2'>
                 {membership.includedDirections.map((direction, index) => (
@@ -238,7 +238,7 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
                   Не включено: {membership.excludedDirections.join(', ')}
                 </p>
               )}
-            </div>
+            </div> */}
 
 
             {/* Для кого подходит */}
