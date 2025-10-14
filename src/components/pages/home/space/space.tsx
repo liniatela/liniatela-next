@@ -16,7 +16,7 @@ import Link from 'next/link'
 
 function Space() {
 	return (
-		<section className='space -mt-7 pt-32 lg:pt-52 overflow-hidden select-none' id='space'>
+		<section className='space -mt-7 pt-30 sm:pt-50 overflow-hidden select-none' id='space'>
 			<div className='container flex flex-col gap-10'>
 				<header className='flex flex-col items-start sm:flex-row sm:items-center sm:gap-8 gap-4'>
 					<Tag>О студии</Tag>

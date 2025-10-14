@@ -7,7 +7,7 @@ import { Button } from "@/components/shared/button"
 
 const CTA = () => {
   return (
-    <section className="cta mt-[100px]">
+    <section className="cta pt-30 sm:pt-50">
       <div className="relative min-h-[400px] md:min-h-[600px] max-w-[1440px] mx-auto rounded-4xl overflow-hidden 
       p-6 md:p-10">
 

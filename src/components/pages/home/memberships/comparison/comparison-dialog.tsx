@@ -18,7 +18,8 @@ const membershipsData = [
     bonuses3Month: ['1 индивидуальная тренировка', 'Заморозка на 2 недели'],
     price6Month: '29 400 ₽',
     bonuses6Month: ['1 индивидуальная тренировка (ТОП тренер)', 'Заморозка на 1 месяц', 'Массаж'],
-    savings: '1 900 ₽ / 4 500 ₽'
+    savings3Month: '1 900 ₽',
+    savings6Month: ' 4 500 ₽'
   },
   {
     id: 'balance',
@@ -29,7 +30,8 @@ const membershipsData = [
     bonuses3Month: ['2 индивидуальные тренировки', 'Заморозка на 2 недели'],
     price6Month: '41 400 ₽',
     bonuses6Month: ['2 индивидуальные тренировки (ТОП тренер)', 'Заморозка на 1 месяц', 'Массаж'],
-    savings: '3 800 ₽ / 7 000 ₽'
+    savings3Month: '3 800 ₽',
+    savings6Month: ' 7 000 ₽'
   },
   {
     id: 'harmony',
@@ -40,7 +42,8 @@ const membershipsData = [
     bonuses3Month: ['3 индивидуальные тренировки', 'Заморозка на 2 недели'],
     price6Month: '47 400 ₽',
     bonuses6Month: ['3 индивидуальные тренировки (ТОП тренер)', 'Заморозка на 1 месяц', 'Массаж', 'Консультация нутрициолога'],
-    savings: '5 700 ₽ / 12 000 ₽'
+    savings3Month: '5 700 ₽',
+    savings6Month: ' 12 000 ₽'
   }
 ]
 
@@ -88,32 +91,35 @@ export const ComparisonDialog = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className='max-md:max-w-screen max-md:w-screen max-md:h-screen max-md:max-h-screen max-md:rounded-none md:max-w-[95vw] md:max-h-[90vh] p-0'>
-        <DialogHeader className='sticky top-0 z-10 bg-white p-6 md:p-8'>
-          <DialogTitle className='text-xl md:text-2xl lg:text-3xl text-[#7C7C7C]'>Сравнить абонементы</DialogTitle>
+        <DialogHeader className='sticky top-0 z-10 bg-white p-4 md:p-8 !pb-2'>
+          <DialogTitle className='text-2xl lg:text-3xl'>Сравнить абонементы</DialogTitle>
           <DialogClose />
         </DialogHeader>
 
-        <div className='overflow-x-auto overflow-y-auto max-h-[calc(90vh-80px)] px-6 pb-6 space-y-8'>
+        <div className='overflow-x-auto overflow-y-auto max-h-[calc(90vh-80px)] px-4 pb-6 md:px-8 space-y-10'>
 
           {/* ТАБЛИЦА 1: АБОНЕМЕНТЫ */}
           <div>
-            <h3 className='text-xl ml-3 mb-2'>Абонементы</h3>
-            <div className='overflow-x-auto'>
+            <h3 className='text-lg mb-3'>Абонементы</h3>
+            <div className='overflow-x-auto border border-input rounded-lg'>
               <table className='w-full border-collapse text-sm'>
                 <thead>
                   <tr className='border-b border-input'>
-                    <th className='text-left py-3 px-3 font-normal text-primary min-w-[140px]  z-10'>
+                    <th className='text-left py-3 px-3 font-normal text-primary min-w-[140px]  z-10 border-r border-input'>
                       Название
                     </th>
 
-                    <th className='text-center py-3 px-3 font-normal text-primary min-w-[110px]'>
+                    <th className='text-center py-3 px-3 font-normal text-primary min-w-[110px] border-r border-input'>
                       1 мес.
                     </th>
                     <th className='text-center py-3 px-3 font-normal text-primary min-w-[110px]'>
                       3 мес.
                     </th>
                     <th className='text-left py-3 px-3 font-normal text-primary min-w-[220px]'>
-                      Бонусы за 3м.
+                      Бонусы за 3 мec.
+                    </th>
+                    <th className='text-left py-3 px-3 font-normal text-primary min-w-[110px] border-r border-input'>
+                      Экономия за 3 мес.
                     </th>
                     <th className='text-center py-3 px-3 font-normal text-primary min-w-[110px]'>
                       6 мес.
@@ -121,8 +127,8 @@ export const ComparisonDialog = ({
                     <th className='text-left py-3 px-3 font-normal text-primary min-w-[240px]'>
                       Бонусы за 6 мес.
                     </th>
-                    <th className='text-center py-3 px-3 font-normal text-primary min-w-[120px]'>
-                      Экономия за 3 мес. / 6 мес.
+                    <th className='text-center py-3 px-3 font-normal text-primary min-w-[110px]'>
+                      Экономия за 6 мес.
                     </th>
                   </tr>
                 </thead>
@@ -132,11 +138,11 @@ export const ComparisonDialog = ({
                       key={item.id}
                       className='border-b border-gray-200 last:border-b-0  transition-colors'
                     >
-                      <td className='py-3 px-3 font-medium text-gray-900 bg-white  transition-colors'>
+                      <td className='py-3 px-3  text-gray-900 bg-white  transition-colors border-r border-input'>
                         {item.name}
                       </td>
 
-                      <td className='py-3 px-3 text-center  text-gray-900'>
+                      <td className='py-3 px-3 text-center  text-gray-900 border-r border-input'>
                         {item.price1Month}
                       </td>
                       <td className='py-3 px-3 text-center  text-gray-900'>
@@ -152,6 +158,9 @@ export const ComparisonDialog = ({
                           ))}
                         </ul>
                       </td>
+                      <td className='py-3 px-3 text-center  text-gray-900 border-r border-input'>
+                        {item.savings3Month}
+                      </td>
                       <td className='py-3 px-3 text-center  text-gray-900'>
                         {item.price6Month}
                       </td>
@@ -165,8 +174,8 @@ export const ComparisonDialog = ({
                           ))}
                         </ul>
                       </td>
-                      <td className='py-3 px-3 text-center text-gray-900'>
-                        {item.savings}
+                      <td className='py-3 px-3 text-center  text-gray-900'>
+                        {item.savings6Month}
                       </td>
                     </tr>
                   ))}
@@ -178,12 +187,12 @@ export const ComparisonDialog = ({
 
           {/* ТАБЛИЦА 2: РАЗОВЫЕ УСЛУГИ */}
           <div>
-            <h3 className='text-xl ml-3 mb-2'>Разовые услуги</h3>
-            <div className='overflow-x-auto'>
-              <table className='w-full border-collapse text-sm'>
+            <h3 className='text-lg mb-3'>Разовые услуги</h3>
+            <div className='overflow-x-auto border border-input rounded-lg w-max'>
+              <table className='border-collapse text-sm'>
                 <thead>
                   <tr className='border-b border-input'>
-                    <th className='text-left py-3 px-3 font-normal text-primary min-w-[280px]'>
+                    <th className='text-left py-3 px-3 font-normal text-primary min-w-[280px] border-r border-input'>
                       Название
                     </th>
 
@@ -198,7 +207,7 @@ export const ComparisonDialog = ({
                       key={item.id}
                       className='border-b border-gray-200 last:border-b-0  transition-colors'
                     >
-                      <td className='py-3 px-4 font-medium text-gray-900'>
+                      <td className='py-3 px-4 text-gray-900 border-r border-input'>
                         {item.name}
                       </td>
 

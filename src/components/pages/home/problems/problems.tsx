@@ -6,7 +6,7 @@ import { IProblem, MOCK_PROBLEMS_DATA } from './constants'
 const Problems = () => {
   return (
     <section className='problems overflow-hidden select-none'>
-      <div className='rounded-4xl pt-10 sm:pt-20'>
+      <div className='rounded-4xl pt-30 sm:pt-50'>
         <div className='container'>
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6'>
             {/* Левая карточка с изображением */}

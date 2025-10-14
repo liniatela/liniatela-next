@@ -18,10 +18,13 @@ export default async function Home() {
       <Memberships />
       <Space />
       <Trainers />
-      <div className='pt-32 lg:pt-52 overflow-hidden'>
-        <div className='bg-white rounded-t-[70px] py-10 sm:py-20'>
-          <Contacts />
-          <Footer />
+      <div className=' overflow-hidden'>
+        <div className='bg-white rounded-[40px] md:rounded-t-[70px] py-10 sm:pt-20'>
+          <div className='container'>
+
+            <Contacts />
+            <Footer />
+          </div>
         </div>
       </div>
     </>
