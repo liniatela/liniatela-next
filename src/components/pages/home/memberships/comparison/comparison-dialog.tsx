@@ -7,78 +7,10 @@ import {
   DialogTitle,
   DialogClose
 } from '@/components/shared/dialog'
+import { InfinityIcon, PlusCircleIcon, SaladIcon, SnowflakeIcon, SparklesIcon, User2Icon, UserPlus2Icon } from 'lucide-react'
+import { COMPARISON_MEMBERSHIPS } from './constants'
 
-const membershipsData = [
-  {
-    id: 'focus',
-    name: 'Фокус',
-    type: 'абонемент',
-    price1Month: '4 900 ₽',
-    price3Month: '14 700 ₽',
-    bonuses3Month: ['1 индивидуальная тренировка', 'Заморозка на 2 недели'],
-    price6Month: '29 400 ₽',
-    bonuses6Month: ['1 индивидуальная тренировка (ТОП тренер)', 'Заморозка на 1 месяц', 'Массаж'],
-    savings3Month: '1 900 ₽',
-    savings6Month: ' 4 500 ₽'
-  },
-  {
-    id: 'balance',
-    name: 'Баланс',
-    type: 'абонемент',
-    price1Month: '6 900 ₽',
-    price3Month: '20 700 ₽',
-    bonuses3Month: ['2 индивидуальные тренировки', 'Заморозка на 2 недели'],
-    price6Month: '41 400 ₽',
-    bonuses6Month: ['2 индивидуальные тренировки (ТОП тренер)', 'Заморозка на 1 месяц', 'Массаж'],
-    savings3Month: '3 800 ₽',
-    savings6Month: ' 7 000 ₽'
-  },
-  {
-    id: 'harmony',
-    name: 'Гармония',
-    type: 'абонемент',
-    price1Month: '7 900 ₽',
-    price3Month: '23 700 ₽',
-    bonuses3Month: ['3 индивидуальные тренировки', 'Заморозка на 2 недели'],
-    price6Month: '47 400 ₽',
-    bonuses6Month: ['3 индивидуальные тренировки (ТОП тренер)', 'Заморозка на 1 месяц', 'Массаж', 'Консультация нутрициолога'],
-    savings3Month: '5 700 ₽',
-    savings6Month: ' 12 000 ₽'
-  }
-]
 
-const servicesData = [
-  {
-    id: 'single',
-    name: 'Разовое посещение',
-    type: 'разовое',
-    price: '890 ₽'
-  },
-  {
-    id: 'individual',
-    name: 'Индивидуальная тренировка',
-    type: 'персональная',
-    price: '1 900 ₽'
-  },
-  {
-    id: 'individual-pro',
-    name: 'Индивидуальная тренировка (ТОП тренер)',
-    type: 'персональная',
-    price: '2 500 ₽'
-  },
-  {
-    id: 'split',
-    name: 'Сплит тренировка',
-    type: 'персональная (сплит)',
-    price: '2 900 ₽'
-  },
-  {
-    id: 'split-pro',
-    name: 'Сплит тренировка (ТОП тренер)',
-    type: 'персональная (сплит)',
-    price: '3 500 ₽'
-  }
-]
 
 export const ComparisonDialog = ({
   open,
@@ -87,140 +19,117 @@ export const ComparisonDialog = ({
   open: boolean
   onOpenChange: (open: boolean) => void
 }) => {
+  const iconMap = {
+    PlusCircle: PlusCircleIcon,
+    Infinity: InfinityIcon,
+    User2: User2Icon,
+    Snowflake: SnowflakeIcon,
+    Sparkles: SparklesIcon,
+    UserPlus2: UserPlus2Icon,
+    Salad: SaladIcon,
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className='max-md:max-w-screen max-md:w-screen max-md:h-screen max-md:max-h-screen max-md:rounded-none md:max-w-[95vw] md:max-h-[90vh] p-0'>
+      <DialogContent className='max-md:max-w-screen max-md:w-screen max-md:h-screen max-md:max-h-screen max-md:rounded-none max-w-2xl p-0'>
         <DialogHeader className='sticky top-0 z-10 bg-white p-4 md:p-8 !pb-2'>
           <DialogTitle className='text-2xl lg:text-3xl'>Сравнить абонементы</DialogTitle>
           <DialogClose />
         </DialogHeader>
 
-        <div className='overflow-x-auto overflow-y-auto max-h-[calc(90vh-80px)] px-4 pb-6 md:px-8 space-y-10'>
+        <div className='overflow-x-auto overflow-y-auto max-h-[calc(90vh-80px)] px-4 pb-6 md:px-8 '>
 
-          {/* ТАБЛИЦА 1: АБОНЕМЕНТЫ */}
-          <div>
-            <h3 className='text-lg mb-3'>Абонементы</h3>
-            <div className='overflow-x-auto border border-input rounded-lg'>
-              <table className='w-full border-collapse text-sm'>
-                <thead>
-                  <tr className='border-b border-input'>
-                    <th className='text-left py-3 px-3 font-normal text-primary min-w-[140px]  z-10 border-r border-input'>
-                      Название
-                    </th>
-
-                    <th className='text-center py-3 px-3 font-normal text-primary min-w-[110px] border-r border-input'>
-                      1 мес.
-                    </th>
-                    <th className='text-center py-3 px-3 font-normal text-primary min-w-[110px]'>
-                      3 мес.
-                    </th>
-                    <th className='text-left py-3 px-3 font-normal text-primary min-w-[220px]'>
-                      Бонусы за 3 мec.
-                    </th>
-                    <th className='text-left py-3 px-3 font-normal text-primary min-w-[110px] border-r border-input'>
-                      Экономия за 3 мес.
-                    </th>
-                    <th className='text-center py-3 px-3 font-normal text-primary min-w-[110px]'>
-                      6 мес.
-                    </th>
-                    <th className='text-left py-3 px-3 font-normal text-primary min-w-[240px]'>
-                      Бонусы за 6 мес.
-                    </th>
-                    <th className='text-center py-3 px-3 font-normal text-primary min-w-[110px]'>
-                      Экономия за 6 мес.
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {membershipsData.map((item) => (
-                    <tr
-                      key={item.id}
-                      className='border-b border-gray-200 last:border-b-0  transition-colors'
+          <ul className='grid grid-cols-1 gap-10'>
+            {COMPARISON_MEMBERSHIPS.map((membership) => {
+              return (
+                <li key={membership.id} className={membership.isPopular ? 'relative' : ''}>
+                  {membership.isPopular && (
+                    <span
+                      className="absolute top-0 right-4 z-20 -translate-y-1/2 bg-white border border-primary text-primary text-xs font-semibold px-3 py-1 rounded-full shadow-sm select-none"
+                      tabIndex={0}
+                      aria-label="Популярно"
+                      role="status"
                     >
-                      <td className='py-3 px-3  text-gray-900 bg-white  transition-colors border-r border-input'>
-                        {item.name}
-                      </td>
+                      Популярно
+                    </span>
+                  )}
 
-                      <td className='py-3 px-3 text-center  text-gray-900 border-r border-input'>
-                        {item.price1Month}
-                      </td>
-                      <td className='py-3 px-3 text-center  text-gray-900'>
-                        {item.price3Month}
-                      </td>
-                      <td className='py-3 px-3'>
-                        <ul className='space-y-1'>
-                          {item.bonuses3Month.map((bonus, idx) => (
-                            <li key={idx} className='flex items-start text-xs'>
-                              <span className='text-green-500 mr-2 mt-0.5'>●</span>
-                              <span className='text-muted-foreground'>{bonus}</span>
-                            </li>
+                  <article
+                    className={
+                      membership.isPopular
+                        ? 'border-2 border-primary/60 ring-3 ring-primary/20 rounded-xl overflow-hidden'
+                        : 'border border-input rounded-xl overflow-hidden'
+                    }
+                  >
+                    <div className='overflow-x-auto'>
+                      <table className='w-full text-sm'>
+                        <thead>
+                          <tr className='border-b border-input'>
+                            <th className='text-left p-4 font-normal w-[150px] lg:w-[150px]'>
+                              <h3 className='text-2xl tracking-tighter leading-none'>
+                                {membership.name}
+                              </h3>
+                            </th>
+                            <th className='text-left p-4 font-light text-muted-foreground text-sm tracking-tighter leading-none'>
+                              Преимущества
+                            </th>
+                            <th className='text-right p-4 font-light text-muted-foreground text-sm tracking-tighter leading-none'>
+                              Стоимость
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {membership.plans.map((plan, planIndex) => (
+                            <tr key={planIndex} className='border-t border-input'>
+                              <td className='p-4 font-light  whitespace-nowrap align-top tracking-tighter leading-none'>
+                                {plan.duration}
+                              </td>
+                              <td className='p-4 align-top'>
+                                <ul className='flex flex-col space-y-2'>
+                                  {plan.benefits.map((benefit, benefitIndex) => {
+                                    const BenefitIcon = iconMap[benefit.icon as keyof typeof iconMap];
+
+                                    return (
+                                      <li
+                                        key={benefitIndex}
+                                        className={`max-md:whitespace-nowrap inline-flex items-start gap-2 tracking-tighter  ${benefit.highlighted
+                                          ? ''
+                                          : 'font-light text-muted-foreground'
+                                          }`}
+                                      >
+                                        <BenefitIcon
+                                          className={`flex-shrink-0 mt-0.5 ${benefit.highlighted
+                                            ? 'text-primary'
+                                            : 'text-muted-foreground'
+                                            }`}
+                                          size={14}
+                                        />
+                                        <span>{benefit.text}</span>
+                                      </li>
+                                    );
+                                  })}
+                                </ul>
+                              </td>
+                              <td className='p-4 text-right whitespace-nowrap align-top'>
+                                <p className='text-xl font-medium text-primary lining-nums tracking-tighter leading-none'>
+                                  {plan.price}&nbsp;₽
+                                </p>
+                                {plan.savings && (
+                                  <p className='text-xs text-secondary-foreground bg-secondary px-2 py-1 rounded-full mt-1 inline-block'>
+                                    выгода {plan.savings}&nbsp;₽
+                                  </p>
+                                )}
+                              </td>
+                            </tr>
                           ))}
-                        </ul>
-                      </td>
-                      <td className='py-3 px-3 text-center  text-gray-900 border-r border-input'>
-                        {item.savings3Month}
-                      </td>
-                      <td className='py-3 px-3 text-center  text-gray-900'>
-                        {item.price6Month}
-                      </td>
-                      <td className='py-3 px-3'>
-                        <ul className='space-y-1'>
-                          {item.bonuses6Month.map((bonus, idx) => (
-                            <li key={idx} className='flex items-start text-xs'>
-                              <span className='text-green-500 mr-2 mt-0.5'>●</span>
-                              <span className='text-muted-foreground'>{bonus}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </td>
-                      <td className='py-3 px-3 text-center  text-gray-900'>
-                        {item.savings6Month}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-
-          {/* ТАБЛИЦА 2: РАЗОВЫЕ УСЛУГИ */}
-          <div>
-            <h3 className='text-lg mb-3'>Разовые услуги</h3>
-            <div className='overflow-x-auto border border-input rounded-lg w-max'>
-              <table className='border-collapse text-sm'>
-                <thead>
-                  <tr className='border-b border-input'>
-                    <th className='text-left py-3 px-3 font-normal text-primary min-w-[280px] border-r border-input'>
-                      Название
-                    </th>
-
-                    <th className='text-center py-3 px-3 font-normal text-primary min-w-[150px]'>
-                      Стоимость
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {servicesData.map((item) => (
-                    <tr
-                      key={item.id}
-                      className='border-b border-gray-200 last:border-b-0  transition-colors'
-                    >
-                      <td className='py-3 px-4 text-gray-900 border-r border-input'>
-                        {item.name}
-                      </td>
-
-                      <td className='py-3 px-4 text-center text-gray-900'>
-                        {item.price}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
+                        </tbody>
+                      </table>
+                    </div>
+                  </article>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </DialogContent>
     </Dialog>
