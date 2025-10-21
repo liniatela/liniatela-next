@@ -87,8 +87,7 @@ const DirectionCard = ({ direction }: { direction: Direction }) => {
         <div className='p-6 h-full grid  text-white'>
           <h3 className='text-4xl leading-none tracking-tighter break-words'>{direction.name}</h3>
           <div className='mt-auto'>
-            <Tag size={'sm'} variant={'white'} className='mb-2'>{direction.category}</Tag>
-            <p className='text-sm mb-4'>калл: -{direction.calories}</p>
+
             <p className='text-lg text-white/90 leading-none tracking-tighter font-light'>
               {direction.shortDescription}
             </p>
@@ -128,15 +127,8 @@ const DirectionCard = ({ direction }: { direction: Direction }) => {
         <div className='h-full flex flex-col'>
           <SheetHeader className='p-0 mb-6'>
             <div className='flex flex-wrap items-center gap-3 mb-2'>
-              <SheetTitle className='text-2xl text-left'>{direction.name}</SheetTitle>
-              <div className='flex items-center gap-2'>
-                {Array.from({ length: direction.difficulty }).map((_, index) => (
-                  <StarIcon key={index} className='size-4 fill-yellow-400 text-yellow-400' />
-                ))}
-                <span className='text-sm text-muted-foreground'>
-                  {getDifficultyLabel(direction.difficulty)}
-                </span>
-              </div>
+              <SheetTitle className='text-4xl text-left'>{direction.name}</SheetTitle>
+
             </div>
           </SheetHeader>
 
@@ -149,30 +141,47 @@ const DirectionCard = ({ direction }: { direction: Direction }) => {
             >
               <div className='space-y-6'>
                 {/* Основная информация */}
-                <SheetDescription className='text-base text-left'>
+                <SheetDescription className='text-left leading-tight tracking-tighter max-w-[320px]'>
                   {direction.shortDescription}
                 </SheetDescription>
 
-                <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
-                  <div className='flex items-center gap-3 p-4 bg-muted rounded-xl'>
-                    <ClockIcon className='size-5 text-primary' />
-                    <div>
-                      <p className='font-medium'>Длительность</p>
-                      <p className='text-sm text-muted-foreground'>{direction.duration}</p>
-                    </div>
-                  </div>
-                  <div className='flex items-center gap-3 p-4 bg-muted rounded-xl'>
-                    <FlameIcon className='size-5 text-orange-500' />
-                    <div>
-                      <p className='font-medium'>Калории</p>
-                      <p className='text-sm text-muted-foreground'>{direction.calories} ккал</p>
-                    </div>
-                  </div>
-                </div>
+                <ul className="space-y-2">
+                  <li className="flex items-center gap-2">
+                    <span className='text-sm leading-none tracking-tighter'>Длительность:</span>
+                    <span className="text-muted-foreground text-sm leading-none tracking-tighter">{direction.duration}</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className='text-sm leading-none tracking-tighter'>Калории:</span>
+                    <span className="text-muted-foreground text-sm leading-none tracking-tighter">-{direction.calories} ккал</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className='text-sm leading-none tracking-tighter'>Категория:</span>
+                    <span className="text-muted-foreground text-sm leading-none tracking-tighter">{direction.category}</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className='text-sm leading-none tracking-tighter'>Сложность:</span>
+                    <span className="flex items-center gap-1" aria-label={`Сложность: ${direction.difficulty}`} tabIndex={0}>
+                      {Array.from({ length: 3 }).map((_, idx) => (
+                        <span
+                          key={idx}
+                          className={
+                            idx < direction.difficulty
+                              ? "inline-block w-2 h-2 rounded-full bg-primary"
+                              : "inline-block w-2 h-2 rounded-full bg-muted-foreground/20"
+                          }
+                          aria-hidden="true"
+                        />
+                      ))}
+                      <span className="sr-only">
+                        {direction.difficulty} из 3
+                      </span>
+                    </span>
+                  </li>
+                </ul>
 
                 {/* Полное описание */}
                 <div>
-                  <p className='text-muted-foreground leading-relaxed'>{direction.fullDescription}</p>
+                  <p className='leading-tight tracking-tighter'>{direction.fullDescription}</p>
                 </div>
               </div>
 
@@ -205,9 +214,7 @@ const DirectionCard = ({ direction }: { direction: Direction }) => {
           {/* CTA кнопки в подвале */}
           <div className='flex items-center gap-4 mt-8 pt-6 border-t border-input'>
             <Button className='flex-1'>Записаться</Button>
-            <Button variant='outline' className='flex-1'>
-              Узнать расписание
-            </Button>
+
           </div>
         </div>
       </SheetContent>

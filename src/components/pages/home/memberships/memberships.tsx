@@ -42,7 +42,7 @@ function Memberships() {
             <span>Твоя свобода</span> — в выборе формата
           </h2>
 
-          <Button size={'lg'} variant={'white'} className='sm:ml-auto' onClick={() => setIsComparisonOpen(true)}>
+          <Button size={'lg'} variant={'secondary'} className='sm:ml-auto' onClick={() => setIsComparisonOpen(true)}>
             Сравнить абонементы
           </Button>
         </header>

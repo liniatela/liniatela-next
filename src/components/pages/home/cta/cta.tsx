@@ -16,11 +16,7 @@ const CTA = () => {
           <div className="border border-white/15 rounded-3xl bg-black/10 backdrop-blur-sm text-white max-w-[600px] p-4 md:p-7">
             <h2 className="text-3xl md:text-4xl font-normal leading-none tracking-tighter">{MOCK_CTA_DATA.title}</h2>
             <p className="leading-none tracking-tighter mt-6 max-w-[450px]">{MOCK_CTA_DATA.description}</p>
-            <ul className="mt-6 flex flex-wrap">
-              {MOCK_CTA_DATA.tags.map((tag) => (
-                <li key={tag.id}><Tag variant={'white'} size={'sm'}>{tag.label}</Tag></li>
-              ))}
-            </ul>
+            
           </div>
           <div className="bg-primary rounded-3xl p-4 md:p-6 text-white max-w-[300px] mt-20  md:mt-32 
            max-md:mx-auto md:ml-auto max-md:text-center">
