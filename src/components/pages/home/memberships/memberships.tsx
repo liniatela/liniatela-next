@@ -42,7 +42,7 @@ function Memberships() {
             <span>Твоя свобода</span> — в выборе формата
           </h2>
 
-          <Button size={'lg'} variant={'secondary'} className='sm:ml-auto' onClick={() => setIsComparisonOpen(true)}>
+          <Button size={'lg'} variant={'secondary'} className='sm:ml-auto max-lg:hidden' onClick={() => setIsComparisonOpen(true)}>
             Сравнить абонементы
           </Button>
         </header>
@@ -72,6 +72,11 @@ function Memberships() {
               </p>
             </footer>
           </Carousel>
+          <div className='mt-5 lg:hideen flex items-center'>
+            <Button size={'lg'} variant={'secondary'} onClick={() => setIsComparisonOpen(true)}>
+              Сравнить абонементы
+            </Button>
+          </div>
         </div>
       </div>
       <ComparisonDialog
