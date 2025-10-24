@@ -72,7 +72,7 @@ function Memberships() {
               </p>
             </footer>
           </Carousel>
-          <div className='mt-5 lg:hideen flex items-center'>
+          <div className='mt-5 lg:hidden flex items-center'>
             <Button size={'lg'} variant={'secondary'} onClick={() => setIsComparisonOpen(true)}>
               Сравнить абонементы
             </Button>

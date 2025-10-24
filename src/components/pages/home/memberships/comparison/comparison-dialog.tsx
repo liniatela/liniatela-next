@@ -34,7 +34,7 @@ export const ComparisonDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className='max-md:max-w-screen max-md:w-screen max-md:h-screen max-md:max-h-screen max-md:rounded-none  p-0'>
+      <DialogContent className='max-md:max-w-screen max-md:w-screen max-md:h-screen max-md:max-h-screen max-md:rounded-none md:max-h-[90vh]  p-0'>
         <DialogHeader className='sticky top-0 z-10 bg-white p-4 md:p-8 !pb-2'>
           <DialogTitle className='text-2xl lg:text-3xl'>Сравнить абонементы</DialogTitle>
           <DialogClose />
@@ -47,7 +47,7 @@ export const ComparisonDialog = ({
               return (
                 <li key={membership.id}>
                   <article className='p-4 border rounded-3xl border-input'>
-                    <h3 className='leading-none tracking-tighter text-2xl xl:text-4xl text-center mb-7'>{membership.name}</h3>
+                    <h3 className='leading-none tracking-tighter text-2xl xl:text-3xl text-center mb-7'>{membership.name}</h3>
                     <div>
                       {membership.plans.map((plan, planIndex) => (
                         <React.Fragment key={planIndex}>
