@@ -27,6 +27,7 @@ import {
 import { CreditCardIcon } from 'lucide-react'
 import { getAllMemberships, Membership } from './constance'
 import { ComparisonDialog } from './comparison/comparison-dialog'
+import { cn } from '@/lib/utils'
 
 function Memberships() {
   const [isComparisonOpen, setIsComparisonOpen] = useState(false)
@@ -107,7 +108,7 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
             <h3 className='text-4xl leading-none tracking-tighter mb-4 break-words'>{membership.title}</h3>
 
             <Tag variant={'white'} size={'lg'}>
-              {membership.price.toLocaleString()} ₽
+              {membership.price.toLocaleString()} ₽ /&nbsp;<span className=' text-white/90'>{membership.duration}</span>
             </Tag>
 
           </div>
@@ -148,21 +149,15 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
 
       <SheetContent
         side="right"
-        className='py-4 px-6 lg:px-8 lg:py-6 overflow-visible'
+        className={cn(
+          'py-4 px-6 lg:px-6 lg:py-6 overflow-y-auto overflow-x-hidden text-black'
+        )}
       >
         <div className='h-full flex flex-col'>
-          <div className="mb-6 relative max-h-[266px] rounded-3xl overflow-hidden">
-            <Image
-              className="object-cover w-full h-full max-sm:max-h-[180px]"
-              src={membership.coverImage}
-              sizes="(max-width: 768px) 90vw, (max-width: 1024px) 50vw, 33vw"
-              alt={membership.title}
-            />
-            <div
-              className="absolute inset-0 bg-black/40 pointer-events-none rounded-3xl"
-              aria-hidden="true"
-            />
-            <SheetHeader className='absolute left-4 top-4 right-4 p-0 mb-6'>
+
+
+
+          {/* <SheetHeader className=''>
               <div className='flex flex-wrap items-center gap-3 mb-2 w-full'>
                 <SheetTitle className='text-2xl text-left text-white'>{membership.title}</SheetTitle>
                 <Tag variant={'white'} size={'md'} className='ml-auto'>
@@ -173,29 +168,42 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
               <SheetDescription className='text-base text-left leading-relaxed text-white'>
                 {membership.shortDescription}
               </SheetDescription>
-            </SheetHeader>
-          </div>
+            </SheetHeader> */}
+          <SheetHeader className='p-0'>
+            <div className='flex flex-wrap items-center gap-3 mb-2'>
+              <SheetTitle className='text-4xl text-left'>{membership.title}</SheetTitle>
+            </div>
+          </SheetHeader>
+
 
           <div className='flex-1 overflow-y-auto overflow-x-hidden pr-2 space-y-10'>
+            <div className='space-y-4'>
+              <SheetDescription className='leading-normal tracking-tighter'>
+                {membership.shortDescription}
+              </SheetDescription>
+              <Tag variant={'blue'} size={'lg'} className='ml-auto'>
+                {membership.price.toLocaleString()} ₽ / {membership.duration}
+              </Tag>
+            </div>
             <div className='space-y-10'>
               <div>
-                <p>{membership.longDescription}</p>
+                <p className='leading-normal tracking-tighter'>{membership.longDescription}</p>
               </div>
 
               <div className='p-4 bg-muted rounded-xl space-y-6'>
                 <div className='flex items-start gap-3'>
 
                   <div>
-                    <p className='text-sm font-medium'>Срок действия</p>
-                    <p className='text-muted-foreground'>{membership.validityPeriod}</p>
+                    <p className='text-sm font-medium leading-normal tracking-tighter'>Срок действия</p>
+                    <p className='text-muted-foreground leading-normal tracking-tighter'>{membership.validityPeriod}</p>
                   </div>
                 </div>
 
                 <div className='flex items-start gap-3'>
 
                   <div>
-                    <p className='text-sm font-medium'>Количество занятий</p>
-                    <p className='text-muted-foreground'>
+                    <p className='text-sm font-medium leading-normal tracking-tighter'>Количество занятий</p>
+                    <p className='text-muted-foreground leading-normal tracking-tighter'>
                       Неограниченное посещение
                     </p>
                   </div>
@@ -204,8 +212,8 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
                 {membership.freeze.available && (
                   <div className='flex items-start gap-3'>
                     <div>
-                      <p className='text-sm font-medium'>Заморозка</p>
-                      <p className='text-muted-foreground'>
+                      <p className='text-sm font-medium leading-normal tracking-tighter'>Заморозка</p>
+                      <p className='text-muted-foreground leading-normal tracking-tighter'>
                         {membership.freeze.duration}
                         {membership.freeze.conditions && ` — ${membership.freeze.conditions}`}
                       </p>
@@ -217,8 +225,8 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
                   <div className='flex items-start gap-3'>
 
                     <div>
-                      <p className='font-medium text-sm'>Стоимость одного занятия</p>
-                      <p className='text-sm text-muted-foreground'>{membership.pricePerSession} ₽</p>
+                      <p className='font-medium text-sm leading-normal tracking-tighter'>Стоимость одного занятия</p>
+                      <p className='text-sm text-muted-foreground leading-normal tracking-tighter'>{membership.pricePerSession} ₽</p>
                     </div>
                   </div>
                 )}

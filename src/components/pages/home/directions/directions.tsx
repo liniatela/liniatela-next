@@ -9,7 +9,7 @@ import {
 } from '@/components/shared/carousel'
 import Tag from '@/components/shared/tag'
 import Image from 'next/image'
-import { Direction, getDifficultyLabel, MOCK_DIRECTIONS } from './constants'
+import { Direction, MOCK_DIRECTIONS } from './constants'
 import { Button } from '@/components/shared/button'
 import { useState } from 'react'
 import {
@@ -20,7 +20,7 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/components/shared/sheet'
-import { ClockIcon, FlameIcon, StarIcon } from 'lucide-react'
+
 import { cn } from '@/lib/utils'
 
 function Directions() {
@@ -114,7 +114,7 @@ const DirectionCard = ({ direction }: { direction: Direction }) => {
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             alt={direction.name}
           />
-          <div className="absolute inset-0 bg-black/20  transition-colors" aria-hidden="true" />
+          <div className="absolute inset-0 bg-black/40  transition-colors" aria-hidden="true" />
         </div>
       </article>
 
@@ -125,10 +125,9 @@ const DirectionCard = ({ direction }: { direction: Direction }) => {
         )}
       >
         <div className='h-full flex flex-col'>
-          <SheetHeader className='p-0 mb-6'>
-            <div className='flex flex-wrap items-center gap-3 mb-2'>
+          <SheetHeader className='p-0'>
+            <div className='flex flex-wrap items-center gap-3'>
               <SheetTitle className='text-4xl text-left'>{direction.name}</SheetTitle>
-
             </div>
           </SheetHeader>
 
@@ -139,7 +138,7 @@ const DirectionCard = ({ direction }: { direction: Direction }) => {
 
               )}
             >
-              <div className='space-y-6'>
+              <div className='space-y-6 mt-2  '>
                 {/* Основная информация */}
                 <SheetDescription className='text-left leading-tight tracking-tighter max-w-[320px]'>
                   {direction.shortDescription}

@@ -3,6 +3,10 @@ import mockImage1 from './images/direction-1.jpg'
 import mockImage2 from './images/direction-2.jpg'
 import mockImage3 from './images/direction-3.jpg'
 import mockImage4 from './images/direction-4.jpg'
+import mockImage5 from './images/direction-5.jpg'
+import mockImage6 from './images/direction-6.jpg'
+import mockImage7 from './images/direction-7.jpg'
+import mockImage8 from './images/direction-8.jpg'
 
 export interface Direction {
   id: string
@@ -32,7 +36,6 @@ export const MOCK_DIRECTIONS: Direction[] = [
     duration: '1 час',
     calories: 120,
     coverImage: mockImage1,
-    gallery: [mockImage1, mockImage2, mockImage3, mockImage4]
   },
   {
     id: '2',
@@ -46,7 +49,6 @@ export const MOCK_DIRECTIONS: Direction[] = [
     duration: '1 час',
     calories: 300,
     coverImage: mockImage2,
-    gallery: [mockImage1, mockImage2, mockImage3, mockImage4]
   },
   {
     id: '3',
@@ -61,7 +63,6 @@ export const MOCK_DIRECTIONS: Direction[] = [
     duration: '1 час',
     calories: 300,
     coverImage: mockImage3,
-    gallery: [mockImage1]
   },
   {
     id: '4',
@@ -87,8 +88,7 @@ export const MOCK_DIRECTIONS: Direction[] = [
     difficulty: 3,
     duration: '1 час',
     calories: 300,
-    coverImage: mockImage1,
-    gallery: [mockImage1, mockImage2, mockImage3, mockImage4]
+    coverImage: mockImage7,
   },
   {
     id: '6',
@@ -101,7 +101,7 @@ export const MOCK_DIRECTIONS: Direction[] = [
     difficulty: 3,
     duration: '1 час',
     calories: 350,
-    coverImage: mockImage2
+    coverImage: mockImage8
   },
   {
     id: '7',
@@ -115,8 +115,7 @@ export const MOCK_DIRECTIONS: Direction[] = [
     difficulty: 3,
     duration: '1 час',
     calories: 350,
-    coverImage: mockImage3,
-    gallery: [mockImage1, mockImage2, mockImage3, mockImage4]
+    coverImage: mockImage5,
   },
   {
     id: '8',
@@ -129,7 +128,7 @@ export const MOCK_DIRECTIONS: Direction[] = [
     difficulty: 3,
     duration: '1 час',
     calories: 450,
-    coverImage: mockImage4
+    coverImage: mockImage6
   }
 ]
 
