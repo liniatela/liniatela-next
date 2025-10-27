@@ -52,7 +52,9 @@ function Memberships() {
           <Carousel
             className='w-full'
             opts={{
-              align: 'start'
+              align: 'start',
+              dragFree: true,
+              containScroll: 'trimSnaps',
             }}
           >
             <CarouselContent>
