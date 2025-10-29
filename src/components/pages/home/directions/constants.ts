@@ -36,6 +36,7 @@ export const MOCK_DIRECTIONS: Direction[] = [
     duration: '1 час',
     calories: 120,
     coverImage: mockImage1,
+    gallery: [mockImage1, mockImage1]
   },
   {
     id: '2',
@@ -49,6 +50,7 @@ export const MOCK_DIRECTIONS: Direction[] = [
     duration: '1 час',
     calories: 300,
     coverImage: mockImage2,
+    gallery: [mockImage1]
   },
   {
     id: '3',

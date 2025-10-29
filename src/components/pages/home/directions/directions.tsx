@@ -13,15 +13,16 @@ import { Direction, MOCK_DIRECTIONS } from './constants'
 import { Button } from '@/components/shared/button'
 import { useState } from 'react'
 import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger
-} from '@/components/shared/sheet'
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogClose,
+} from '@/components/shared/dialog'
 
 import { cn } from '@/lib/utils'
+import { FlameIcon } from 'lucide-react'
 
 function Directions() {
   return (
@@ -71,152 +72,120 @@ function Directions() {
 export default Directions
 
 const DirectionCard = ({ direction }: { direction: Direction }) => {
-  const [isSheetOpen, setIsSheetOpen] = useState(false)
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
 
-  const handleOpenSheet = () => {
-    setIsSheetOpen(true)
+  const handleOpenDialog = () => {
+    setIsDialogOpen(true)
   }
 
   const haveGallery = direction.gallery && direction.gallery.length > 0
 
   return (
-    <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <article
         className='group/card relative rounded-3xl overflow-hidden h-full min-h-[400px] transition-all shadow hover:shadow-2xl duration-300 cursor-pointer'
+        onClick={handleOpenDialog}
       >
-        <div className='p-6 h-full grid  text-white'>
+        <div className='p-6 h-full grid text-white'>
           <h3 className='text-4xl leading-none tracking-tighter break-words'>{direction.name}</h3>
           <div className='mt-auto'>
-
             <p className='text-lg text-white/90 leading-none tracking-tighter font-light'>
               {direction.shortDescription}
             </p>
-            <div className='grid md:grid-cols-2 mt-6 gap-2'>
-              <Button variant={'secondary'} className='shadow-2xl' type='button'>
-                Записаться
-              </Button>
-              <SheetTrigger asChild>
-                <Button variant={'ghost'} className='shadow-2xl' onClick={handleOpenSheet}>
-                  Подробнее
-                </Button>
-              </SheetTrigger>
-            </div>
           </div>
         </div>
-        <div className='flex flex-col items-center justify-center lg:opacity-0'>
-
-        </div>
-        <div className="absolute inset-0 -z-10">
+        <div className='flex flex-col items-center justify-center lg:opacity-0'></div>
+        <div className='absolute inset-0 -z-10'>
           <Image
-            className="object-cover w-full h-full transition-[filter]"
+            className='object-cover w-full h-full transition-[filter]'
             src={direction.coverImage}
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
             alt={direction.name}
           />
-          <div className="absolute inset-0 bg-black/40  transition-colors" aria-hidden="true" />
+          <div className='absolute inset-0 bg-black/40 transition-colors' aria-hidden='true' />
         </div>
       </article>
+      <DialogContent className={cn('max-w-3xl max-h-screen max-lg:h-screen max-lg:rounded-none  lg:max-h-[90vh] overflow-visible p-4 sm:p-10',
+        direction.gallery && direction.gallery.length > 0 ? 'max-w-5xl' : 'max-w-3xl'
+      )}>
+        <DialogClose className='absolute right-4 top-4 lg:-right-0 lg:-top-10 xl:-right-8  lg:text-white' />
+        <div className={cn(
+          'grid gap-10 overflow-y-auto',
+          direction.gallery && direction.gallery.length > 0 ? 'lg:grid-cols-2' : ''
+        )}>
+          <div>
+            <div className='flex flex-col h-full items-start'>
+              <Tag variant={'outline'} size={'sm'}>Направление</Tag>
+              <h2 className='text-4xl leading-none tracking-tighter mt-6'>{direction.name}</h2>
+              <p className='text-lg leading-none tracking-tighter mt-6 text-black/80'>{direction.fullDescription}</p>
+              <ul className='mt-6 space-y-4'>
+                <li className='flex items-center gap-2'>
+                  <span className='text-lg font-medium leading-none tracking-tighter'>Сложность&nbsp;:</span>
+                  <span
+                    className='flex items-center gap-1 border-none outline-none'
+                    aria-label={`Сложность: ${direction.difficulty}`}
+                    tabIndex={0}
+                  >
+                    {Array.from({ length: 3 }).map((_, idx) => (
+                      <span
+                        key={idx}
+                        className={
+                          idx < direction.difficulty
+                            ? 'inline-block w-4 h-4 rounded-full bg-muted-foreground'
+                            : 'inline-block w-4 h-4 rounded-full bg-whites border border-muted-foreground'
+                        }
+                        aria-hidden='true'
+                      />
+                    ))}
+                    <span className='sr-only'>{direction.difficulty} из 3</span>
+                  </span>
+                </li>
+                <li className='flex items-center gap-2'>
+                  <span className='text-lg font-medium leading-none tracking-tighter'>Длительность&nbsp;:</span>
+                  <span className='leading-none tracking-tighter'>
+                    {direction.duration}
+                  </span>
+                </li>
 
-      <SheetContent
-        side="right"
-        className={cn(
-          'py-4 px-6 lg:px-6 lg:py-6 overflow-y-auto overflow-x-hidden'
-        )}
-      >
-        <div className='h-full flex flex-col'>
-          <SheetHeader className='p-0'>
-            <div className='flex flex-wrap items-center gap-3'>
-              <SheetTitle className='text-4xl text-left'>{direction.name}</SheetTitle>
-            </div>
-          </SheetHeader>
+                <li className='flex items-center gap-2'>
+                  <span className='text-lg font-medium leading-none tracking-tighter inline-flex'> 🔥&nbsp;:</span>
+                  <span className='leading-none tracking-tighter'>
+                    {direction.calories} ккал
+                  </span>
+                </li>
+              </ul>
 
-          <div className='flex-1 overflow-y-auto overflow-x-hidden pr-2'>
-            <div
-              className={cn(
-                'grid gap-8',
+              <div className='mt-auto pt-10'>
 
-              )}
-            >
-              <div className='space-y-6 mt-2  '>
-                {/* Основная информация */}
-                <SheetDescription className='text-left leading-tight tracking-tighter max-w-[320px]'>
-                  {direction.shortDescription}
-                </SheetDescription>
-
-                <ul className="space-y-2">
-                  <li className="flex items-center gap-2">
-                    <span className='text-sm leading-none tracking-tighter'>Длительность:</span>
-                    <span className="text-muted-foreground text-sm leading-none tracking-tighter">{direction.duration}</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className='text-sm leading-none tracking-tighter'>Калории:</span>
-                    <span className="text-muted-foreground text-sm leading-none tracking-tighter">-{direction.calories} ккал</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className='text-sm leading-none tracking-tighter'>Категория:</span>
-                    <span className="text-muted-foreground text-sm leading-none tracking-tighter">{direction.category}</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className='text-sm leading-none tracking-tighter'>Сложность:</span>
-                    <span className="flex items-center gap-1" aria-label={`Сложность: ${direction.difficulty}`} tabIndex={0}>
-                      {Array.from({ length: 3 }).map((_, idx) => (
-                        <span
-                          key={idx}
-                          className={
-                            idx < direction.difficulty
-                              ? "inline-block w-2 h-2 rounded-full bg-primary"
-                              : "inline-block w-2 h-2 rounded-full bg-muted-foreground/20"
-                          }
-                          aria-hidden="true"
-                        />
-                      ))}
-                      <span className="sr-only">
-                        {direction.difficulty} из 3
-                      </span>
-                    </span>
-                  </li>
-                </ul>
-
-                {/* Полное описание */}
-                <div>
-                  <p className='leading-tight tracking-tighter'>{direction.fullDescription}</p>
-                </div>
+                <Button size={'lg'}>Записаться</Button>
               </div>
-
-              {/* Галерея */}
-              {direction.gallery && direction.gallery.length > 0 && (
-                <div className=''>
-                  <Carousel className='w-full'>
-                    <CarouselContent className='rounded-3xl'>
-                      {direction.gallery.map((image, index) => (
-                        <CarouselItem key={index} className='basis-1/2'>
-                          <div className='relative aspect-square rounded-3xl overflow-hidden'>
-                            <Image
-                              src={image}
-                              alt={`${direction.name} галерея ${index + 1}`}
-                              fill
-                              className='object-cover hover:scale-110 transition-transform duration-300'
-                              sizes='400px'
-                            />
-                          </div>
-                        </CarouselItem>
-                      ))}
-                    </CarouselContent>
-                    <CarouselNavigationWithDots className='mt-4' />
-                  </Carousel>
-                </div>
-              )}
             </div>
           </div>
-
-          {/* CTA кнопки в подвале */}
-          <div className='flex items-center gap-4 mt-8 pt-6 border-t border-input'>
-            <Button className='flex-1'>Записаться</Button>
-
-          </div>
+          {direction.gallery && direction.gallery.length > 0 && (
+            <div>
+              <Carousel className='w-full'>
+                <CarouselContent className='rounded-3xl overflow-hidden'>
+                  {direction.gallery.map((image, index) => (
+                    <CarouselItem key={index} className='basis-full sm:basis-1/2 lg:basis-full'>
+                      <div className='relative aspect-square rounded-3xl overflow-hidden'>
+                        <Image
+                          src={image}
+                          alt={`${direction.name} галерея ${index + 1}`}
+                          fill
+                          className='pointer-events-none object-cover hover:scale-110 transition-transform duration-300'
+                          sizes='400px'
+                        />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselNavigationWithDots className='mt-4' />
+              </Carousel>
+            </div>
+          )}
         </div>
-      </SheetContent>
-    </Sheet>
+      </DialogContent>
+    </Dialog>
   )
 }

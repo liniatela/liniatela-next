@@ -230,7 +230,7 @@ export const MEMBERSHIPS: Membership[] = [
       'Без долгосрочных обязательств',
       'Идеально для первого знакомства со студией'
     ],
-    duration: '1 посещ.',
+    duration: '',
     supportText: 'Попробуйте перед покупкой абонемента',
     validityPeriod: 'Действует в день покупки',
     sessionsCount: 1,
@@ -265,7 +265,7 @@ export const MEMBERSHIPS: Membership[] = [
       '100% внимания инструктора',
       'Быстрый прогресс и видимые результаты'
     ],
-    duration: '1 посещ.',
+    duration: '',
     supportText: 'Максимальный результат за минимальное время',
     validityPeriod: 'По согласованию с тренером',
     sessionsCount: 1,
@@ -301,7 +301,7 @@ export const MEMBERSHIPS: Membership[] = [
       'Программа адаптируется под каждого участника',
       'Выгоднее, чем две индивидуальные тренировки'
     ],
-    duration: '1 посещ.',
+    duration: '',
     supportText: 'Тренируйтесь вместе и экономьте',
     validityPeriod: 'По согласованию с тренером',
     sessionsCount: 1,

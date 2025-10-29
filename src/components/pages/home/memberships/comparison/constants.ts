@@ -7,7 +7,7 @@ export const COMPARISON_MEMBERSHIPS = [
     isPopular: false,
     plans: [
       {
-        duration: 'от 1 месяца',
+        duration: '1 месяц',
         price: '4 900',
         benefits: [
           {
@@ -23,7 +23,7 @@ export const COMPARISON_MEMBERSHIPS = [
         ]
       },
       {
-        duration: 'от 3 месяцев',
+        duration: '3 месяца',
         price: '14 700',
         savings: '1 900',
         benefits: [
@@ -50,7 +50,7 @@ export const COMPARISON_MEMBERSHIPS = [
         ]
       },
       {
-        duration: 'от 6 месяцев',
+        duration: '6 месяца',
         price: '29 400',
         savings: '4 500',
         benefits: [
@@ -89,7 +89,7 @@ export const COMPARISON_MEMBERSHIPS = [
     isPopular: false,
     plans: [
       {
-        duration: 'от 1 месяца',
+        duration: '1 месяц',
         price: '6 900',
         benefits: [
           {
@@ -105,7 +105,7 @@ export const COMPARISON_MEMBERSHIPS = [
         ]
       },
       {
-        duration: 'от 3 месяцев',
+        duration: '3 месяца',
         price: '20 700',
         savings: '3 800',
         benefits: [
@@ -132,7 +132,7 @@ export const COMPARISON_MEMBERSHIPS = [
         ]
       },
       {
-        duration: 'от 6 месяцев',
+        duration: '6 месяца',
         price: '41 400',
         savings: '7 000',
         benefits: [
@@ -171,7 +171,7 @@ export const COMPARISON_MEMBERSHIPS = [
     isPopular: true,
     plans: [
       {
-        duration: 'от 1 месяца',
+        duration: '1 месяц',
         price: '7 900',
         benefits: [
           {
@@ -187,7 +187,7 @@ export const COMPARISON_MEMBERSHIPS = [
         ]
       },
       {
-        duration: 'от 3 месяцев',
+        duration: '3 месяца',
         price: '23 700',
         savings: '5 700',
         benefits: [
@@ -214,7 +214,7 @@ export const COMPARISON_MEMBERSHIPS = [
         ]
       },
       {
-        duration: 'от 6 месяцев',
+        duration: '6 месяца',
         price: '47 400',
         savings: '12 000',
         benefits: [
@@ -288,7 +288,7 @@ export const COMPARISON_MEMBERSHIPS = [
             icon: 'User2',
             text: '1 индивидуальная тренировка',
             highlighted: true
-          },
+          }
         ]
       }
     ]
@@ -311,7 +311,7 @@ export const COMPARISON_MEMBERSHIPS = [
             icon: 'UserPlus2',
             text: '1 индивидуальная тренировка с PRO-тренером',
             highlighted: true
-          },
+          }
         ]
       }
     ]

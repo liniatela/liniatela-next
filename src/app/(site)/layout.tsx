@@ -22,12 +22,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ru'>
-      <ReactLenis root>
-        <body className={`${onestSans.variable} antialiased min-h-screen flex flex-col`}>
-          <Header />
-          <main className='flex-1'>{children}</main>
-        </body>
-      </ReactLenis>
+      <body className={`${onestSans.variable} antialiased min-h-screen flex flex-col`}>
+        <Header />
+        <main className='flex-1'>{children}</main>
+      </body>
+     
     </html>
   )
 }

@@ -43,9 +43,9 @@ function Memberships() {
             <span>Твоя свобода</span> — в выборе формата
           </h2>
 
-          <Button size={'lg'} variant={'secondary'} className='sm:ml-auto max-lg:hidden' onClick={() => setIsComparisonOpen(true)}>
+          {/* <Button size={'lg'} variant={'secondary'} className='sm:ml-auto max-lg:hidden' onClick={() => setIsComparisonOpen(true)}>
             Сравнить абонементы
-          </Button>
+          </Button> */}
         </header>
 
         <div className='relative'>
@@ -53,8 +53,6 @@ function Memberships() {
             className='w-full'
             opts={{
               align: 'start',
-              dragFree: true,
-              containScroll: 'trimSnaps',
             }}
           >
             <CarouselContent>
@@ -75,7 +73,7 @@ function Memberships() {
               </p>
             </footer>
           </Carousel>
-          <div className='mt-5 lg:hidden flex items-center'>
+          <div className='mt-5 flex items-center'>
             <Button size={'lg'} variant={'secondary'} onClick={() => setIsComparisonOpen(true)}>
               Сравнить абонементы
             </Button>
@@ -103,14 +101,19 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
   return (
     <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
       <article
-        className='group/card relative rounded-3xl overflow-hidden h-full min-h-[400px] transition-all shadow hover:shadow-2xl duration-300 cursor-pointer'
+        className='group/card relative rounded-3xl overflow-hidden h-full min-h-[400px] transition-all shadow hover:shadow-2xl duration-300 cursor-pointer' onClick={handleOpenSheet}
       >
         <div className='p-6 h-full grid text-white'>
           <div>
             <h3 className='text-4xl leading-none tracking-tighter mb-4 break-words'>{membership.title}</h3>
 
             <Tag variant={'white'} size={'lg'}>
-              {membership.price.toLocaleString()} ₽ /&nbsp;<span className=' text-white/90'>{membership.duration}</span>
+              {membership.price.toLocaleString()}&nbsp;₽
+              {membership.duration && (
+                <>
+                  /&nbsp;<span className=' text-white/90'>{membership.duration}</span>
+                </>
+              )}
             </Tag>
 
           </div>
@@ -123,14 +126,14 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
               {membership.shortDescription}
             </p>
             <div className='grid md:grid-cols-2 mt-6 gap-2'>
-              <Button variant={'secondary'} className='shadow-2xl' type='button'>
+              <Button variant={'ghost'} className='shadow-2xl' type='button' onClick={(e) => e.stopPropagation()}>
                 Приобрести
               </Button>
-              <SheetTrigger asChild>
+              {/* <SheetTrigger asChild>
                 <Button variant={'ghost'} className='shadow-2xl' onClick={handleOpenSheet}>
                   Подробнее
                 </Button>
-              </SheetTrigger>
+              </SheetTrigger> */}
             </div>
 
           </div>
@@ -156,31 +159,16 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
         )}
       >
         <div className='h-full flex flex-col'>
-
-
-
-          {/* <SheetHeader className=''>
-              <div className='flex flex-wrap items-center gap-3 mb-2 w-full'>
-                <SheetTitle className='text-2xl text-left text-white'>{membership.title}</SheetTitle>
-                <Tag variant={'white'} size={'md'} className='ml-auto'>
-                  {membership.price.toLocaleString()} ₽ / {membership.duration}
-                </Tag>
-
-              </div>
-              <SheetDescription className='text-base text-left leading-relaxed text-white'>
-                {membership.shortDescription}
-              </SheetDescription>
-            </SheetHeader> */}
           <SheetHeader className='p-0'>
-            <div className='flex flex-wrap items-center gap-3 mb-2'>
-              <SheetTitle className='text-4xl text-left'>{membership.title}</SheetTitle>
+            <div className='flex flex-wrap items-center gap-3 mb-4'>
+              <SheetTitle className='text-4xl text-left font-normal'>{membership.title}</SheetTitle>
             </div>
           </SheetHeader>
 
 
           <div className='flex-1 overflow-y-auto overflow-x-hidden pr-2 space-y-10'>
             <div className='space-y-4'>
-              <SheetDescription className='leading-normal tracking-tighter'>
+              <SheetDescription className='text-base leading-normal tracking-tighter'>
                 {membership.shortDescription}
               </SheetDescription>
               <Tag variant={'blue'} size={'lg'} className='ml-auto'>
@@ -189,14 +177,14 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
             </div>
             <div className='space-y-10'>
               <div>
-                <p className='leading-normal tracking-tighter'>{membership.longDescription}</p>
+                <p className='text-lg leading-normal tracking-tighter'>{membership.longDescription}</p>
               </div>
 
-              <div className='p-4 bg-muted rounded-xl space-y-6'>
+              <div className='p-4 bg-primary/5 max-w-max rounded-xl space-y-6 grid'>
                 <div className='flex items-start gap-3'>
 
                   <div>
-                    <p className='text-sm font-medium leading-normal tracking-tighter'>Срок действия</p>
+                    <p className='font-medium leading-normal tracking-tighter'>Срок действия</p>
                     <p className='text-muted-foreground leading-normal tracking-tighter'>{membership.validityPeriod}</p>
                   </div>
                 </div>
@@ -204,7 +192,7 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
                 <div className='flex items-start gap-3'>
 
                   <div>
-                    <p className='text-sm font-medium leading-normal tracking-tighter'>Количество занятий</p>
+                    <p className='font-medium leading-normal tracking-tighter'>Количество занятий</p>
                     <p className='text-muted-foreground leading-normal tracking-tighter'>
                       Неограниченное посещение
                     </p>
@@ -235,30 +223,9 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
               </div>
             </div>
 
-            {/* Направления */}
-            {/* <div className='space-y-3'>
-              <h3 className='text-sm'>Включенные направления</h3>
-              <div className='flex flex-wrap gap-2'>
-                {membership.includedDirections.map((direction, index) => (
-                  <span
-                    key={index}
-                    className='px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium'
-                  >
-                    {direction}
-                  </span>
-                ))}
-              </div>
-              {membership.excludedDirections && membership.excludedDirections.length > 0 && (
-                <p className='text-sm text-muted-foreground'>
-                  Не включено: {membership.excludedDirections.join(', ')}
-                </p>
-              )}
-            </div> */}
-
-
             {/* Для кого подходит */}
             <div className='space-y-3'>
-              <h3 className='text-sm'>Подходит для</h3>
+              <h3 className=''>Подходит для</h3>
               <div className='flex flex-wrap gap-2'>
                 {membership.suitableFor.map((level, index) => (
                   <span key={index} className='px-3 py-1 bg-white  text-primary  rounded-full text-sm border border-primary'>
@@ -270,7 +237,7 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
 
             {/* FAQ Аккордион */}
             <div className='overflow-hidden'>
-              <Accordion type="single" className='w-full' defaultValue='0'>
+              <Accordion type="single" className='w-full' collapsible defaultValue='0'>
                 {membership.faq.map((item, index) => (
                   <AccordionItem key={index} value={`faq-${index}`}>
                     <AccordionTrigger className='px-4 hover:no-underline'>
@@ -289,13 +256,10 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
           </div>
 
           {/* CTA кнопки в подвале */}
-          <div className='flex flex-col gap-3 mt-8 pt-6 border-t border-input'>
+          <div className='flex flex-col gap-3 mt-6'>
             <Button className='w-full' size='lg'>
-              <CreditCardIcon className='size-4 mr-2' />
-              Приобрести абонемент
+              Приобрести
             </Button>
-
-
           </div>
         </div>
       </SheetContent>

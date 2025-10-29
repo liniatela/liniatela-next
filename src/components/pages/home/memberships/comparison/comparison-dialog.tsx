@@ -51,10 +51,10 @@ export const ComparisonDialog = ({
                     <div>
                       {membership.plans.map((plan, planIndex) => (
                         <React.Fragment key={planIndex}>
-                          <div key={plan.duration} className='grid gap-1 xl:grid-cols-3 text-sm p-2 px-4 items-center justify-center border rounded-2xl border-input'>
+                          <div key={plan.duration} className='grid gap-1 xl:grid-cols-[80px_1fr_1fr] text-sm p-2 px-4 items-center justify-center border rounded-2xl border-input'>
                             <p className='leading-none tracking-tighter text-center xl:text-start'>{plan.duration}</p>
-                            <div className='text-2xl font-semibold text-primary mx-auto tracking-tighter'>{plan.price}&nbsp;₽</div>
-                            {plan.savings && <div className=' ml-auto whitespace-nowrap py-1 px-2 rounded-full text-[12px] bg-primary text-primary-foreground max-w-max'>выгода {plan.savings}&nbsp;₽</div>}
+                            {plan.savings ? <div className=' ml-auto whitespace-nowrap py-1 px-2 rounded-full text-[12px] bg-primary text-primary-foreground max-w-max'>экономия {plan.savings}&nbsp;₽</div> : <div></div>}
+                            <div className='ml-auto  text-2xl font-semibold text-primary tracking-tighter'>{plan.price}&nbsp;₽</div>
                           </div>
 
                           <ul className="flex flex-col gap-2 mt-2 pl-4 my-4">
