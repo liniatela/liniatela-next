@@ -213,7 +213,7 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
                             {membership.pricing['3'].price.toLocaleString()} ₽
                           </p>
                           {membership.pricing['3'].savings && (
-                            <p className='text-sm text-green-600 mt-1'>
+                            <p className='text-sm text-primary mt-1'>
                               Выгода {membership.pricing['3'].savings.toLocaleString()} ₽
                             </p>
                           )}
