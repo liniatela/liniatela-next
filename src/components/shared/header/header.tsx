@@ -5,7 +5,7 @@ import ButtonMenu from './menu'
 import Image from 'next/image'
 
 import logo from '@/icons/logo.svg'
-import { Button } from '../button'
+import { Button } from '../ui/button'
 import { cn } from '@/lib/utils'
 import { useScrollPosition } from '@/lib/hooks'
 

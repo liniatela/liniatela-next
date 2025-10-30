@@ -6,10 +6,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogClose
-} from '@/components/shared/dialog'
+} from '@/components/shared/ui/dialog'
 import { InfinityIcon, MinusIcon, PlusCircleIcon, SaladIcon, SnowflakeIcon, SparklesIcon, User2Icon, UserPlus2Icon } from 'lucide-react'
 import { COMPARISON_MEMBERSHIPS } from './constants'
-import Tag from '@/components/shared/tag'
 import { cn } from '@/lib/utils'
 import React from 'react'
 

@@ -5,10 +5,10 @@ import {
   CarouselContent,
   CarouselItem,
   CarouselNavigation
-} from '@/components/shared/carousel'
-import Tag from '@/components/shared/tag'
+} from '@/components/shared/ui/carousel'
+import Tag from '@/components/shared/ui/tag'
 import Image from 'next/image'
-import { Button } from '@/components/shared/button'
+import { Button } from '@/components/shared/ui/button'
 import { useState } from 'react'
 import {
   Sheet,
@@ -17,14 +17,14 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger
-} from '@/components/shared/sheet'
+} from '@/components/shared/ui/sheet'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger
-} from '@/components/shared/accordion'
-import { CreditCardIcon } from 'lucide-react'
+} from '@/components/shared/ui/accordion'
+import { CreditCardIcon, Salad, Snowflake, Sparkles, User2 } from 'lucide-react'
 import { getAllMemberships, Membership } from './constance'
 import { ComparisonDialog } from './comparison/comparison-dialog'
 import { cn } from '@/lib/utils'
@@ -119,9 +119,6 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
           </div>
 
           <div className='mt-auto'>
-
-
-
             <p className='mt-4 text-white/90 font-light text-lg leading-none tracking-tighter mb-4 line-clamp-3'>
               {membership.shortDescription}
             </p>
@@ -129,11 +126,6 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
               <Button variant={'ghost'} className='shadow-2xl' type='button' onClick={(e) => e.stopPropagation()}>
                 Приобрести
               </Button>
-              {/* <SheetTrigger asChild>
-                <Button variant={'ghost'} className='shadow-2xl' onClick={handleOpenSheet}>
-                  Подробнее
-                </Button>
-              </SheetTrigger> */}
             </div>
 
           </div>
@@ -168,11 +160,12 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
 
           <div className='flex-1 overflow-y-auto overflow-x-hidden pr-2 space-y-10'>
             <div className='space-y-4'>
-              <SheetDescription className='text-base leading-normal tracking-tighter'>
-                {membership.shortDescription}
-              </SheetDescription>
               <Tag variant={'blue'} size={'lg'} className='ml-auto'>
-                {membership.price.toLocaleString()} ₽ / {membership.duration}
+                {membership.price.toLocaleString()} ₽ {membership.duration && (
+                  <>
+                    /&nbsp;<span className=' text-white/90'>{membership.duration}</span>
+                  </>
+                )}
               </Tag>
             </div>
             <div className='space-y-10'>
@@ -182,46 +175,117 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
 
               <div className='p-4 bg-primary/5 max-w-max rounded-xl space-y-6 grid'>
                 <div className='flex items-start gap-3'>
-
                   <div>
                     <p className='font-medium leading-normal tracking-tighter'>Срок действия</p>
                     <p className='text-muted-foreground leading-normal tracking-tighter'>{membership.validityPeriod}</p>
                   </div>
                 </div>
 
-                <div className='flex items-start gap-3'>
-
-                  <div>
-                    <p className='font-medium leading-normal tracking-tighter'>Количество занятий</p>
-                    <p className='text-muted-foreground leading-normal tracking-tighter'>
-                      Неограниченное посещение
-                    </p>
-                  </div>
-                </div>
-
-                {membership.freeze.available && (
+                {membership.sessionsCount && (
                   <div className='flex items-start gap-3'>
                     <div>
-                      <p className='text-sm font-medium leading-normal tracking-tighter'>Заморозка</p>
+                      <p className='font-medium leading-normal tracking-tighter'>Количество занятий</p>
                       <p className='text-muted-foreground leading-normal tracking-tighter'>
-                        {membership.freeze.duration}
-                        {membership.freeze.conditions && ` — ${membership.freeze.conditions}`}
+                        {membership.sessionsCount === 'unlimited'
+                          ? 'Неограниченное посещение'
+                          : `${membership.sessionsCount} занятий${membership.sessionsPerWeek ? ` (${membership.sessionsPerWeek})` : ''}`
+                        }
                       </p>
-                    </div>
-                  </div>
-                )}
-
-                {membership.pricePerSession && (
-                  <div className='flex items-start gap-3'>
-
-                    <div>
-                      <p className='font-medium text-sm leading-normal tracking-tighter'>Стоимость одного занятия</p>
-                      <p className='text-sm text-muted-foreground leading-normal tracking-tighter'>{membership.pricePerSession} ₽</p>
                     </div>
                   </div>
                 )}
               </div>
             </div>
+
+            {/* Блок с тарифами на 3 и 6 месяцев */}
+            {membership.pricing && (membership.pricing['3'] || membership.pricing['6']) && (
+              <div className='space-y-4'>
+                <h3 className='text-xl font-medium leading-none tracking-tighter'>Специальные предложения</h3>
+
+                <div className='grid gap-4'>
+                  {/* 3 месяца */}
+                  {membership.pricing['3'] && (
+                    <div className='p-4 border border-input rounded-xl space-y-3 '>
+                      <div className='flex items-start justify-between'>
+                        <h4 className='text-lg font-medium leading-none tracking-tighter'>3 месяца</h4>
+                        <div className='text-right'>
+                          <p className='text-2xl font-semibold leading-none tracking-tighter'>
+                            {membership.pricing['3'].price.toLocaleString()} ₽
+                          </p>
+                          {membership.pricing['3'].savings && (
+                            <p className='text-sm text-green-600 mt-1'>
+                              Выгода {membership.pricing['3'].savings.toLocaleString()} ₽
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className='space-y-2'>
+                        {membership.pricing['3'].freeze && (
+                          <div className='flex items-center gap-2 text-sm'>
+                            <Snowflake className='w-4 h-4 text-primary' />
+                            <span>Заморозка {membership.pricing['3'].freeze}</span>
+                          </div>
+                        )}
+                        {membership.pricing['3'].personalTraining && membership.pricing['3'].personalTraining > 0 && (
+                          <div className='flex items-center gap-2 text-sm'>
+                            <User2 className='w-4 h-4 text-primary' />
+                            <span>{membership.pricing['3'].personalTraining} {membership.pricing['3'].personalTraining === 1 ? 'индивидуальная тренировка' : 'индивидуальные тренировки'}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 6 месяцев */}
+                  {membership.pricing['6'] && (
+                    <div className='p-4 border-2 border-primary/40 rounded-xl space-y-3 relative'>
+
+                      <div className='flex items-start justify-between'>
+                        <h4 className='text-lg font-medium leading-none tracking-tighter'>6 месяцев</h4>
+                        <div className='text-right'>
+                          <p className='text-2xl font-semibold leading-none tracking-tighter'>
+                            {membership.pricing['6'].price.toLocaleString()} ₽
+                          </p>
+                          {membership.pricing['6'].savings && (
+                            <p className='text-sm text-primary mt-1'>
+                              Выгода {membership.pricing['6'].savings.toLocaleString()} ₽
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className='space-y-2'>
+                        {membership.pricing['6'].freeze && (
+                          <div className='flex items-center gap-2 text-sm'>
+                            <Snowflake className='w-4 h-4 text-primary' />
+                            <span>Заморозка {membership.pricing['6'].freeze}</span>
+                          </div>
+                        )}
+                        {membership.pricing['6'].personalTraining && membership.pricing['6'].personalTraining > 0 && (
+                          <div className='flex items-center gap-2 text-sm'>
+                            <User2 className='w-4 h-4 text-primary' />
+                            <span>{membership.pricing['6'].personalTraining} {membership.pricing['6'].personalTraining === 1 ? 'индивидуальная тренировка' : 'индивидуальные тренировки'} с PRO-тренером</span>
+                          </div>
+                        )}
+                        {membership.pricing['6'].massage && (
+                          <div className='flex items-center gap-2 text-sm'>
+                            <Sparkles className='w-4 h-4 text-primary' />
+                            <span>Массаж в подарок</span>
+                          </div>
+                        )}
+                        {membership.pricing['6'].nutritionist && (
+                          <div className='flex items-center gap-2 text-sm'>
+                            <Salad className='w-4 h-4 text-primary' />
+                            <span>Консультация нутрициолога</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
 
             {/* Для кого подходит */}
             <div className='space-y-3'>

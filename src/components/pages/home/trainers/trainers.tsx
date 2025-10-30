@@ -5,10 +5,10 @@ import {
   CarouselContent,
   CarouselItem,
   CarouselNavigation
-} from '@/components/shared/carousel'
-import Tag from '@/components/shared/tag'
+} from '@/components/shared/ui/carousel'
+import Tag from '@/components/shared/ui/tag'
 import Image from 'next/image'
-import { Button } from '@/components/shared/button'
+import { Button } from '@/components/shared/ui/button'
 import { getAllTrainers, Trainer } from './constance'
 
 function Trainers() {

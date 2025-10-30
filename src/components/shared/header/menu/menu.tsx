@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '../../button'
+import { Button } from '../../ui/button'
 import { MenuIcon, XIcon } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MENU_ITEMS } from './constants'

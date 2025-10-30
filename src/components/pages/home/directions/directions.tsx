@@ -6,11 +6,11 @@ import {
   CarouselItem,
   CarouselNavigation,
   CarouselNavigationWithDots,
-} from '@/components/shared/carousel'
-import Tag from '@/components/shared/tag'
+} from '@/components/shared/ui/carousel'
+import Tag from '@/components/shared/ui/tag'
 import Image from 'next/image'
 import { Direction, MOCK_DIRECTIONS } from './constants'
-import { Button } from '@/components/shared/button'
+import { Button } from '@/components/shared/ui/button'
 import { useState } from 'react'
 import {
   Dialog,
@@ -19,7 +19,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogClose,
-} from '@/components/shared/dialog'
+} from '@/components/shared/ui/dialog'
 
 import { cn } from '@/lib/utils'
 import { FlameIcon } from 'lucide-react'

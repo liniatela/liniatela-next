@@ -25,40 +25,39 @@ export interface Membership {
     question: string
     answer: string
   }[]
-  // Новые поля для продажи
-  validityPeriod: string // "30 дней с момента покупки", "3 месяца"
-  sessionsCount: number | 'unlimited' // 8, 12, 'unlimited'
-  sessionsPerWeek?: string // "до 2 раз", "до 3 раз", "без ограничений"
+  validityPeriod: string
+  sessionsCount?: number | 'unlimited' // Сделали опциональным
+  sessionsPerWeek?: string
   freeze: {
     available: boolean
-    duration?: string // "1 неделя", "2 недели"
-    conditions?: string // "При покупке на 3+ месяца"
+    duration?: string
+    conditions?: string
   }
-  includedDirections: string[] // ["Пилатес", "Йога", "Растяжка"]
-  excludedDirections?: string[] // ["Индивидуальные занятия"]
+  includedDirections: string[]
+  excludedDirections?: string[]
   rescheduling: {
     available: boolean
-    conditions?: string // "Не менее чем за 8 часов"
+    conditions?: string
   }
-  transferable: boolean // Можно ли передать другому человеку
-  suitableFor: string[] // ["Новичков", "Продолжающих", "Всех уровней"]
+  transferable: boolean
+  suitableFor: string[]
   tags?: {
     isPopular?: boolean
     isBestseller?: boolean
     isRecommended?: boolean
-    discount?: number // Процент скидки
-    label?: string // "Выгодно", "Хит продаж"
+    discount?: number
+    label?: string
   }
-  renewalBenefit?: string // "Скидка 10% при продлении"
-  restrictions?: string[] // ["Действует только в будние дни до 16:00"]
-  included: string[] // ["Коврик", "Полотенце", "Вода"]
-  cancellationPolicy: string // "Возврат 100% в течение 14 дней"
-  pricePerSession?: number // Расчетная стоимость одного занятия
+  renewalBenefit?: string
+  restrictions?: string[]
+  included: string[]
+  cancellationPolicy: string
+  pricePerSession?: number
   pricing?: {
-    '1': { price: number; originalPrice?: number; freeze?: string; personalTraining?: number }
-    '3': { price: number; originalPrice?: number; freeze?: string; personalTraining?: number }
-    '6': { price: number; originalPrice?: number; freeze?: string; personalTraining?: number }
-    '12': { price: number; originalPrice?: number; freeze?: string; personalTraining?: number }
+    '1': { price: number; originalPrice?: number; freeze?: string; personalTraining?: number; savings?: number; massage?: boolean }
+    '3': { price: number; originalPrice?: number; freeze?: string; personalTraining?: number; savings?: number; massage?: boolean }
+    '6': { price: number; originalPrice?: number; freeze?: string; personalTraining?: number; savings?: number; massage?: boolean; nutritionist?: boolean }
+    '12': { price: number; originalPrice?: number; freeze?: string; personalTraining?: number; savings?: number; massage?: boolean; nutritionist?: boolean }
   }
 }
 
@@ -78,14 +77,12 @@ export const MEMBERSHIPS: Membership[] = [
     ],
     duration: '1 мес.',
     supportText: 'Стабильный выбор для целенаправленных тренировок',
-    // Новые поля
     validityPeriod: '30 дней с момента активации',
     sessionsCount: 8,
     sessionsPerWeek: 'до 2 раз в неделю',
     freeze: {
       available: false
     },
-
     includedDirections: ['Пилатес'],
     rescheduling: {
       available: true,
@@ -107,13 +104,16 @@ export const MEMBERSHIPS: Membership[] = [
       },
       '3': {
         price: 14700,
-        freeze: '2 недели',
+        savings: 1900,
+        freeze: '14 дней',
         personalTraining: 1
       },
       '6': {
         price: 29400,
-        freeze: '1 месяц',
-        personalTraining: 1 // ТОП тренер
+        savings: 4500,
+        freeze: '30 дней',
+        personalTraining: 1, // PRO тренер
+        massage: true
       },
       '12': {
         price: 42000,
@@ -122,7 +122,6 @@ export const MEMBERSHIPS: Membership[] = [
         personalTraining: 2
       }
     },
-
   },
   {
     id: '2',
@@ -164,9 +163,25 @@ export const MEMBERSHIPS: Membership[] = [
     faq: COMMON_FAQ as { question: string; answer: string; }[],
     pricing: {
       '1': { price: 6900 },
-      '3': { price: 20700, freeze: '2 недели', personalTraining: 2 },
-      '6': { price: 41400, freeze: '1 месяц', personalTraining: 2 }, // ТОП тренер
-      '12': { price: 66000, originalPrice: 82800, freeze: '2 месяца', personalTraining: 3 }
+      '3': {
+        price: 20700,
+        savings: 3800,
+        freeze: '14 дней',
+        personalTraining: 2
+      },
+      '6': {
+        price: 41400,
+        savings: 7000,
+        freeze: '30 дней',
+        personalTraining: 2, // PRO тренер
+        massage: true
+      },
+      '12': {
+        price: 66000,
+        originalPrice: 82800,
+        freeze: '2 месяца',
+        personalTraining: 3
+      }
     },
   },
   {
@@ -208,20 +223,37 @@ export const MEMBERSHIPS: Membership[] = [
     renewalBenefit: 'Скидка 15% при продлении + подарок',
     included: ['Все удобства студии', 'Коврик', 'Вода', 'Полотенце', 'Раздевалка', 'Душ', 'Сауна'],
     cancellationPolicy: 'Возврат 100% в течение 30 дней, если не посещали занятия',
-    pricePerSession: undefined, // безлимит
+    pricePerSession: undefined,
     faq: COMMON_FAQ as { question: string; answer: string; }[],
     pricing: {
       '1': { price: 7900 },
-      '3': { price: 23700, freeze: '2 недели', personalTraining: 3 },
-      '6': { price: 47400, freeze: '1 месяц', personalTraining: 3 }, // ТОП тренер + массаж + нутрициолог
-      '12': { price: 78000, originalPrice: 94800, freeze: '2 месяца', personalTraining: 4 }
+      '3': {
+        price: 23700,
+        savings: 5700,
+        freeze: '14 дней',
+        personalTraining: 3
+      },
+      '6': {
+        price: 47400,
+        savings: 12000,
+        freeze: '30 дней',
+        personalTraining: 3, // PRO тренер
+        massage: true,
+        nutritionist: true
+      },
+      '12': {
+        price: 78000,
+        originalPrice: 94800,
+        freeze: '2 месяца',
+        personalTraining: 4
+      }
     },
   },
   {
     id: '4',
     title: 'Разовое посещение',
     slug: 'single-visit',
-    coverImage: mockImage4, // Используйте подходящее изображение
+    coverImage: mockImage4,
     price: 890,
     shortDescription: 'Попробуйте любое направление без обязательств.',
     longDescription: 'Хотите познакомиться со студией или у вас нет времени на регулярные занятия? Разовое посещение — это ваш шанс попробовать любое направление без долгосрочных обязательств. Выберите удобное время, приходите и наслаждайтесь полноценной тренировкой под руководством профессионального инструктора. Это идеальный вариант для тех, кто впервые знакомится с пилатесом, йогой или растяжкой, или просто хочет разнообразить свой фитнес-график. Никаких абонементов, никаких обязательств — только качественная тренировка здесь и сейчас.',
@@ -233,7 +265,7 @@ export const MEMBERSHIPS: Membership[] = [
     duration: '',
     supportText: 'Попробуйте перед покупкой абонемента',
     validityPeriod: 'Действует в день покупки',
-    sessionsCount: 1,
+    // sessionsCount убрано
     freeze: {
       available: false
     },
@@ -256,7 +288,7 @@ export const MEMBERSHIPS: Membership[] = [
     id: '5',
     title: 'Индивидуальная тренировка',
     slug: 'personal-training',
-    coverImage: mockImage6, // Используйте подходящее изображение
+    coverImage: mockImage6,
     price: 'от 1900',
     shortDescription: 'Персональный подход и максимум внимания от инструктора.',
     longDescription: 'Индивидуальная тренировка — это персональный подход к вашим целям и особенностям тела. Опытный инструктор разработает программу специально для вас, учитывая ваш уровень подготовки, здоровье и пожелания. Вы получите максимум внимания, детальную отработку техники и быстрый прогресс. Это идеальный выбор для тех, кто хочет быстрых результатов, работает над специфическими проблемами или просто предпочитает заниматься без посторонних глаз. Час качественной работы над собой в комфортной обстановке.',
@@ -268,7 +300,7 @@ export const MEMBERSHIPS: Membership[] = [
     duration: '',
     supportText: 'Максимальный результат за минимальное время',
     validityPeriod: 'По согласованию с тренером',
-    sessionsCount: 1,
+    // sessionsCount убрано
     freeze: {
       available: false
     },
@@ -292,7 +324,7 @@ export const MEMBERSHIPS: Membership[] = [
     id: '6',
     title: 'Сплит тренировка',
     slug: 'split-training',
-    coverImage: mockImage5, // Используйте подходящее изображение
+    coverImage: mockImage5,
     price: 'от 2 900',
     shortDescription: 'Тренировка на двоих с персональным вниманием инструктора.',
     longDescription: 'Сплит-тренировка — это уникальная возможность заниматься вдвоем с персональным инструктором. Приводите друга, партнера или члена семьи и наслаждайтесь индивидуальным подходом по доступной цене. Инструктор адаптирует программу под обоих участников, учитывая разный уровень подготовки. Вы получите все преимущества персональной тренировки — внимание к технике, индивидуальные корректировки и мотивацию, но при этом разделите стоимость на двоих. Это не только выгодно, но и веселее тренироваться вместе!',
@@ -304,7 +336,7 @@ export const MEMBERSHIPS: Membership[] = [
     duration: '',
     supportText: 'Тренируйтесь вместе и экономьте',
     validityPeriod: 'По согласованию с тренером',
-    sessionsCount: 1,
+    // sessionsCount убрано
     freeze: {
       available: false
     },
@@ -321,10 +353,9 @@ export const MEMBERSHIPS: Membership[] = [
     renewalBenefit: 'Скидка 10% при покупке 5+ тренировок',
     included: ['Все оборудование студии', 'Коврики', 'Вода', 'Полотенца'],
     cancellationPolicy: 'Возврат 100% не позднее 24 часов до занятия',
-    pricePerSession: 1450, // На человека
+    pricePerSession: 1450,
     faq: COMMON_FAQ as { question: string; answer: string; }[]
   },
-
 ]
 
 // Функция для получения абонемента по slug

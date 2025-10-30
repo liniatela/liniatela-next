@@ -7,6 +7,7 @@ import Footer from '@/components/shared/footer'
 import Contacts from '@/components/shared/contacts'
 import Problems from '@/components/pages/home/problems/problems'
 import CTA from '@/components/pages/home/cta/cta'
+import Certificate from '@/components/pages/home/certificate/certificate'
 
 export default async function Home() {
   return (
@@ -18,15 +19,13 @@ export default async function Home() {
       <Memberships />
       <Space />
       <Trainers />
-      <div className=' overflow-hidden'>
-        <div className='bg-white rounded-[40px] md:rounded-t-[70px] py-10 sm:pt-20'>
+      <Certificate />
+      <div className='overflow-hidden'>
           <div className='container'>
-
             <Contacts />
             <Footer />
           </div>
         </div>
-      </div>
     </>
   )
 }

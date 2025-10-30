@@ -2,8 +2,8 @@ import Image from "next/image"
 
 import backgroundImage from './images/background.jpg'
 import { MOCK_CTA_DATA } from "./constants"
-import Tag from "@/components/shared/tag"
-import { Button } from "@/components/shared/button"
+import Tag from "@/components/shared/ui/tag"
+import { Button } from "@/components/shared/ui/button"
 
 const CTA = () => {
   return (
