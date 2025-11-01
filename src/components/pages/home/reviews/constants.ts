@@ -1,9 +1,9 @@
 import backgroundCard from './images/background-card.jpg'
 
-const review1 = '/videos/reviews/review-1.mp4'
-const review2 = '/videos/reviews/review-2.mov'
-const review3 = '/videos/reviews/review-3.mp4'
-const review4 = '/videos/reviews/review-4.mp4'
+const review1 = '/videos/reviews/review-1.MP4'
+const review2 = '/videos/reviews/review-2.MOV'
+const review3 = '/videos/reviews/review-3.MP4'
+const review4 = '/videos/reviews/review-4.MP4'
 
 export type ReviewType = 'text' | 'image' | 'video'
 
