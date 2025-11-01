@@ -19,6 +19,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogClose,
+  VisuallyHidden,
 } from '@/components/shared/ui/dialog'
 
 import { cn } from '@/lib/utils'
@@ -109,6 +110,7 @@ const DirectionCard = ({ direction }: { direction: Direction }) => {
       <DialogContent className={cn('max-w-3xl max-h-screen max-lg:h-screen max-lg:rounded-none  lg:max-h-[90vh] overflow-visible p-4 sm:p-10',
         direction.gallery && direction.gallery.length > 0 ? 'max-w-5xl' : 'max-w-3xl'
       )}>
+        <DialogTitle><VisuallyHidden /></DialogTitle>
         <DialogClose className='absolute right-4 top-4 lg:-right-0 lg:-top-10 xl:-right-8  lg:text-white' />
         <div className={cn(
           'grid gap-10 overflow-y-auto',
@@ -118,7 +120,7 @@ const DirectionCard = ({ direction }: { direction: Direction }) => {
             <div className='flex flex-col h-full items-start'>
               <Tag variant={'outline'} size={'sm'}>Направление</Tag>
               <h2 className='text-4xl leading-none tracking-tighter mt-6'>{direction.name}</h2>
-              <p className='text-lg leading-none tracking-tighter mt-6 text-black/80'>{direction.fullDescription}</p>
+              <p className='text-lg leading-tight tracking-tighter mt-6 text-black/80'>{direction.fullDescription}</p>
               <ul className='mt-6 space-y-4'>
                 <li className='flex items-center gap-2'>
                   <span className='text-lg font-medium leading-none tracking-tighter'>Сложность&nbsp;:</span>
@@ -149,7 +151,7 @@ const DirectionCard = ({ direction }: { direction: Direction }) => {
                 </li>
 
                 <li className='flex items-center gap-2'>
-                  <span className='text-lg font-medium leading-none tracking-tighter inline-flex'> 🔥&nbsp;:</span>
+                  <span className='text-lg font-medium leading-none tracking-tighter inline-flex'> <FlameIcon size={20} className='stroke-orange-400 fill-orange-600'/>&nbsp;:</span>
                   <span className='leading-none tracking-tighter'>
                     {direction.calories} ккал
                   </span>

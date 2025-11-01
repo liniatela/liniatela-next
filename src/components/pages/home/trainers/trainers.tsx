@@ -34,7 +34,7 @@ function Trainers() {
             >
               <CarouselContent className='max-sm:max-w-[90vw]'>
                 {trainers.map(trainer => (
-                  <CarouselItem key={trainer.id} className='pl-4 basis-[95%] lg:basis-[60%]'>
+                  <CarouselItem key={trainer.id} className='pl-4 basis-[95%] lg:basis-[65%]'>
                     <TrainerCard trainer={trainer} />
                   </CarouselItem>
                 ))}
@@ -70,7 +70,7 @@ const TrainerCard = ({ trainer }: { trainer: Trainer }) => {
           </blockquote>
           <div className="absolute inset-0">
             <Image
-              className="object-[0%_10%] object-cover"
+              className="object-[0%_60%] object-cover"
               src={trainer.photo}
               alt=""
               fill
@@ -98,7 +98,7 @@ const TrainerCard = ({ trainer }: { trainer: Trainer }) => {
             </ul>
           </div>
 
-          <p className='max-sm:hidden'>{trainer.description}</p>
+          <p className=''>{trainer.description}</p>
 
           <div className='mt-auto flex flex-col gap-2'>
             <Button className=' xl:group-hover/trainer:opacity-100 xl:opacity-0 max-xl:opacity-100'>

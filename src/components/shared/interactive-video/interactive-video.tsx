@@ -26,6 +26,7 @@ type InteractiveVideoProps = {
   pauseButtonClassName?: string;
   onPlay?: () => void;
   onPause?: () => void;
+  onEnded?: () => void;
   autoPlayWhenActive?: boolean;
   isActive?: boolean;
 };
@@ -52,6 +53,7 @@ const InteractiveVideo: ForwardRefRenderFunction<
     pauseButtonClassName,
     onPlay,
     onPause,
+    onEnded,
     autoPlayWhenActive = false,
     isActive = false,
   },
@@ -94,6 +96,7 @@ const InteractiveVideo: ForwardRefRenderFunction<
     const handleVideoEnded = () => {
       setIsPlaying(false);
       onPause?.();
+      onEnded?.();
     };
 
     const handleMouseEnter = () => {
@@ -146,7 +149,7 @@ const InteractiveVideo: ForwardRefRenderFunction<
             <AnimatePresence>
               {isInView && (
                 <m.video
-                  className={cn('absolute inset-0 rounded-[inherit]', videoClassName)}
+                  className={cn('absolute  inset-0 rounded-[inherit] !pointer-events-none select-none', videoClassName)}
                   ref={videoRef}
                   controls={false}
                   width={width}
@@ -160,11 +163,13 @@ const InteractiveVideo: ForwardRefRenderFunction<
                   playsInline
                   onLoadedData={() => setIsVideoLoaded(true)}
                   onEnded={handleVideoEnded}
+                  tabIndex={-1}
                 >
                   {children}
                 </m.video>
               )}
             </AnimatePresence>
+            <div className=' cursor-pointer absolute w-full h-full rounded-[inherit] bg-gradient-to-t from-black/50 to-transparent' onClick={isPlaying ? handlePause : handlePlay}></div>
 
             {/* Кнопка Play - показывается когда видео не играет */}
             <AnimatePresence>
@@ -176,7 +181,7 @@ const InteractiveVideo: ForwardRefRenderFunction<
                   transition={{ duration: 0.2 }}
                   onClick={handlePlay}
                   className={cn(
-                    'absolute right-6 top-6 z-10 flex items-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm text-white transition-colors hover:bg-primary/90 cursor-pointer',
+                    'absolute right-6 top-6 z-10 flex items-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm text-white transition-colors hover:bg-primary/90 cursor-pointer pointer-events-auto',
                     playButtonClassName
                   )}
                   aria-label="Воспроизвести видео"
@@ -197,7 +202,7 @@ const InteractiveVideo: ForwardRefRenderFunction<
                   transition={{ duration: 0.2 }}
                   onClick={handlePause}
                   className={cn(
-                    'absolute inset-0 z-10 flex items-center justify-center bg-black/30 backdrop-blur-sm rounded-[inherit] cursor-pointer',
+                    'max-lg:hidden absolute inset-0 z-10 flex items-center justify-center bg-black/30 backdrop-blur-sm rounded-[inherit] cursor-pointer',
                     pauseButtonClassName
                   )}
                   aria-label="Остановить видео"

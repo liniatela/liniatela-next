@@ -50,7 +50,7 @@ export const COMPARISON_MEMBERSHIPS = [
         ]
       },
       {
-        duration: '6 месяца',
+        duration: '6 месяцев',
         price: '29 400',
         savings: '4 500',
         benefits: [
@@ -132,7 +132,7 @@ export const COMPARISON_MEMBERSHIPS = [
         ]
       },
       {
-        duration: '6 месяца',
+        duration: '6 месяцев',
         price: '41 400',
         savings: '7 000',
         benefits: [
@@ -214,7 +214,7 @@ export const COMPARISON_MEMBERSHIPS = [
         ]
       },
       {
-        duration: '6 месяца',
+        duration: '6 месяцев',
         price: '47 400',
         savings: '12 000',
         benefits: [

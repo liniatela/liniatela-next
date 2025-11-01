@@ -3,6 +3,7 @@
 import * as React from 'react'
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
 
 import { cn } from '@/lib/utils'
 import { Button } from '../button'
@@ -18,6 +19,7 @@ type CarouselProps = {
   plugins?: CarouselPlugin
   orientation?: 'horizontal' | 'vertical'
   setApi?: (api: CarouselApi) => void
+  enableWheelGestures?: boolean
 }
 
 type CarouselContextProps = {
@@ -46,6 +48,7 @@ export function useCarousel() {
 
 function Carousel({
   orientation = 'horizontal',
+  enableWheelGestures = true,
   opts,
   setApi,
   plugins,
@@ -53,12 +56,22 @@ function Carousel({
   children,
   ...props
 }: React.ComponentProps<'div'> & CarouselProps) {
+  const wheelGesturesPlugin = React.useMemo(
+    () => (enableWheelGestures ? [WheelGesturesPlugin()] : []),
+    [enableWheelGestures]
+  )
+
+  const allPlugins = React.useMemo(
+    () => [...(plugins || []), ...wheelGesturesPlugin],
+    [plugins, wheelGesturesPlugin]
+  )
+
   const [carouselRef, api] = useEmblaCarousel(
     {
       ...opts,
       axis: orientation === 'horizontal' ? 'x' : 'y'
     },
-    plugins
+    allPlugins
   )
   const [canScrollPrev, setCanScrollPrev] = React.useState(false)
   const [canScrollNext, setCanScrollNext] = React.useState(false)
@@ -374,7 +387,7 @@ const CarouselHeader = () => {
 
   return (
     <header className="mb-5 flex items-center justify-between sm:mb-10">
-      <CarouselNavigation className='max-xl:flex'/>
+      <CarouselNavigation className='max-xl:flex' />
       <div className="tracking-tighter text-muted-foreground">
         <span className='text-black'>{selectedIndex + 1}</span> / {scrollSnaps.length}
       </div>

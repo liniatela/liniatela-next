@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { Gift, Heart, Calendar, Sparkles } from 'lucide-react'
 import { useState } from 'react'
 import CertificateFormDialog from './form-dialog/certificate-form-dialog'
+import logo from '@/icons/short-logo.svg'
 
 const Certificate = () => {
   const [openForm, setOpenForm] = useState(false)
@@ -16,7 +17,7 @@ const Certificate = () => {
 
   return (
     <>
-      <section className='certificate my-20 overflow-hidden' id='certificate'>
+      <section className='certificate mb-20 overflow-hidden' id='certificate'>
         <div className=''>
           <div className='container  rounded-4xl py-10 sm:py-20'>
             <header className='flex flex-col items-start sm:flex-row sm:items-center sm:gap-8 gap-4 mb-10'>
@@ -32,7 +33,7 @@ const Certificate = () => {
                 <div className='relative rounded-3xl overflow-hidden aspect-[4/3] shadow-lg'>
                   <div className='absolute inset-0 bg-gradient-to-br from-primary to-primary/70 p-8 sm:p-12 flex flex-col justify-between'>
                     <div>
-                      <Gift className='size-8 sm:size-12 lg:size-16 text-white mb-4' strokeWidth={1} />
+                      <Gift className='size-8 sm:size-12 text-white mb-4' strokeWidth={1} />
                       <h3 className='text-white text-3xl lg:text-4xl leading-none tracking-tighter'>
                         Подарочный<br />сертификат
                       </h3>
@@ -42,7 +43,8 @@ const Certificate = () => {
                         <p className='text-sm sm:text-base leading-none tracking-tighter'>от</p>
                         <p className='text-4xl sm:text-5xl leading-none tracking-tighter '>3&nbsp;000&nbsp;₽</p>
                       </div>
-                      <Sparkles className='size-8 sm:size-12 lg:size-16 text-white/80' strokeWidth={1} />
+                      <Image src={logo} width={45} height={45} alt='' />
+
                     </div>
                   </div>
                 </div>

@@ -30,16 +30,16 @@ export interface Hall {
 }
 
 export const STUDIO_INFO: StudioInfo = {
-	address: 'ул. Дмитровская 5А, корп. 5 этаж',
-	area: '120 кв м.',
+	address: 'г. Абакан ул. Генерала Тихонова 2',
+	area: '260 кв м.',
 	reviewsPercent: '98 %',
 	hallsCount: '3 зала',
-	directionsCount: '12 лучших',
+	directionsCount: '8 лучших',
 	description:
 		'Тёплое, светлое и камерное пространство, где ты можешь замедлиться, переключиться и почувствовать себя.',
 	features: [
 		{
-			label: '120 кв м.',
+			label: '260 кв м.',
 			value: 'Просторной студии',
 			description: 'Просторные залы для комфортных тренировок'
 		},
@@ -54,7 +54,7 @@ export const STUDIO_INFO: StudioInfo = {
 			description: 'Современное оборудование для всех направлений'
 		},
 		{
-			label: '12 лучших',    
+			label: '8 лучших',    
 			value: 'Направлений на выбор',
 			description: 'Разнообразие практик для каждого'
 		}

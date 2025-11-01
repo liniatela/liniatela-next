@@ -4,91 +4,55 @@ import trainerImage1 from './images/trainer-1.jpg'
 import trainerImage2 from './images/trainer-2.jpg'
 
 export interface Trainer {
-	id: string
-	name: string
-	slug: string
-	position: string
-	photo: string | StaticImageData
-	quote: string
-	directions: string[]
-	description: string
-	experience?: string
-	certifications?: string[]
+  id: string
+  name: string
+  slug: string
+  position: string
+  photo: string | StaticImageData
+  quote: string
+  directions: string[]
+  description: string
+  experience?: string
+  certifications?: string[]
 }
 
 export const TRAINERS: Trainer[] = [
-	{
-		id: '1',
-		name: 'Светлана С.',
-		slug: 'svetlana-s',
-		position: 'Тренер',
-		photo: trainerImage1,
-		quote: 'Тело — это не проект, а дом',
-		directions: ['Растяжка', 'Пилатес', 'Йога', 'МФР'],
-		description:
-			'Тренер по антигравити и гамакам, сертифицированная по системе AntiGravity®. Обожает работать с новичками, даёт поддержку и уверенность на высоте. Ведёт с мягкой строгостью, выравнивает технику и помогает преодолеть страх. После её занятий — ощущение лёгкости и полёта.',
-		experience: '5+ лет',
-		certifications: [
-			'AntiGravity® Level 1-2',
-			'Сертификат по йоге Хатха',
-			'Курс анатомии для йоги'
-		]
-	},
-	{
-		id: '2',
-		name: 'Инна А.',
-		slug: 'inna-a',
-		position: 'Инструктор',
-		photo: trainerImage2,
-		quote: 'Тело — это не проект, а дом',
-		directions: ['Танец свободы', 'Энергия тела', 'Аэро-йога'],
-		description:
-			'Мастер танцевальных направлений и энергетических практик. Помогает раскрыть женственность через движение, работает с внутренней уверенностью и самовыражением. Её занятия — это микс силы, грации и эмоциональной свободы.',
-		experience: '7+ лет',
-		certifications: [
-			'Сертификат Contemporary Dance',
-			'Курс по танцевально-двигательной терапии',
-			'Тренинг по женской энергетике'
-		]
-	},
-	{
-		id: '3',
-		name: 'Елена К.',
-		slug: 'elena-k',
-		position: 'Мастер-тренер',
-		photo: trainerImage1,
-		quote: 'Движение — это жизнь, а жизнь — это движение',
-		directions: ['Пилатес', 'МФР', 'Невесомая растяжка'],
-		description:
-			'Специалист по восстановительным практикам и пилатесу. Работает с реабилитацией после травм, знает анатомию как никто другой. Её подход — мягкий, но эффективный. Помогает построить здоровые отношения с телом.',
-		experience: '8+ лет',
-		certifications: [
-			'Сертификат Pilates Comprehensive',
-			'Курс МФР терапии',
-			'Анатомия и биомеханика движений'
-		]
-	},
-	{
-		id: '4',
-		name: 'Мария Т.',
-		slug: 'maria-t',
-		position: 'Тренер',
-		photo: trainerImage2,
-		quote: 'В каждом движении — частичка души',
-		directions: ['Йога', 'Растяжка', 'Аэро-йога'],
-		description:
-			'Йога-терапевт и специалист по работе с дыханием. Создаёт атмосферу доверия и принятия на занятиях. Помогает найти баланс между телом и разумом, работает с энергетическими блоками через асаны.',
-		experience: '6+ лет',
-		certifications: ['200h Yoga Alliance', 'Курс по пранаяме', 'Сертификат йога-терапии']
-	}
+  {
+    id: '1',
+    name: 'Юля Дригота',
+    slug: 'julia-d',
+    position: 'Тренер',
+    photo: trainerImage1,
+    quote: 'Плохая тренировка - та, которой не было',
+    directions: ['Растяжка', 'МФР', 'Энергия тела'],
+    description:
+      'Специалист по динамичной растяжке и функциональному тренингу. Тренировки с Юлей — это путь к сильному, гибкому и гармоничному телу. Более 7 лет в спорте научили её видеть, как движение меняет не только тело, но и отношение к себе. Юля поможет вам улучшить гибкость, осанку, подвижность суставов и вернуть лёгкость каждому движению.'
+  },
+  {
+    id: '2',
+    name: 'Лиля Кондакова',
+    slug: 'lilya-k',
+    position: 'PRO Тренер',
+    photo: trainerImage2,
+    quote: 'Человек молод и здоров, пока у него гибкий позвоночник',
+    directions: ['Растяжка', 'Пилатес', 'МФР', 'Невесомая растяжка'],
+    description:
+      'Лиля Кондакова — сертифицированный фитнес-тренер, специалист по работе с женским телом и осознанному движению. Главный принцип Лили — постоянное развитие. Она регулярно проходит обучение, посещает фитнес-конвенции и внедряет современные методики в свои тренировки. Её миссия — помочь каждой женщине почувствовать уверенность, полюбить своё тело и сделать спорт частью жизни. Тренировки с Лилей — это баланс результата и удовольствия, где каждая участница получает заряд энергии и отличного настроения.',
+    experience: '7+ лет',
+    certifications: [
+      'Сертификат Contemporary Dance',
+      'Курс по танцевально-двигательной терапии',
+      'Тренинг по женской энергетике'
+    ]
+  }
 ]
 
 // Функция для получения тренера по slug
 export const getTrainerBySlug = (slug: string): Trainer | undefined => {
-	return TRAINERS.find(trainer => trainer.slug === slug)
+  return TRAINERS.find(trainer => trainer.slug === slug)
 }
 
 // Функция для получения всех тренеров
 export const getAllTrainers = (): Trainer[] => {
-	return TRAINERS
+  return TRAINERS
 }

@@ -14,8 +14,9 @@ import { useCarousel } from '@/components/shared/ui/carousel/carousel';
 import { cn } from '@/lib/utils';
 
 import InteractiveVideo from '@/components/shared/interactive-video';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { InteractiveVideoHandle } from '@/components/shared/interactive-video/interactive-video';
+import { ArrowRight } from 'lucide-react';
 
 const Reviews = () => {
   return (
@@ -53,11 +54,15 @@ const ReviewCard = ({ review, index }: { review: Review; index: number }) => {
   const videoRef = useRef<InteractiveVideoHandle>(null);
   const isActive = selectedIndex === index;
   const shouldAnimate = index > 0;
+  const [isVideoEnded, setIsVideoEnded] = useState(false);
 
-  // Когда карточка становится неактивной - останавливаем видео
+  // Когда карточка становится неактивной - останавливаем видео и сбрасываем флаг окончания
   useEffect(() => {
-    if (!isActive && videoRef.current?.isPlaying) {
-      videoRef.current.pause();
+    if (!isActive) {
+      if (videoRef.current?.isPlaying) {
+        videoRef.current.pause();
+      }
+      setIsVideoEnded(false); // Сбросить флаг при смене карточки
     }
   }, [isActive]);
 
@@ -66,6 +71,16 @@ const ReviewCard = ({ review, index }: { review: Review; index: number }) => {
     if (!isActive) {
       scrollTo(index);
     }
+    setIsVideoEnded(false); // Сбросить флаг при повторном воспроизведении
+  };
+
+  const handleVideoEnded = () => {
+    setIsVideoEnded(true); // Устанавливаем флаг что видео закончилось
+  };
+
+  const handleContinue = () => {
+    // Переключаемся на следующий слайд
+    scrollTo(index + 1);
   };
 
   const renderCardContent = () => {
@@ -98,9 +113,23 @@ const ReviewCard = ({ review, index }: { review: Review; index: number }) => {
               poster={review.image}
               isActive={isActive}
               onPlay={handleVideoPlay}
+              onEnded={handleVideoEnded}
             >
               <source src={review.videoUrl} type="video/mp4" />
             </InteractiveVideo>
+
+            {isVideoEnded && (
+              <div className="absolute inset-0 flex items-center justify-center rounded-[inherit]">
+                <button
+                  onClick={handleContinue}
+                  className="pointer-events-auto flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-base font-medium text-black shadow-lg transition-all duration-200 hover:scale-105 hover:shadow-xl cursor-pointer"
+                  aria-label="Продолжить к следующему отзыву"
+                >
+                  <span>Далее</span>
+                  <ArrowRight className="h-5 w-5" />
+                </button>
+              </div>
+            )}
 
             <div
               className={cn(

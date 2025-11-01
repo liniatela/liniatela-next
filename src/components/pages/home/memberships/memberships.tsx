@@ -28,6 +28,7 @@ import { CreditCardIcon, Salad, Snowflake, Sparkles, User2 } from 'lucide-react'
 import { getAllMemberships, Membership } from './constance'
 import { ComparisonDialog } from './comparison/comparison-dialog'
 import { cn } from '@/lib/utils'
+import { DialogDescription } from '@radix-ui/react-dialog'
 
 function Memberships() {
   const [isComparisonOpen, setIsComparisonOpen] = useState(false)
@@ -98,6 +99,8 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
     setIsSheetOpen(true)
   }
 
+  const showProTrainerPrice = membership.id === '5' || membership.id === '6'
+
   return (
     <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
       <article
@@ -106,7 +109,6 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
         <div className='p-6 h-full grid text-white'>
           <div>
             <h3 className='text-4xl leading-none tracking-tighter mb-4 break-words'>{membership.title}</h3>
-
             <Tag variant={'white'} size={'lg'}>
               {membership.price.toLocaleString()}&nbsp;₽
               {membership.duration && (
@@ -115,6 +117,8 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
                 </>
               )}
             </Tag>
+
+
 
           </div>
 
@@ -154,23 +158,44 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
           <SheetHeader className='p-0'>
             <div className='flex flex-wrap items-center gap-3 mb-4'>
               <SheetTitle className='text-4xl text-left font-normal'>{membership.title}</SheetTitle>
+
             </div>
           </SheetHeader>
 
 
           <div className='flex-1 overflow-y-auto overflow-x-hidden pr-2 space-y-10'>
             <div className='space-y-4'>
-              <Tag variant={'blue'} size={'lg'} className='ml-auto'>
-                {membership.price.toLocaleString()} ₽ {membership.duration && (
-                  <>
-                    /&nbsp;<span className=' text-white/90'>{membership.duration}</span>
-                  </>
-                )}
-              </Tag>
+              <SheetDescription>{membership.shortDescription}</SheetDescription>
+
+
+              {showProTrainerPrice && membership.pricePerSessionPro ? (
+                <div className='space-y-2 text-black'>
+                  <Tag variant={'outline'} size={'lg'}>
+                    {membership.pricePerSession?.toLocaleString()}&nbsp;₽
+                    <span className='text-white/90'></span>
+                  </Tag>
+                  <p className='text-sm font-light tracking-tight'>
+                    с PRO тренером:
+                  </p>
+                  <Tag variant={'blue'} size={'lg'}>
+                    {membership.pricePerSessionPro.toLocaleString()}&nbsp;₽
+                    <span className='text-white/90'></span>
+                  </Tag>
+                </div>
+              ) :
+                <Tag variant={'blue'} size={'lg'} className='ml-auto'>
+                  {membership.price.toLocaleString()} ₽ {membership.duration && (
+                    <>
+                      /&nbsp;<span className=' text-white/90'>{membership.duration}</span>
+                    </>
+                  )}
+                </Tag>
+              }
+
             </div>
             <div className='space-y-10'>
               <div>
-                <p className='text-lg leading-normal tracking-tighter'>{membership.longDescription}</p>
+                <p className='text-lg leading-tight tracking-tighter'>{membership.longDescription}</p>
               </div>
 
               <div className='p-4 bg-primary/5 max-w-max rounded-xl space-y-6 grid'>
@@ -308,7 +333,7 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
                       {item.question}
                     </AccordionTrigger>
                     <AccordionContent className='px-4'>
-                      <div className='leading-relaxed [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-2 [&_p]:mb-2 last:[&_p]:mb-0 [&_strong]:font-medium [&_a]:text-primary [&_a]:underline'>
+                      <div className='leading-tight [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-2 [&_p]:mb-2 last:[&_p]:mb-0 [&_strong]:font-medium [&_a]:text-primary [&_a]:underline'>
                         {typeof item.answer === 'string' ? item.answer : item.answer}
                       </div>
                     </AccordionContent>

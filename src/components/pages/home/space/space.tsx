@@ -79,7 +79,14 @@ function Space() {
               </ul>
               <div className='flex flex-col gap-2'>
                 <Button asChild variant={'white'}>
-                  <Link href={''}>Открыть на карте</Link>
+                  <Link
+                    href="https://yandex.ru/maps/-/CLr0JSzK"
+                    rel="nofollow noopener noreferrer"
+                    target="_blank"
+                    tabIndex={0}
+                  >
+                    Открыть на карте
+                  </Link>
                 </Button>
 
                 <p className='text-sm text-muted leading-none tracking-tighter sm:max-w-[150px] text-center sm:text-end'>

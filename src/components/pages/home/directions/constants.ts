@@ -36,11 +36,12 @@ export const MOCK_DIRECTIONS: Direction[] = [
     duration: '1 час',
     calories: 120,
     coverImage: mockImage1,
-    gallery: [mockImage1, mockImage1]
+    gallery: [mockImage1]
   },
   {
     id: '2',
-    shortDescription: 'Мягкая практика для тела и ума. Укрепляет физическое состояние, дарит расслабление и наполняет жизненной энергией',
+    shortDescription:
+      'Мягкая практика для тела и ума. Укрепляет физическое состояние, дарит расслабление и наполняет жизненной энергией',
     name: 'Йога',
     category: 'Йога',
     slug: 'yoga',
@@ -50,7 +51,7 @@ export const MOCK_DIRECTIONS: Direction[] = [
     duration: '1 час',
     calories: 300,
     coverImage: mockImage2,
-    gallery: [mockImage1]
+    gallery: [mockImage2]
   },
   {
     id: '3',
@@ -65,10 +66,12 @@ export const MOCK_DIRECTIONS: Direction[] = [
     duration: '1 час',
     calories: 300,
     coverImage: mockImage3,
+    gallery: [mockImage3]
   },
   {
     id: '4',
-    shortDescription: 'Лёгкость движений и свобода тела. Развивает гибкость, снимает мышечное напряжение и улучшает координацию всего тела',
+    shortDescription:
+      'Лёгкость движений и свобода тела. Развивает гибкость, снимает мышечное напряжение и улучшает координацию всего тела',
     name: 'Растяжка',
     slug: 'rastyashka',
     category: 'Классическая растяжка',
@@ -77,11 +80,13 @@ export const MOCK_DIRECTIONS: Direction[] = [
     difficulty: 2,
     duration: '1.5 часа',
     calories: 250,
-    coverImage: mockImage4
+    coverImage: mockImage4,
+    gallery: [mockImage4]
   },
   {
     id: '5',
-    shortDescription: 'Парящая практика в гамаках, которая снимает напряжение и дарит ощущение невесомости. Йога, которая окрыляет',
+    shortDescription:
+      'Парящая практика в гамаках, которая снимает напряжение и дарит ощущение невесомости. Йога, которая окрыляет',
     name: 'Аэро-йога',
     category: 'Йога на гамаках',
     slug: 'aero-yoga',
@@ -91,10 +96,12 @@ export const MOCK_DIRECTIONS: Direction[] = [
     duration: '1 час',
     calories: 300,
     coverImage: mockImage7,
+    gallery: [mockImage7]
   },
   {
     id: '6',
-    shortDescription: 'Динамика, гибкость и ощущение полёта. Растяжка в гамаках делает тело пластичным, а суставы более подвижными.',
+    shortDescription:
+      'Динамика, гибкость и ощущение полёта. Растяжка в гамаках делает тело пластичным, а суставы более подвижными.',
     name: 'Невесомая растяжка',
     category: 'Растяжка на гамаках',
     slug: 'nevesomaya-rastyashka',
@@ -103,7 +110,8 @@ export const MOCK_DIRECTIONS: Direction[] = [
     difficulty: 3,
     duration: '1 час',
     calories: 350,
-    coverImage: mockImage8
+    coverImage: mockImage8,
+    gallery: [mockImage8]
   },
   {
     id: '7',
@@ -118,10 +126,12 @@ export const MOCK_DIRECTIONS: Direction[] = [
     duration: '1 час',
     calories: 350,
     coverImage: mockImage5,
+    gallery: [mockImage5]
   },
   {
     id: '8',
-    shortDescription: 'Путь к подтянутому телу, энергии и уверенности. Силовые тренировки развивают выносливость, сохраняя женственные формы.',
+    shortDescription:
+      'Путь к подтянутому телу, энергии и уверенности. Силовые тренировки развивают выносливость, сохраняя женственные формы.',
     name: 'Энергия тела',
     category: 'Силовая',
     slug: 'energia-tela',
@@ -130,7 +140,8 @@ export const MOCK_DIRECTIONS: Direction[] = [
     difficulty: 3,
     duration: '1 час',
     calories: 450,
-    coverImage: mockImage6
+    coverImage: mockImage6,
+    gallery: [mockImage6]
   }
 ]
 

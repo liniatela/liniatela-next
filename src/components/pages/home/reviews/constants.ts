@@ -1,9 +1,9 @@
 import backgroundCard from './images/background-card.jpg'
 
-const review1 = '/videos/reviews/review-1.MP4'
-const review2 = '/videos/reviews/review-2.MOV'
-const review3 = '/videos/reviews/review-3.MP4'
-const review4 = '/videos/reviews/review-4.MP4'
+const review1 = '/videos/reviews/review-1.mp4'
+const review2 = '/videos/reviews/review-2.mp4'
+const review3 = '/videos/reviews/review-3.mp4'
+const review4 = '/videos/reviews/review-4.mp4'
 
 export type ReviewType = 'text' | 'image' | 'video'
 
@@ -31,7 +31,7 @@ export const REVIEWS: Review[] = [
   {
     id: 2,
     type: 'video',
-    name: 'Светлана У.',
+    name: 'Наташа П.',
     description: 'Ходит на йогу',
     image: backgroundCard.src,
     videoUrl: review1
@@ -39,7 +39,7 @@ export const REVIEWS: Review[] = [
   {
     id: 3,
     type: 'video',
-    name: 'Саша Бобр',
+    name: 'Алёна С.',
     description: 'Ходит на МФР',
     image: backgroundCard.src,
     videoUrl: review2
@@ -47,7 +47,7 @@ export const REVIEWS: Review[] = [
   {
     id: 4,
     type: 'video',
-    name: 'Настя К.',
+    name: 'Аня К.',
     description: 'Ходит на растяжку',
     image: backgroundCard.src,
     videoUrl: review3
@@ -55,7 +55,7 @@ export const REVIEWS: Review[] = [
   {
     id: 5,
     type: 'video',
-    name: 'Анна М.',
+    name: 'Оля К.',
     description: 'Ходит на пилатес',
     image: backgroundCard.src,
     videoUrl: review4

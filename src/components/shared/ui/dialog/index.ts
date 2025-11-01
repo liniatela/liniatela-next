@@ -8,7 +8,8 @@ import {
 	DialogOverlay,
 	DialogPortal,
 	DialogTitle,
-	DialogTrigger
+	DialogTrigger,
+  VisuallyHidden
 } from './dialog'
 export {
 	Dialog,
@@ -20,5 +21,6 @@ export {
 	DialogOverlay,
 	DialogPortal,
 	DialogTitle,
-	DialogTrigger
+	DialogTrigger,
+  VisuallyHidden
 }
