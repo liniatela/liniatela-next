@@ -34,7 +34,7 @@ type CarouselContextProps = {
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null)
 
-function useCarousel() {
+export function useCarousel() {
   const context = React.useContext(CarouselContext)
 
   if (!context) {
@@ -369,6 +369,20 @@ function CarouselNavigation({ className }: { className?: string }) {
   )
 }
 
+const CarouselHeader = () => {
+  const { selectedIndex, scrollSnaps } = useCarousel();
+
+  return (
+    <header className="mb-5 flex items-center justify-between sm:mb-10">
+      <CarouselNavigation className='max-xl:flex'/>
+      <div className="tracking-tighter text-muted-foreground">
+        <span className='text-black'>{selectedIndex + 1}</span> / {scrollSnaps.length}
+      </div>
+    </header>
+  );
+};
+
+
 export {
   type CarouselApi,
   CarouselNavigation,
@@ -378,5 +392,6 @@ export {
   CarouselPrevious,
   CarouselNext,
   CarouselDots,
-  CarouselNavigationWithDots
+  CarouselNavigationWithDots,
+  CarouselHeader
 }

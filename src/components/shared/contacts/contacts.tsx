@@ -9,7 +9,7 @@ function Contacts() {
   return (
     <section id="contacts">
       <div className="relative sm:rounded-[40px] sm:p-10 overflow-hidden">
-        <div className='bg-white relative z-10 rounded-[40px] p-10 flex flex-col items-start gap-6 w-full sm:w-max'>
+        <div className='bg-input relative z-10 rounded-[40px] p-10 flex flex-col items-start gap-6 w-full sm:w-max'>
           <Tag>Контакты</Tag>
           <div className='space-y-3'>
             <span className='text-sm font-medium leading-none tracking-tighter'>Адрес студии</span>

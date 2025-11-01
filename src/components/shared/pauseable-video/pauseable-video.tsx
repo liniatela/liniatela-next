@@ -53,113 +53,114 @@ const PauseableVideo: ForwardRefRenderFunction<
   },
   ref,
 ) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
-  const [videoVisibilityRef, isInView] = useInView({
-    triggerOnce: true,
-    rootMargin: '400px 0px',
-  });
-  const { inView, ref: setVideoRef } = useInView({ threshold: 0.1 });
+    const [videoVisibilityRef, isInView] = useInView({
+      triggerOnce: true,
+      rootMargin: '400px 0px',
+    });
+    const { inView, ref: setVideoRef } = useInView({ threshold: 0.1 });
 
-  useEffect(() => {
-    setVideoRef(videoRef.current);
-  }, [setVideoRef]);
+    useEffect(() => {
+      setVideoRef(videoRef.current);
+    }, [setVideoRef]);
 
-  const playVideo = useCallback(
-    (videoElement: HTMLVideoElement) => {
-      if (withReset) {
-        videoElement.currentTime = 0;
+    const playVideo = useCallback(
+      (videoElement: HTMLVideoElement) => {
+        if (withReset) {
+          videoElement.currentTime = 0;
+        }
+        const playPromise = videoElement.play();
+
+        if (playPromise !== undefined) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          playPromise.catch((error: any) => {
+            // eslint-disable-next-line no-console
+            console.error('Error attempting to play video:', error);
+          });
+        }
+      },
+      [withReset],
+    );
+
+    useEffect(() => {
+      if (!videoRef.current) {
+        return;
       }
-      const playPromise = videoElement.play();
 
-      if (playPromise !== undefined) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        playPromise.catch((error: any) => {
-          // eslint-disable-next-line no-console
-          console.error('Error attempting to play video:', error);
-        });
-      }
-    },
-    [withReset],
-  );
+      const videoElement = videoRef.current;
 
-  useEffect(() => {
-    if (!videoRef.current) {
-      return;
-    }
-
-    const videoElement = videoRef.current;
-
-    if (customInView !== undefined) {
-      if (customInView) {
-        playVideo(videoElement);
+      if (customInView !== undefined) {
+        if (customInView) {
+          playVideo(videoElement);
+        } else {
+          videoElement.pause();
+        }
       } else {
-        videoElement.pause();
+        if (inView) {
+          playVideo(videoElement);
+        } else {
+          videoElement.pause();
+        }
       }
-    } else {
-      if (inView) {
-        playVideo(videoElement);
-      } else {
-        videoElement.pause();
-      }
-    }
-  }, [inView, customInView, playVideo]);
+    }, [inView, customInView, playVideo]);
 
-  // Combine the external ref with the internal videoRef
-  useImperativeHandle<HTMLVideoElement | null, HTMLVideoElement | null>(
-    ref,
-    () => videoRef.current,
-  );
+    // Combine the external ref with the internal videoRef
+    useImperativeHandle<HTMLVideoElement | null, HTMLVideoElement | null>(
+      ref,
+      () => videoRef.current,
+    );
 
-  return (
-    <>
-      {poster && !isVideoLoaded && (
-        <div className={cn(className, videoClassName, 'absolute bg-page-background')}>
-          <Image
-            src={poster}
-            alt="Video poster"
-            width={width}
-            height={height}
-            className={cn('h-full w-full object-cover', videoClassName)}
-            quality={90}
-            priority
-          />
-        </div>
-      )}
+    return (
+      <>
+        {poster && !isVideoLoaded && (
+          <div className={cn(className, videoClassName, 'absolute')}>
+            <Image
+              src={poster}
+              alt="Video poster"
+              width={width}
+              height={height}
+              className={cn('h-full w-full object-cover', videoClassName)}
+              quality={90}
+              priority
+            />
+            <div className="absolute inset-0 bg-black/40" />
+          </div>
+        )}
 
-      <LazyMotion features={domAnimation}>
-        <div className={className} ref={videoVisibilityRef}>
-          <AnimatePresence>
-            {isInView && (
-              <m.video
-                className={cn('absolute inset-0', videoClassName)}
-                ref={videoRef}
-                controls={false}
-                width={width}
-                height={height}
-                {...(!poster && {
-                  initial: {
-                    opacity: 0,
-                  },
-                  animate: { opacity: isVideoLoaded ? 1 : 0 },
-                  transition: { duration: 0.5 },
-                })}
-                loop={withLoop}
-                style={{ display: isVideoLoaded ? 'block' : 'none' }}
-                muted
-                autoPlay
-                playsInline
-                onLoadedData={() => setIsVideoLoaded(true)}
-              >
-                {children}
-              </m.video>
-            )}
-          </AnimatePresence>
-        </div>
-      </LazyMotion>
-    </>
-  );
-};
+        <LazyMotion features={domAnimation}>
+          <div className={className} ref={videoVisibilityRef}>
+            <AnimatePresence>
+              {isInView && (
+                <m.video
+                  className={cn('absolute inset-0', videoClassName)}
+                  ref={videoRef}
+                  controls={false}
+                  width={width}
+                  height={height}
+                  {...(!poster && {
+                    initial: {
+                      opacity: 0,
+                    },
+                    animate: { opacity: isVideoLoaded ? 1 : 0 },
+                    transition: { duration: 0.5 },
+                  })}
+                  loop={withLoop}
+                  style={{ display: isVideoLoaded ? 'block' : 'none' }}
+                  muted
+                  autoPlay
+                  playsInline
+                  onLoadedData={() => setIsVideoLoaded(true)}
+                >
+                  {children}
+                </m.video>
+              )}
+            </AnimatePresence>
+          </div>
+        </LazyMotion>
+      </>
+    );
+  };
 
 export default forwardRef(PauseableVideo);
