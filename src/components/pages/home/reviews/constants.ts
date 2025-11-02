@@ -1,4 +1,8 @@
 import backgroundCard from './images/background-card.jpg'
+import poster1 from './images/poster-1.jpg'
+import poster2 from './images/poster-2.jpg'
+import poster3 from './images/poster-3.jpg'
+import poster4 from './images/poster-4.jpg'
 
 const review1 = '/videos/reviews/review-1.mp4'
 const review2 = '/videos/reviews/review-2.mp4'
@@ -33,7 +37,7 @@ export const REVIEWS: Review[] = [
     type: 'video',
     name: 'Наташа П.',
     description: 'Ходит на йогу',
-    image: backgroundCard.src,
+    image: poster1.src,
     videoUrl: review1
   },
   {
@@ -41,7 +45,7 @@ export const REVIEWS: Review[] = [
     type: 'video',
     name: 'Алёна С.',
     description: 'Ходит на МФР',
-    image: backgroundCard.src,
+    image: poster2.src,
     videoUrl: review2
   },
   {
@@ -49,7 +53,7 @@ export const REVIEWS: Review[] = [
     type: 'video',
     name: 'Аня К.',
     description: 'Ходит на растяжку',
-    image: backgroundCard.src,
+    image: poster3.src,
     videoUrl: review3
   },
   {
@@ -57,7 +61,7 @@ export const REVIEWS: Review[] = [
     type: 'video',
     name: 'Оля К.',
     description: 'Ходит на пилатес',
-    image: backgroundCard.src,
+    image: poster4.src,
     videoUrl: review4
   }
 ]

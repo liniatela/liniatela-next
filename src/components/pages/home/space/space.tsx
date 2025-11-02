@@ -13,10 +13,11 @@ import {
   CarouselPrevious
 } from '@/components/shared/ui/carousel'
 import Link from 'next/link'
+import PauseableVideo from '@/components/shared/pauseable-video'
 
 function Space() {
   return (
-    <section className='space -mt-7 pt-30 sm:pt-50 overflow-hidden select-none' id='space'>
+    <section className='space -mt-7 pt-20 sm:pt-30 overflow-hidden select-none' id='space'>
       <div className='container flex flex-col gap-10'>
         <header className='flex flex-col items-start sm:flex-row sm:items-center sm:gap-8 gap-4'>
           <Tag>О студии</Tag>
@@ -44,7 +45,7 @@ function Space() {
                   alt=""
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
-                <div className="absolute inset-0 bg-black/30 pointer-events-none" aria-hidden="true" />
+                <div className="absolute inset-0 bg-black/60 pointer-events-none" aria-hidden="true" />
               </div>
             </div>
             <div className='relative overflow-hidden rounded-3xl max-sm:hidden min-h-[180px]'>
@@ -106,9 +107,11 @@ function Space() {
             </div>
           </div>
         </div>
-
         {/* Слайдер */}
         <div className='sm:mt-10'>
+          <h2 className='text-3xl mb-10 [&_span]:text-muted-foreground leading-none tracking-tighter'>
+            <span>Атмосфера</span> зала
+          </h2>
           <Carousel
             className='w-full relative'
             opts={{
@@ -117,7 +120,8 @@ function Space() {
           >
             <CarouselContent>
               {HALLS.map(hall => (
-                <CarouselItem key={hall.id} className='basis-[95%] sm:basis-[75%]'>
+                <CarouselItem key={hall.id} className='basis-[95%] sm:basis-[45%] xl:basis-[30%]'>
+                  {/* <CarouselItem key={hall.id} className='basis-[95%] sm:basis-[75%]'> */}
                   <HallCard hall={hall} />
                 </CarouselItem>
               ))}
@@ -136,7 +140,7 @@ export default Space
 
 const HallCard = ({ hall }: { hall: Hall }) => {
   return (
-    <article className='group relative rounded-3xl overflow-hidden aspect-video shadow-lg'>
+    <article className='group relative rounded-3xl overflow-hidden shadow-lg min-h-[550px]'>
       <div className='absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-transparent z-10' />
 
       <div className='relative z-20 p-6 h-full flex flex-col'>
@@ -152,13 +156,26 @@ const HallCard = ({ hall }: { hall: Hall }) => {
         </div>
       </div>
 
-      <Image
-        className='object-cover -z-10 group-hover:scale-105 transition-transform duration-500'
-        src={hall.image}
-        fill
-        sizes='(max-width: 640px) 85vw, (max-width: 1024px) 70vw, 40vw'
-        alt={hall.name}
-      />
+      {hall.video ? (
+        <PauseableVideo
+          className='absolute inset-0 w-full h-full -z-10'
+          videoClassName='object-cover group-hover:scale-105 transition-transform duration-500'
+          width={1920}
+          height={1080}
+          poster={typeof hall.image === 'string' ? hall.image : hall.image.src}
+          withLoop={true}
+        >
+          <source src={hall.video} type='video/mp4' />
+        </PauseableVideo>
+      ) : (
+        <Image
+          className='object-cover object-[0%_10%] -z-10 group-hover:scale-105 transition-transform duration-500'
+          src={hall.image}
+          fill
+          sizes='(max-width: 640px) 85vw, (max-width: 1024px) 70vw, 40vw'
+          alt={hall.name}
+        />
+      )}
     </article>
   )
 }

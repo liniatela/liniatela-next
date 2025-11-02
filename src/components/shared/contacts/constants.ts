@@ -48,18 +48,18 @@ export const SOCIAL_NETWORKS = {
 	title: 'Наши соц сети',
 	instagram: {
 		name: 'Instagram*',
-		href: 'https://instagram.com/liniatela',
+		href: 'https://www.instagram.com/linia__tela?igsh=Z3hmbWw2Y2htaWZx',
 		icon: InstagramIcon
 	},
 	telegram: {
 		name: 'Telegram',
-		href: 'https://t.me/liniatela',
+		href: 'https://t.me/+kctFnxaDhFcxYjAy',
 		icon: TelegramIcon
 	}
 }
 
 // Информация об ИП
-export const BUSINESS_INFO: BusinessInfo = {
+export const  BUSINESS_INFO: BusinessInfo = {
 	name: 'ИП Иванов Иван Иванович',
 	inn: 'ИНН 999999999999',
 	ogrn: 'ОГРН 999999999999999'

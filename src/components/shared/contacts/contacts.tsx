@@ -16,8 +16,8 @@ function Contacts() {
             <address className='not-italic text-muted-foreground leading-none tracking-tighter'>{STUDIO_INFO.address}</address>
           </div>
 
-          <Link href={'tel:+7 (999) 999 99-99'}>
-            <span className='font-medium text-xl leading-none tracking-tighter'>+7 (999) 999 99-99</span>
+          <Link href={'tel:+89830577878'}>
+            <span className='font-medium text-xl leading-none tracking-tighter'>+8 (983) 057 -78-78</span>
           </Link>
 
           <div className='grid sm:grid-cols-2 gap-10'>
@@ -25,12 +25,12 @@ function Contacts() {
               <span className='text-sm font-medium leading-none tracking-tighter' >Для связи с нами</span>
               <ul className='flex items-center gap-2 mt-2'>
                 <li>
-                  <Link href={CONTACT_METHODS.telegram.href}>
+                  <Link href={CONTACT_METHODS.telegram.href} target='_blank' rel='nofollow noreferrer'>
                     <CONTACT_METHODS.telegram.icon />
                   </Link>
                 </li>
                 <li>
-                  <Link href={CONTACT_METHODS.whatsapp.href}>
+                  <Link href={CONTACT_METHODS.whatsapp.href} target='_blank' rel='nofollow noreferrer'>
                     <CONTACT_METHODS.whatsapp.icon />
                   </Link>
                 </li>
@@ -40,12 +40,12 @@ function Contacts() {
               <span className='text-sm font-medium leading-none tracking-tighter' >Наши соц. сети</span>
               <ul className='flex items-center gap-2 mt-2'>
                 <li>
-                  <Link href={SOCIAL_NETWORKS.instagram.href}>
+                  <Link href={SOCIAL_NETWORKS.instagram.href} target='_blank' rel='nofollow'>
                     <SOCIAL_NETWORKS.instagram.icon />
                   </Link>
                 </li>
                 <li>
-                  <Link href={SOCIAL_NETWORKS.telegram.href}>
+                  <Link href={SOCIAL_NETWORKS.telegram.href} target='_blank' rel='nofollow'>
                     <SOCIAL_NETWORKS.telegram.icon />
                   </Link>
                 </li>
