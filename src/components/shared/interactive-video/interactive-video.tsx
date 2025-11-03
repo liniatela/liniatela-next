@@ -66,7 +66,7 @@ const InteractiveVideo: ForwardRefRenderFunction<
 
     const [videoVisibilityRef, isInView] = useInView({
       triggerOnce: true,
-      rootMargin: '400px 0px',
+      rootMargin: '100px 0px',
     });
 
     const handlePlay = () => {

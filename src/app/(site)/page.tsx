@@ -1,14 +1,33 @@
-import Hero from '@/components/pages/home/hero'
 import Directions from '@/components/pages/home/directions'
-import Memberships from '@/components/pages/home/memberships'
-import Space from '@/components/pages/home/space'
-import Trainers from '@/components/pages/home/trainers'
-import Footer from '@/components/shared/footer'
-import Contacts from '@/components/shared/contacts'
+import Hero from '@/components/pages/home/hero'
 import Problems from '@/components/pages/home/problems/problems'
-import CTA from '@/components/pages/home/cta/cta'
-import Certificate from '@/components/pages/home/certificate/certificate'
-import Reviews from '@/components/pages/home/reviews/reviews'
+import Contacts from '@/components/shared/contacts'
+import Footer from '@/components/shared/footer'
+import dynamic from 'next/dynamic'
+
+const Memberships = dynamic(() => import('@/components/pages/home/memberships'), {
+  loading: () => <div className="min-h-[400px]" /> // placeholder
+})
+
+const Space = dynamic(() => import('@/components/pages/home/space'), {
+  loading: () => <div className="min-h-[600px]" />
+})
+
+const Trainers = dynamic(() => import('@/components/pages/home/trainers'), {
+  loading: () => <div className="min-h-[400px]" />
+})
+
+const Certificate = dynamic(() => import('@/components/pages/home/certificate/certificate'), {
+  loading: () => <div className="min-h-[400px]" />
+})
+
+const Reviews = dynamic(() => import('@/components/pages/home/reviews/reviews'), {
+  loading: () => <div className="min-h-[500px]" />
+})
+
+const CTA = dynamic(() => import('@/components/pages/home/cta/cta'), {
+  loading: () => <div className="min-h-[300px]" />
+})
 
 export default async function Home() {
   return (

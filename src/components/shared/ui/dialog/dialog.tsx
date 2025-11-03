@@ -6,7 +6,7 @@ import * as VisuallyHiddenPrimitive from '@radix-ui/react-visually-hidden'
 import { XIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { useLenis } from 'lenis/react'
+import ReactLenis, { useLenis } from 'lenis/react'
 
 function Dialog({ open, onOpenChange, ...props }: React.ComponentProps<typeof DialogPrimitive.Root>) {
   const lenis = useLenis()
@@ -80,7 +80,9 @@ function DialogContent({
         )}
         {...props}
       >
-        {children}
+        <ReactLenis root={false} options={{ prevent: (node) => node.hasAttribute('data-lenis-prevent-inner') }}>
+          {children}
+        </ReactLenis>
       </DialogPrimitive.Content>
     </DialogPortal>
   )

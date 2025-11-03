@@ -34,7 +34,7 @@ function Trainers() {
             >
               <CarouselContent className='max-sm:max-w-[90vw]'>
                 {trainers.map(trainer => (
-                  <CarouselItem key={trainer.id} className='pl-4 basis-[95%] lg:basis-[65%]'>
+                  <CarouselItem key={trainer.id} className='pl-4 basis-[90%] sm:basis-full lg:basis-[80%] xl::basis-[65%]'>
                     <TrainerCard trainer={trainer} />
                   </CarouselItem>
                 ))}
@@ -58,9 +58,9 @@ export default Trainers
 const TrainerCard = ({ trainer }: { trainer: Trainer }) => {
   return (
     <article className='h-full group/trainer'>
-      <div className='rounded-4xl bg-white max-sm:flex max-sm:flex-col sm:grid sm:grid-cols-2 sm:gap-2 h-full md:min-h-[350px]'>
+      <div className='rounded-4xl bg-white max-sm:flex max-md:flex-col md:grid md:grid-cols-2 md:gap-2 h-full md:min-h-[350px]'>
         {/* Изображение */}
-        <div className='relative overflow-hidden rounded-3xl p-4 flex flex-col max-sm:h-[300px] '>
+        <div className='relative overflow-hidden rounded-3xl p-4 flex flex-col max-md:h-[450px] '>
           <div className='flex flex-col text-white gap-2 z-10 relative'>
             <span className='text-2xl leading-none tracking-tighter'>{trainer.name}</span>
             <span className='leading-none tracking-tighter'>{trainer.position}</span>

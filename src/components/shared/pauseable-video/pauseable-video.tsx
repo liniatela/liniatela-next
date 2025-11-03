@@ -58,7 +58,7 @@ const PauseableVideo: ForwardRefRenderFunction<
 
     const [videoVisibilityRef, isInView] = useInView({
       triggerOnce: true,
-      rootMargin: '400px 0px',
+      rootMargin: '100px 0px',
     });
     const { inView, ref: setVideoRef } = useInView({ threshold: 0.1 });
 
