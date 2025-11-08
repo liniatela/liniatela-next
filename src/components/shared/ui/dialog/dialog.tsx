@@ -6,19 +6,18 @@ import * as VisuallyHiddenPrimitive from '@radix-ui/react-visually-hidden'
 import { XIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import ReactLenis, { useLenis } from 'lenis/react'
 
 function Dialog({ open, onOpenChange, ...props }: React.ComponentProps<typeof DialogPrimitive.Root>) {
-  const lenis = useLenis()
+  // const lenis = useLenis()
 
   // Управляем Lenis при открытии/закрытии диалога
-  React.useEffect(() => {
-    if (open) {
-      lenis?.stop()
-    } else {
-      lenis?.start()
-    }
-  }, [open, lenis])
+  // React.useEffect(() => {
+  //   if (open) {
+  //     lenis?.stop()
+  //   } else {
+  //     lenis?.start()
+  //   }
+  // }, [open, lenis])
 
   return <DialogPrimitive.Root data-slot='dialog' open={open} onOpenChange={onOpenChange} {...props} />
 }
@@ -80,9 +79,9 @@ function DialogContent({
         )}
         {...props}
       >
-        <ReactLenis root={false} options={{ prevent: (node) => node.hasAttribute('data-lenis-prevent-inner') }}>
-          {children}
-        </ReactLenis>
+
+        {children}
+
       </DialogPrimitive.Content>
     </DialogPortal>
   )

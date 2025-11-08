@@ -34,8 +34,8 @@ export default async function Home() {
     <>
       <Hero />
       <Directions />
-      <Problems />
       <CTA />
+      <Problems />
       <Memberships />
       <Space />
       <Trainers />

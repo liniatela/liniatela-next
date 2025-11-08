@@ -5,19 +5,9 @@ import * as SheetPrimitive from "@radix-ui/react-dialog"
 import { ArrowLeft, XIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import ReactLenis, { useLenis } from "lenis/react"
 
 function Sheet({ open, onOpenChange, ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
-  const lenis = useLenis()
 
-  // Управляем Lenis при открытии/закрытии sheet
-  React.useEffect(() => {
-    if (open) {
-      lenis?.stop()
-    } else {
-      lenis?.start()
-    }
-  }, [open, lenis])
 
   return <SheetPrimitive.Root data-slot="sheet" open={open} onOpenChange={onOpenChange}  {...props} />
 }
@@ -83,9 +73,9 @@ function SheetContent({
         )}
         {...props}
       >
-        <ReactLenis root={false} options={{ prevent: (node) => node.hasAttribute('data-lenis-prevent-inner') }}>
-          {children}
-        </ReactLenis>
+
+        {children}
+
         <SheetPrimitive.Close className="hidden sm:block absolute top-4 -left-14 rounded-xs opacity-100 transition-opacity hover:opacity-70 focus:outline-hidden disabled:pointer-events-none cursor-pointer text-white">
           <XIcon strokeWidth={1.5} size={40} />
           <span className="sr-only">Закрыть</span>

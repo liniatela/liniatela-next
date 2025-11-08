@@ -151,9 +151,9 @@ const DirectionCard = ({ direction }: { direction: Direction }) => {
                 </li>
 
                 <li className='flex items-center gap-2'>
-                  <span className='text-lg font-medium leading-none tracking-tighter inline-flex'> <FlameIcon size={20} className='stroke-orange-400 fill-orange-600'/>&nbsp;:</span>
+                  <span className='text-lg font-medium leading-none tracking-tighter'>Активность&nbsp;:</span>
                   <span className='leading-none tracking-tighter'>
-                    {direction.calories} ккал
+                    {direction.calories}
                   </span>
                 </li>
               </ul>

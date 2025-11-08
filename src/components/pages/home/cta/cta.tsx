@@ -13,14 +13,14 @@ const CTA = () => {
 
 
         <div className="">
-          <div className="border border-white/15 rounded-3xl bg-black/10 backdrop-blur-sm text-white max-w-[600px] p-4 md:p-7">
+          <div className="border border-white/15 rounded-3xl bg-black/30 backdrop-blur-sm text-white max-w-[600px] p-4 md:p-7">
+            <Tag variant={'brown'} className="mb-4">Бесплатная тренировка</Tag>
             <h2 className="text-3xl md:text-4xl font-normal leading-none tracking-tighter">{MOCK_CTA_DATA.title}</h2>
             <p className="leading-none tracking-tighter mt-6 max-w-[450px]">{MOCK_CTA_DATA.description}</p>
-            <Tag variant={'brown'} className="mt-4">Бесплатная тренировка</Tag>
           </div>
           <div className="bg-primary rounded-3xl p-4 md:p-6 text-white max-w-[300px] mt-20  md:mt-32 
            max-md:mx-auto md:ml-auto max-md:text-center">
-            <p className="text-2xl leading-none tracking-tighter ">Запишись на первое занятие уже сейчас</p>
+            <p className="text-2xl leading-none tracking-tighter ">Запишись на первое бесплатное занятие уже сейчас</p>
             <Button className="mt-4" variant={'white'}>Записаться</Button>
           </div>
         </div>

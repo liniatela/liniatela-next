@@ -8,7 +8,7 @@ const Problems = () => {
     <section className='problems overflow-hidden select-none'>
       <div className='rounded-4xl pt-30 sm:pt-50'>
         <div className='container'>
-          <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6'>
+          <div className='grid grid-cols-1 lg:grid-cols-[400px_1fr] 2xl:grid-cols-2 gap-4 lg:gap-6'>
             {/* Левая карточка с изображением */}
             <article className='relative rounded-3xl overflow-hidden min-h-[400px] lg:min-h-[600px] group'>
               <div className='relative h-full z-10 md:py-10 md:px-8 py-6 px-4  flex flex-col justify-between'>
@@ -64,7 +64,7 @@ export default Problems
 
 const ProblemCard = ({ problem }: { problem: IProblem }) => {
   return (
-    <article className='bg-gray-50 rounded-3xl p-6 xl:p-8 min-h-[200px] md:min-h-[240px] hover:bg-gray-100 transition-colors text-center grid place-content-center'>
+    <article className='bg-gray-50 rounded-3xl p-6 xl:p-8 min-h-[200px] md:min-h-[240px]  transition-colors text-center grid place-content-center'>
       <h3 className='text-xl font-medium text-gray-900 leading-none tracking-tighter'>
         {problem.title}
       </h3>

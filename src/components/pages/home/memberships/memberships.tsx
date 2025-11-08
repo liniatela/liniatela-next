@@ -16,7 +16,6 @@ import {
   SheetDescription,
   SheetHeader,
   SheetTitle,
-  SheetTrigger
 } from '@/components/shared/ui/sheet'
 import {
   Accordion,
@@ -24,11 +23,10 @@ import {
   AccordionItem,
   AccordionTrigger
 } from '@/components/shared/ui/accordion'
-import { CreditCardIcon, Salad, Snowflake, Sparkles, User2 } from 'lucide-react'
+import { Salad, Snowflake, Sparkles, User2 } from 'lucide-react'
 import { getAllMemberships, Membership } from './constance'
 import { ComparisonDialog } from './comparison/comparison-dialog'
 import { cn } from '@/lib/utils'
-import { DialogDescription } from '@radix-ui/react-dialog'
 
 function Memberships() {
   const [isComparisonOpen, setIsComparisonOpen] = useState(false)
@@ -74,8 +72,8 @@ function Memberships() {
               </p>
             </footer>
           </Carousel>
-          <div className='mt-5 flex items-center'>
-            <Button size={'lg'} variant={'secondary'} onClick={() => setIsComparisonOpen(true)}>
+          <div className='mt-5 flex justify-center'>
+            <Button size={'lg'} variant={'default'} onClick={() => setIsComparisonOpen(true)}>
               Сравнить абонементы
             </Button>
           </div>
