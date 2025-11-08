@@ -5,6 +5,8 @@ export const COMPARISON_MEMBERSHIPS = [
     id: 'focus',
     name: 'Фокус',
     isPopular: false,
+    theme: 'white',
+    isMembership: 'true',
     plans: [
       {
         duration: '1 месяц',
@@ -12,7 +14,7 @@ export const COMPARISON_MEMBERSHIPS = [
         benefits: [
           {
             icon: 'PlusCircle',
-            text: '1 любое направление',
+            text: 'Одно любое направление',
             highlighted: true
           },
           {
@@ -87,6 +89,8 @@ export const COMPARISON_MEMBERSHIPS = [
     id: 'balance',
     name: 'Баланс',
     isPopular: false,
+    theme: 'primary',
+    isMembership: 'true',
     plans: [
       {
         duration: '1 месяц',
@@ -169,6 +173,8 @@ export const COMPARISON_MEMBERSHIPS = [
     id: 'harmony',
     name: 'Гармония',
     isPopular: true,
+    theme: 'secondary',
+    isMembership: 'true',
     plans: [
       {
         duration: '1 месяц',

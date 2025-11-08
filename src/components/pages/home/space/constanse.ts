@@ -28,7 +28,7 @@ export interface StudioInfo {
 export interface Hall {
   id: string
   name: string
-  description: string
+  description?: string
   image: string | StaticImageData
   video?: string
   features: string[]
@@ -70,8 +70,8 @@ export const STUDIO_INFO: StudioInfo = {
 export const HALLS: Hall[] = [
   {
     id: '1',
-    name: 'Зал растяжки',
-    description: 'Для групповых тренировок по йоге и растяжке',
+    name: 'Занятие по пилатесу',
+    // description: 'Для групповых тренировок по йоге и растяжке',
     image: mockImage2,
     features: [
       'Мягкое освещение',
@@ -83,8 +83,8 @@ export const HALLS: Hall[] = [
   },
   {
     id: '2',
-    name: 'Зал пилатеса',
-    description: 'Специализированный зал для занятий пилатесом',
+    name: 'Атмосфера наших раздевалок',
+    // description: 'Специализированный зал для занятий пилатесом',
     image: mockImage3,
     features: [
       'Реформеры для пилатеса',
@@ -96,8 +96,8 @@ export const HALLS: Hall[] = [
   },
   {
     id: '3',
-    name: 'Танцевальный зал',
-    description: 'Просторный зал для танцевальных направлений',
+    name: 'Детали нашего пространства',
+    // description: 'Просторный зал для танцевальных направлений',
     image: mockImage4,
     features: [
       'Паркетный пол',
@@ -109,22 +109,11 @@ export const HALLS: Hall[] = [
   },
   {
     id: '4',
-    name: 'Зал для МФР',
-    description: 'Уютное пространство для восстановительных практик',
+    name: 'Занятие на гамаках',
+    // description: 'Уютное пространство для восстановительных практик',
     image: mockImage2,
     features: ['Массажные роллы', 'Теннисные мячи', 'Мягкое покрытие', 'Расслабляющая атмосфера'],
     video: video4
   },
-  {
-    id: '5',
-    name: 'Аэро-зал',
-    description: 'Зал с гамаками для воздушных практик',
-    image: mockImage3,
-    features: [
-      'Специальные гамаки',
-      'Высокие потолки',
-      'Надежные крепления',
-      'Мягкие маты под гамаками'
-    ]
-  }
+  
 ]

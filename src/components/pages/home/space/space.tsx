@@ -110,7 +110,7 @@ function Space() {
         {/* Слайдер */}
         <div className='sm:mt-10'>
           <h2 className='text-3xl mb-10 [&_span]:text-muted-foreground leading-none tracking-tighter'>
-            <span>Атмосфера</span> зала
+            <span>Наша</span> атмосфера
           </h2>
           <Carousel
             className='w-full relative'
@@ -120,7 +120,7 @@ function Space() {
           >
             <CarouselContent>
               {HALLS.map(hall => (
-                <CarouselItem key={hall.id} className='basis-[95%] sm:basis-[45%] xl:basis-[30%]'>
+                <CarouselItem key={hall.id} className='basis-[95%] sm:basis-[60%] lg:basis-[30%]'>
                   {/* <CarouselItem key={hall.id} className='basis-[95%] sm:basis-[75%]'> */}
                   <HallCard hall={hall} />
                 </CarouselItem>
@@ -140,7 +140,7 @@ export default Space
 
 const HallCard = ({ hall }: { hall: Hall }) => {
   return (
-    <article className='group relative rounded-3xl overflow-hidden shadow-lg min-h-[550px]'>
+    <article className='group relative rounded-3xl overflow-hidden shadow-lg min-h-[420px] sm:min-h-[550px]'>
       <div className='absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-transparent z-10' />
 
       <div className='relative z-20 p-6 h-full flex flex-col'>
