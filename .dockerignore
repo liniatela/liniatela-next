@@ -59,4 +59,3 @@ LICENSE
 .prettierrc
 .eslintrc
 eslint.config.mjs
-tsconfig.json
