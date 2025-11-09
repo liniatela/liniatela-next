@@ -184,7 +184,7 @@ const MembershipCard = ({ membership }: { membership: Membership }) => {
                 <Tag variant={'blue'} size={'lg'} className='ml-auto'>
                   {membership.price.toLocaleString()} ₽ {membership.duration && (
                     <>
-                      /&nbsp;<span className=' text-white/90'>{membership.duration}</span>
+                      / &nbsp;<span className=' text-white/90'>{membership.duration}</span>
                     </>
                   )}
                 </Tag>

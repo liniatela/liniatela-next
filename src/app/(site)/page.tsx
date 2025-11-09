@@ -3,6 +3,7 @@ import Hero from '@/components/pages/home/hero'
 import Problems from '@/components/pages/home/problems/problems'
 import Contacts from '@/components/shared/contacts'
 import Footer from '@/components/shared/footer'
+import { getHomePage, getSettings } from '@/sanity/lib'
 import dynamic from 'next/dynamic'
 
 const Memberships = dynamic(() => import('@/components/pages/home/memberships'), {
@@ -30,9 +31,13 @@ const CTA = dynamic(() => import('@/components/pages/home/cta/cta'), {
 })
 
 export default async function Home() {
+  const settings = await getSettings()
+  const homePage = await getHomePage()
+  
+
   return (
     <>
-      <Hero />
+      <Hero {...homePage} />
       <Directions />
       <CTA />
       <Problems />
@@ -40,12 +45,12 @@ export default async function Home() {
       <Space />
       <Trainers />
       <Certificate />
-      <div className='overflow-hidden '>
-        <div className='bg-white rounded-[42px] py-10 sm:py-20'>
+      <div className='overflow-hidden'>
+        <div className='bg-white rounded-[42px] py-10 sm:py-20 !pb-0'>
           <Reviews />
           <div className='container pt-30'>
-            <Contacts />
-            <Footer />
+            <Contacts {...homePage} />
+            <Footer settings={settings} />
           </div>
         </div>
       </div>

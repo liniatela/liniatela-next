@@ -88,7 +88,7 @@ export const COMPARISON_MEMBERSHIPS = [
   {
     id: 'balance',
     name: 'Баланс',
-    isPopular: false,
+    isPopular: true,
     theme: 'primary',
     isMembership: 'true',
     plans: [
@@ -172,7 +172,7 @@ export const COMPARISON_MEMBERSHIPS = [
   {
     id: 'harmony',
     name: 'Гармония',
-    isPopular: true,
+    isPopular: false,
     theme: 'secondary',
     isMembership: 'true',
     plans: [

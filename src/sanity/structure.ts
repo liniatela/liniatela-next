@@ -1,102 +1,74 @@
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 import type { StructureResolver } from 'sanity/structure'
 
-export const structure: StructureResolver = S =>
-	S.list()
-		.title('Контент')
-		.items([
-			S.listItem()
-				.title('Главная страница')
-				.child(S.document().schemaType('mainPage').documentId('mainPage')),
-			S.divider(),
-			S.listItem()
-				.title('Направления')
-				.child(
-					S.list()
-						.title('Направления')
-						.items([
-							S.listItem()
-								.title('Все направления')
-								.child(
-									S.documentList()
-										.title('Все направления')
-										.schemaType('sports')
-										.filter('_type == "sports"')
-								),
-							S.listItem().title('Создать направление').child(S.document().schemaType('sports'))
-						])
-				),
-			S.listItem()
-				.title('Абонементы')
-				.child(
-					S.list()
-						.title('Абонементы')
-						.items([
-							S.listItem()
-								.title('Все абонементы')
-								.child(
-									S.documentList()
-										.title('Все абонементы')
-										.schemaType('abonements')
-										.filter('_type == "abonements"')
-								),
-							S.listItem().title('Создать абонемент').child(S.document().schemaType('abonements'))
-						])
-				),
-			S.listItem()
-				.title('Тренеры')
-				.child(
-					S.list()
-						.title('Тренеры')
-						.items([
-							S.listItem()
-								.title('Все тренеры')
-								.child(
-									S.documentList()
-										.title('Все тренеры')
-										.schemaType('trainers')
-										.filter('_type == "trainers"')
-								),
-							S.listItem().title('Создать тренера').child(S.document().schemaType('trainers'))
-						])
-				),
-			S.listItem()
-				.title('Отзывы')
-				.child(
-					S.list()
-						.title('Отзывы')
-						.items([
-							S.listItem()
-								.title('Все отзывы')
-								.child(
-									S.documentList()
-										.title('Все отзывы')
-										.schemaType('reviews')
-										.filter('_type == "reviews"')
-								),
-							S.listItem().title('Создать отзыв').child(S.document().schemaType('reviews'))
-						])
-				),
-			S.divider(),
-			S.listItem().title('Студия').child(S.document().schemaType('studios').documentId('studios')),
-			S.listItem()
-				.title('Проблемы')
-				.child(
-					S.list()
-						.title('Проблемы')
-						.items([
-							S.listItem()
-								.title('Все проблемы')
-								.child(
-									S.documentList()
-										.title('Все проблемы')
-										.schemaType('problems')
-										.filter('_type == "problems"')
-								),
-							S.listItem().title('Создать проблему').child(S.document().schemaType('problems'))
-						])
-				),
-			S.listItem()
-				.title('Контакты')
-				.child(S.document().schemaType('contacts').documentId('contacts'))
-		])
+export const structure: StructureResolver = (S) =>
+  S.list()
+    .title('Контент')
+    .items([
+      // Главная страница
+      S.listItem()
+        .title('Главная страница')
+        .icon(() => '🏠')
+        .child(
+          S.document()
+            .schemaType('homePage')
+            .documentId('homePage')
+        ),
+
+      S.divider(),
+
+      // Направления
+      S.listItem()
+        .title('Направления')
+        .icon(() => '🧘')
+        .child(
+          S.documentTypeList('direction')
+            .title('Направления')
+            .filter('_type == "direction"')
+        ),
+
+      // Абонементы
+      S.listItem()
+        .title('Абонементы')
+        .icon(() => '💳')
+        .child(
+          S.documentTypeList('membership')
+            .title('Абонементы')
+            .filter('_type == "membership"')
+            .defaultOrdering([{ field: 'order', direction: 'asc' }])
+        ),
+
+      // Тренеры
+      S.listItem()
+        .title('Тренеры')
+        .icon(() => '👥')
+        .child(
+          S.documentTypeList('trainer')
+            .title('Тренеры')
+            .filter('_type == "trainer"')
+            .defaultOrdering([{ field: 'order', direction: 'asc' }])
+        ),
+
+      // Отзывы
+      S.listItem()
+        .title('Отзывы')
+        .icon(() => '⭐')
+        .child(
+          S.documentTypeList('review')
+            .title('Отзывы')
+            .filter('_type == "review"')
+            .defaultOrdering([{ field: 'publishedAt', direction: 'desc' }])
+        ),
+
+      S.divider(),
+
+      // Настройки сайта
+      S.listItem()
+        .title('Настройки сайта')
+        .icon(() => '⚙️')
+        .child(
+          S.document()
+            .schemaType('settings')
+            .documentId('settings')
+        ),
+    ])

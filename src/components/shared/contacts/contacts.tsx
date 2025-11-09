@@ -1,10 +1,15 @@
 import Image from 'next/image'
 import backgroundImage from './images/bg.jpg'
 import Tag from '../ui/tag'
-import { BUSINESS_INFO, CONTACT_METHODS, SOCIAL_NETWORKS, STUDIO_INFO } from './constants'
+import { BUSINESS_INFO, SOCIAL_NETWORKS, STUDIO_INFO } from './constants'
 import Link from 'next/link'
+import { SanityContacts, SanitySettings } from '@/sanity/lib'
 
-function Contacts() {
+interface ContactsProps {
+  contacts: SanityContacts
+}
+
+function Contacts({ contacts }: ContactsProps) {
 
   return (
     <section id="contacts">
@@ -21,7 +26,7 @@ function Contacts() {
           </Link>
 
           <div className='grid sm:grid-cols-2 gap-10'>
-            <div>
+            {/* <div>
               <span className='text-sm font-medium leading-none tracking-tighter' >Для связи с нами</span>
               <ul className='flex items-center gap-2 mt-2'>
                 <li>
@@ -35,17 +40,17 @@ function Contacts() {
                   </Link>
                 </li>
               </ul>
-            </div>
+            </div> */}
             <div>
               <span className='text-sm font-medium leading-none tracking-tighter' >Наши соц. сети</span>
               <ul className='flex items-center gap-2 mt-2'>
                 <li>
-                  <Link href={SOCIAL_NETWORKS.instagram.href} target='_blank' rel='nofollow'>
+                  <Link href={contacts?.instagram?.url || '/'} target='_blank' rel='nofollow noopener noreferrer'>
                     <SOCIAL_NETWORKS.instagram.icon />
                   </Link>
                 </li>
                 <li>
-                  <Link href={SOCIAL_NETWORKS.telegram.href} target='_blank' rel='nofollow'>
+                  <Link href={contacts?.telegramChannel?.url || '/'} target='_blank' rel='nofollow noopener noreferrer'>
                     <SOCIAL_NETWORKS.telegram.icon />
                   </Link>
                 </li>
@@ -53,11 +58,11 @@ function Contacts() {
             </div>
           </div>
 
-          <ul className=''>
+          {/* <ul className=''>
             <li className='text-sm text-muted-foreground leading-none tracking-tighter'>{BUSINESS_INFO.name}</li>
             <li className='text-sm text-muted-foreground leading-none tracking-tighter'>{BUSINESS_INFO.inn}</li>
             <li className='text-sm text-muted-foreground leading-none tracking-tighter'>{BUSINESS_INFO.ogrn}</li>
-          </ul>
+          </ul> */}
         </div>
         <Image className='object-cover max-sm:hidden' src={backgroundImage} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw" alt="" />
       </div>

@@ -8,6 +8,8 @@ import { ReactLenis } from '@/lib/utils/lenis'
 import { siteMetadata } from '@/lib/utils/metadata'
 import { siteJsonLd } from '@/lib/utils/metadata'
 
+import { getSettings } from '@/sanity/lib'
+
 const onestSans = Onest({
   variable: '--font-onest',
   subsets: ['latin']
@@ -15,11 +17,14 @@ const onestSans = Onest({
 
 export const metadata: Metadata = siteMetadata
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode
 }>) {
+
+  const settings = await getSettings()
+  
   return (
     <html lang='ru'>
       <head>
@@ -29,7 +34,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${onestSans.variable} antialiased min-h-screen flex flex-col`}>
-        <Header />
+        <Header settings={settings} />
         <main className='flex-1'>
           {children}
         </main>

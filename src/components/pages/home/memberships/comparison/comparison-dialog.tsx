@@ -11,6 +11,7 @@ import { CircleQuestionMark, InfinityIcon, MinusIcon, PlusCircleIcon, SaladIcon,
 import { COMPARISON_MEMBERSHIPS } from './constants'
 import { cn } from '@/lib/utils'
 import React from 'react'
+import { Button } from '@/components/shared/ui/button'
 
 export const ComparisonDialog = ({
   open,
@@ -44,20 +45,20 @@ export const ComparisonDialog = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className='max-md:max-w-screen max-md:w-screen max-md:h-screen max-md:max-h-screen max-md:rounded-none md:max-h-[90vh] p-0 lg:max-w-7xl'>
-        <DialogHeader className='sticky top-0 z-10 bg-white p-4 md:p-8 !pb-2'>
-          <DialogTitle className='text-2xl lg:text-3xl'>Сравнить абонементы</DialogTitle>
+        <DialogHeader className='sticky top-0 z-10 bg-white p-4 md:p-6 !pb-2'>
+          <DialogTitle className='text-2xl lg:text-3xl'>Сравнение</DialogTitle>
           <DialogClose />
         </DialogHeader>
 
         <div className='overflow-x-auto overflow-y-auto px-4 pb-6 md:px-8'>
-          <ul className='grid md:grid-cols-2 lg:grid-cols-3 gap-5 h-full'>
+          <ul className='grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-5 h-full md:mt-8'>
             {COMPARISON_MEMBERSHIPS.map((membership) => {
               const monthlyPrice = getMonthlyPrice(membership);
               const mainFeatures = getMainFeatures(membership);
 
               return (
                 <li key={membership.id}>
-                  <article className={cn('p-5 border rounded-3xl border-input/50 shadow-lg h-full',
+                  <article className={cn('relative p-5 border rounded-3xl border-input/50 shadow-lg h-full flex flex-col',
                     // В зависимости от theme membership - используем цветовые Tailwind классы
 
                     membership.theme === 'white' && 'bg-white text-black',
@@ -65,8 +66,23 @@ export const ComparisonDialog = ({
                     membership.theme === 'secondary' && 'bg-secondary text-white'
 
                   )}>
+                    {/* 🆕 Бейдж "Популярно" */}
+                    {membership.isPopular && (
+                      <div className="absolute -top-5 left-2  z-10">
+                        <span className={cn(
+                          "inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-semibold tracking-tight shadow-lg",
+                          membership.theme === 'white' && 'bg-primary text-white',
+                          membership.theme === 'primary' && ' border border-primary bg-white text-primary',
+                          membership.theme === 'secondary' && 'bg-secondary-foreground text-secondary'
+                        )}>
+                          <SparklesIcon size={14} className="animate-pulse" />
+                          Популярно
+                        </span>
+                      </div>
+                    )}
+
                     {/* Заголовок с ценой */}
-                    <div className='flex flex-wrap justify-between gap-2'>
+                    <div className='flex flex-wrap justify-between gap-2 mt-2'>
                       <h3 className='leading-none font-medium tracking-tighter text-2xl xl:text-3xl mb-3'>
                         {membership.name}
                       </h3>
@@ -83,7 +99,7 @@ export const ComparisonDialog = ({
 
                     {/* Основные характеристики в виде бейджей */}
                     {membership.isMembership &&
-                      <div className='grid grid-cols-2 items-start mb-6 gap-4'>
+                      <div className='grid grid-cols-1 xl:grid-cols-2 items-start mb-6 gap-4 mt-4'>
                         {mainFeatures.map((feature, index) => {
                           const Icon = iconMap[feature.icon as keyof typeof iconMap];
                           return (
@@ -128,7 +144,7 @@ export const ComparisonDialog = ({
                             {/* Заголовок плана */}
                             <div className=''>
                               {membership.isMembership ? (
-                                <div className='border rounded-xl border-input p-2 px-4 flex items-center justify-between gap-2'>
+                                <div className='border rounded-xl border-input p-2 px-4 flex items-center justify-between gap-2 flex-wrap'>
                                   <p className='font-semibold text-lg tracking-tight'>
                                     {plan.duration}
                                   </p>
@@ -181,6 +197,11 @@ export const ComparisonDialog = ({
                         );
                       })}
                     </div>
+                    {membership.isMembership &&
+                      <div className='flex flex-col w-full mt-auto pt-8'>
+                        <Button variant={membership.theme === 'white' ? 'default' : 'ghost'}>Приобрести</Button>
+                      </div>
+                    }
                   </article>
                 </li>
               );

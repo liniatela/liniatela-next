@@ -8,7 +8,15 @@ import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { useMenu } from '@/lib/hooks'
 
-const Menu = () => {
+interface MenuProps {
+  menuItems: {
+    title: string
+    href: string
+  }[]
+}
+
+
+const Menu = ({ menuItems }: MenuProps) => {
 	const { isMenuOpen, handleToggleMenu, handleCloseMenu, handleKeyDown } = useMenu()
 
 	return (
@@ -67,9 +75,9 @@ const Menu = () => {
 								transition={{ duration: 0.4, ease: 'easeOut' }}
 							>
 								<ul className='mt-15 p-6 flex flex-col gap-4'>
-									{MENU_ITEMS.map((item, index) => (
+									{menuItems.map((item, index) => (
 										<motion.li
-											key={item.id}
+											key={index}
 											initial={{ opacity: 0, y: 20 }}
 											animate={{ opacity: 1, y: 0 }}
 											exit={{ opacity: 0, y: 20 }}
